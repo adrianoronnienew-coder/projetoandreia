@@ -296,6 +296,18 @@
  #servicos .service-card{filter:none!important;opacity:1!important}
  #servicos .service-card.ale-focus-card{filter:blur(5px)!important;opacity:.38!important;transition:filter .25s ease,opacity .25s ease!important}
 }
+</style><style id="ale-rail-mobile-v16">
+@media(max-width:600px){
+ #servicos{position:relative!important;overflow:hidden!important}
+ #ale-native-rail{position:absolute!important;right:12px!important;top:24%!important;transform:none!important;z-index:40!important;display:flex!important;flex-direction:column!important;align-items:flex-end!important;gap:22px!important}
+ #ale-native-rail .ale-rail-item{width:64px!important;height:64px!important;min-width:64px!important;padding:5px!important;overflow:hidden!important;flex:none!important}
+ #ale-native-rail .ale-rail-item i{width:52px!important;height:52px!important;min-width:52px!important}
+ #ale-native-rail .ale-rail-item .ale-rail-copy{display:none!important}
+ #ale-native-rail .ale-rail-item.active{width:min(275px,calc(100vw - 38px))!important;height:70px!important}
+ #ale-native-rail .ale-rail-item.active .ale-rail-copy{display:flex!important}
+ #servicos .service-card{filter:none!important;opacity:1!important}
+ #servicos .service-card.ale-focus-card{filter:blur(5px)!important;opacity:.42!important;transition:filter .25s ease,opacity .25s ease!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -1016,6 +1028,37 @@
    activate(Math.floor(p*items.length));
   }
   items.forEach(function(x,i){x.onclick=function(){activate(i)};x.ontouchstart=function(){activate(i)}});
+  addEventListener('scroll',sync,{passive:true});addEventListener('resize',sync,{passive:true});activate(0);sync();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script><script id="ale-rail-mobile-v16-js">
+(function(){
+ function init(){
+  var sec=document.getElementById('servicos'),rail=document.getElementById('ale-native-rail');if(!sec||!rail)return;
+  if(rail.parentNode!==sec)sec.appendChild(rail);
+  var items=[].slice.call(rail.querySelectorAll('.ale-rail-item')),cards=[].slice.call(sec.querySelectorAll('.service-card')),active=-1;
+  function activate(i){
+   if(!items.length)return;i=Math.max(0,Math.min(items.length-1,i));
+   if(i===active)return; active=i;
+   items.forEach(function(x,n){x.classList.toggle('active',n===i)});
+   cards.forEach(function(x){x.classList.remove('ale-focus-card')});
+   /* somente um card por vez */
+   if(cards[i])cards[i].classList.add('ale-focus-card');
+  }
+  function sync(){
+   if(innerWidth>600)return;
+   var r=sec.getBoundingClientRect(), vh=innerHeight;
+   /* A troca só acontece depois que o próximo card realmente ocupa o centro.
+      O item ativo NÃO retrai entre estados. */
+   var center=vh*.52, best=0, dist=Infinity;
+   cards.forEach(function(card,i){
+    var cr=card.getBoundingClientRect(), d=Math.abs((cr.top+cr.bottom)/2-center);
+    if(d<dist){dist=d;best=i}
+   });
+   activate(Math.min(best,items.length-1));
+  }
+  items.forEach(function(x,i){x.addEventListener('click',function(){activate(i)});x.addEventListener('touchstart',function(){activate(i)},{passive:true})});
   addEventListener('scroll',sync,{passive:true});addEventListener('resize',sync,{passive:true});activate(0);sync();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
