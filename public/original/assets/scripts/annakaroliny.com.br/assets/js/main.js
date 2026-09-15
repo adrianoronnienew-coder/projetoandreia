@@ -40,7 +40,7 @@ function initializeApp() {
     animateCounters();
     setupNavbarEffects();
     
-    console.log('Anna Karoliny Website initialized successfully!');
+    console.log('Ale Marques Website initialized successfully!');
 }
 
 // Service buttons with WhatsApp integration
