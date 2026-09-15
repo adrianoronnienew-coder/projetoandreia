@@ -184,6 +184,17 @@
 .footer hr{border-color:rgba(255,255,255,.18)!important;opacity:1!important}
 .footer .social-link{display:inline-grid!important;place-items:center!important;width:46px!important;height:46px!important;border-radius:50%!important;background:linear-gradient(135deg,#a93bd4,#168dff)!important;color:#fff!important;font-size:20px!important;box-shadow:0 8px 22px rgba(56,93,255,.18)!important}
 .footer .social-links{display:flex!important;gap:12px!important;align-items:center!important}
+</style><style id="ale-mobile-nav-scrollfix-v7">
+/* A seta de voltar ao topo só existe depois de rolar a página */
+#backToTop{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(16px)!important;transition:opacity .25s ease,transform .25s ease,visibility .25s!important}
+#backToTop.ale-visible{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateY(0)!important}
+@media(max-width:991.98px){
+ #mainNav .navbar-collapse{position:absolute!important;top:100%!important;left:0!important;right:0!important;background:rgba(7,7,11,.98)!important;border-top:1px solid rgba(255,255,255,.08)!important;padding:12px 22px 18px!important;box-shadow:0 18px 35px rgba(0,0,0,.38)!important}
+ #mainNav .navbar-collapse:not(.show){display:none!important}
+ #mainNav .navbar-collapse.show{display:block!important}
+ #mainNav .navbar-nav{gap:2px!important}
+ #mainNav .nav-link{padding:11px 8px!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -688,4 +699,30 @@
         window.addEventListener('load', function() {
             document.getElementById('loading-spinner').style.display = 'none';
         });
-    </script><script src="copyai-runtime.js" data-copyai-runtime="true"></script></body></html>
+    </script><script src="copyai-runtime.js" data-copyai-runtime="true"></script><script id="ale-mobile-controls-v7">
+(function(){
+ function initAleControls(){
+   var toggler=document.querySelector('#mainNav .navbar-toggler');
+   var menu=document.getElementById('navbarNav');
+   if(toggler&&menu&&!toggler.dataset.aleBound){
+     toggler.dataset.aleBound='1';
+     toggler.addEventListener('click',function(ev){
+       ev.preventDefault(); ev.stopPropagation();
+       var open=menu.classList.toggle('show');
+       toggler.setAttribute('aria-expanded',open?'true':'false');
+     });
+     menu.querySelectorAll('a.nav-link').forEach(function(a){
+       a.addEventListener('click',function(){menu.classList.remove('show');toggler.setAttribute('aria-expanded','false')});
+     });
+   }
+   var back=document.getElementById('backToTop');
+   if(back&&!back.dataset.aleBound){
+     back.dataset.aleBound='1';
+     back.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+   }
+   function syncBack(){if(back) back.classList.toggle('ale-visible',window.scrollY>650)}
+   window.addEventListener('scroll',syncBack,{passive:true}); syncBack();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAleControls);else initAleControls();
+})();
+</script></body></html>
