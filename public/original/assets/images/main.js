@@ -417,6 +417,7 @@ function animateCounters() {
 // Animate individual counter
 function animateCounter(element) {
     const target = parseInt(element.dataset.count);
+    if (!Number.isFinite(target)) return;
     const duration = 2000;
     const increment = target / (duration / 16);
     let current = 0;
