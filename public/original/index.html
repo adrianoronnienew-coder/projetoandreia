@@ -199,6 +199,19 @@
 /* Indicador de rolagem: dica rápida, nunca persistente */
 .scroll-indicator{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .22s ease!important}
 .scroll-indicator.ale-scroll-cue{opacity:1!important;visibility:visible!important}
+</style><style id="ale-native-rail-v9">
+#ale-links-live,.hero-image>.ale-links{display:none!important}
+#ale-native-rail{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:99980;display:flex;flex-direction:column;align-items:flex-end;gap:9px}
+#ale-native-rail .ale-rail-item{position:relative;width:46px;height:46px;padding:4px;border-radius:999px;display:flex;align-items:center;gap:9px;overflow:hidden;text-decoration:none;color:#fff;background:rgba(10,11,16,.9);border:1px solid rgba(255,255,255,.14);box-shadow:0 9px 24px rgba(0,0,0,.3);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:width .36s cubic-bezier(.2,.8,.2,1),transform .25s ease,box-shadow .25s ease}
+#ale-native-rail .ale-rail-item i{width:38px;height:38px;min-width:38px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:linear-gradient(135deg,#a83bd6,#168dff)}
+#ale-native-rail .ale-rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)}
+#ale-native-rail .ale-rail-item span{display:flex;flex-direction:column;line-height:1.08;white-space:nowrap;opacity:0;transform:translateX(8px);transition:opacity .2s ease,transform .25s ease}
+#ale-native-rail .ale-rail-item b{font-size:11px;font-weight:800}#ale-native-rail .ale-rail-item small{font-size:7.5px;opacity:.7}
+#ale-native-rail .ale-rail-item.active{width:210px;box-shadow:0 12px 34px rgba(108,55,210,.3)}
+#ale-native-rail .ale-rail-item.active span{opacity:1;transform:translateX(0)}
+body.ale-rail-focus:before{content:"";position:fixed;inset:0;z-index:99960;background:rgba(5,6,12,.18);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);pointer-events:none;opacity:1;transition:opacity .25s ease}
+#ale-native-rail{isolation:isolate}
+@media(max-width:600px){#ale-native-rail{right:7px;gap:8px}#ale-native-rail .ale-rail-item{width:44px;height:44px}#ale-native-rail .ale-rail-item i{width:36px;height:36px;min-width:36px;font-size:15px}#ale-native-rail .ale-rail-item.active{width:188px}#ale-native-rail .ale-rail-item b{font-size:10px}#ale-native-rail .ale-rail-item small{font-size:7px}}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -294,15 +307,7 @@
   <span class="social-node social-node-youtube"><i class="fab fa-youtube"></i></span>
   <span class="social-node social-node-tiktok"><i class="fab fa-tiktok"></i></span>
 </div></div>
-                    <div id="ale-links-live" class="ale-links">
-                        <a href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp">
-                            <i class="fab fa-whatsapp"></i><span><b>Grupo VIP</b><small>Futuros alunos</small></span>
-                        </a>
-                        <a href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp">
-                            <i class="fab fa-whatsapp"></i><span><b>Grupo 2</b><small>Comunidade e novidades</small></span>
-                        </a>
-                    </div>
-                </div></div>
+                    </div></div>
     </div>
     
     <div class="scroll-indicator" data-copyai-node-id="n90">
@@ -743,5 +748,35 @@
    window.addEventListener('touchmove',hide,{passive:true});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initScrollCue);else initScrollCue();
+})();
+</script><nav id="ale-native-rail" aria-label="Atalhos da Ale Marques">
+<a class="ale-rail-item" href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span><b>Novos alunos</b><small>Grupo para futuros alunos</small></span></a>
+<a class="ale-rail-item" href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span><b>Networking</b><small>Comunidade e novidades</small></span></a>
+<a class="ale-rail-item" href="https://www.instagram.com/ale.marques.social?stkn=bTE3aDkwbG5kcjc3" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i><span><b>Instagram</b><small>@ale.marques.social</small></span></a>
+<a class="ale-rail-item" href="https://www.tiktok.com/@alemarques.com.br?_r=1&amp;_t=ZS-99lTQRZwlPz" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i><span><b>Novo perfil</b><small>Siga o novo perfil</small></span></a>
+<a class="ale-rail-item" href="https://www.tiktok.com/@alesocialmedia.com.br" target="_blank" rel="noopener noreferrer"><i class="fas fa-video"></i><span><b>Lives</b><small>Perfil atual de lives</small></span></a>
+</nav><script id="ale-native-rail-v9-js">
+(function(){
+ function initRail(){
+  var rail=document.getElementById('ale-native-rail'); if(!rail)return;
+  var items=[].slice.call(rail.querySelectorAll('.ale-rail-item'));
+  var active=-1, timer;
+  function setActive(i,brief){
+   if(i===active&&!brief)return; active=i;
+   items.forEach(function(el,n){el.classList.toggle('active',n===i)});
+   document.body.classList.toggle('ale-rail-focus',i>=0);
+   clearTimeout(timer);
+   if(brief)timer=setTimeout(function(){items.forEach(function(el){el.classList.remove('active')});document.body.classList.remove('ale-rail-focus');active=-1},1450);
+  }
+  function onScroll(){
+   var max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+   var p=Math.max(0,Math.min(1,scrollY/max));
+   setActive(Math.min(items.length-1,Math.floor(p*items.length)),true);
+  }
+  var ticking=false;
+  addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(function(){onScroll();ticking=false});ticking=true}},{passive:true});
+  items.forEach(function(el,i){el.addEventListener('mouseenter',function(){setActive(i,false)});el.addEventListener('mouseleave',function(){setActive(-1,false)});el.addEventListener('touchstart',function(){setActive(i,false)},{passive:true})});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initRail);else initRail();
 })();
 </script></body></html>
