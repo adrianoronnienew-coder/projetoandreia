@@ -1,7 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useRef } from 'react'
-import profilePhoto from '@/assets/ale-marques-profile.png.asset.json'
-import studioPhoto from '@/assets/ale-marques-studio.png.asset.json'
 
 const WHATSAPP_1 = 'https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&p=a&mlu=4&ilr=4'
 const WHATSAPP_2 = 'https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&p=a&mlu=4&ilr=4'
@@ -32,18 +30,6 @@ function HomePage() {
 
     doc.title = 'Ale Marques - Especialista em TikTok'
 
-    const heroPhoto = doc.querySelector<HTMLImageElement>('.hero-photo')
-    if (heroPhoto) {
-      heroPhoto.src = profilePhoto.url
-      heroPhoto.alt = 'Ale Marques, especialista em conteúdo e estratégia para TikTok'
-    }
-
-    const aboutPhoto = doc.querySelector<HTMLImageElement>('.about-image img')
-    if (aboutPhoto) {
-      aboutPhoto.src = studioPhoto.url
-      aboutPhoto.alt = 'Ale Marques em seu estúdio de criação de conteúdo'
-    }
-
     const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
     const nodes: Text[] = []
     while (walker.nextNode()) nodes.push(walker.currentNode as Text)
@@ -65,17 +51,6 @@ function HomePage() {
       el.setAttribute('rel', 'noopener noreferrer')
     })
 
-    const serviceButtons = doc.querySelectorAll<HTMLElement>('.btn-service')
-    serviceButtons.forEach((button, index) => {
-      const link = doc.createElement('a')
-      link.className = button.className
-      link.href = index === 0 ? WHATSAPP_1 : WHATSAPP_2
-      link.target = '_blank'
-      link.rel = 'noopener noreferrer'
-      link.innerHTML = button.innerHTML
-      button.replaceWith(link)
-    })
-
     const whatsappFloat = doc.querySelector<HTMLAnchorElement>('.whatsapp-btn')
     if (whatsappFloat) {
       whatsappFloat.href = WHATSAPP_1
@@ -89,33 +64,6 @@ function HomePage() {
       link.style.display = 'none'
     })
 
-    const heroCta = doc.querySelector('.hero-cta')
-    if (heroCta && !doc.getElementById('ale-links')) {
-      const links = doc.createElement('div')
-      links.id = 'ale-links'
-      links.innerHTML = `
-        <a href="${WHATSAPP_1}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp"><i class="fab fa-whatsapp" aria-hidden="true"></i> Entrar no Grupo VIP do WhatsApp</a>
-        <a href="${WHATSAPP_2}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp secondary"><i class="fab fa-whatsapp" aria-hidden="true"></i> Entrar no Grupo 2 do WhatsApp</a>
-        <a href="${TIKTOK}" target="_blank" rel="noopener noreferrer" class="ale-action ale-tiktok"><i class="fab fa-tiktok" aria-hidden="true"></i> Acompanhar minhas Lives no TikTok</a>
-      `
-      heroCta.insertAdjacentElement('afterend', links)
-    }
-
-    const style = doc.createElement('style')
-    style.textContent = `
-      #ale-links{display:flex;flex-direction:column;gap:12px;margin-top:24px;max-width:520px}
-      .ale-action{display:flex;align-items:center;justify-content:center;min-height:56px;padding:14px 22px;border-radius:14px;color:#fff!important;text-decoration:none!important;font-weight:800;font-size:15px;letter-spacing:.1px;transition:transform .2s ease,box-shadow .2s ease}
-      .ale-action:hover{transform:translateY(-2px)}
-      .ale-action i{font-size:20px;margin-right:10px}
-      .ale-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 10px 28px rgba(37,211,102,.28)}
-      .ale-whatsapp.secondary{background:linear-gradient(135deg,#20bd5a,#087d6b)}
-      .ale-tiktok{background:linear-gradient(135deg,#111,#272727);border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 28px rgba(0,0,0,.28)}
-      .hero-photo{aspect-ratio:1/1;object-fit:cover;object-position:center;border-radius:50%}
-      .about-image img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 30%}
-      @media(max-width:991px){#ale-links{margin:24px auto 0}}
-      @media(max-width:520px){.ale-action{font-size:14px;min-height:54px;padding:13px 16px}}
-    `
-    doc.head.appendChild(style)
   }
 
   return (
