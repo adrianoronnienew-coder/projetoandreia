@@ -1,0 +1,1 @@
+Vídeos diretos verificados e pequenos o suficiente para os anexos do Lovable são incorporados localmente. HLS sem proteção é listado para download completo separado; DASH/embeds permanecem como referências externas; vídeos maiores são listados em MEDIA_TO_REPLACE.json para não estourar o limite de upload.
