@@ -13,8 +13,10 @@ export const Route = createFileRoute('/')({
       { property: 'og:title', content: 'Ale Marques - Especialista em TikTok' },
       { property: 'og:description', content: 'Conteúdo, estratégia e crescimento no TikTok com Ale Marques.' },
       { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://alemarques.site/' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
+    links: [{ rel: 'canonical', href: 'https://alemarques.site/' }],
   }),
   component: HomePage,
 })
@@ -46,32 +48,22 @@ function HomePage() {
     doc.querySelectorAll('a[href*="tiktok.com"]').forEach((el) => {
       el.setAttribute('href', TIKTOK)
       el.setAttribute('target', '_blank')
+      el.setAttribute('rel', 'noopener noreferrer')
     })
 
-    const heroCta = doc.querySelector('.hero-cta')
-    if (heroCta && !doc.getElementById('ale-links')) {
-      const links = doc.createElement('div')
-      links.id = 'ale-links'
-      links.innerHTML = `
-        <a href="${WHATSAPP_1}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp">💬 Entrar no Grupo VIP do WhatsApp</a>
-        <a href="${WHATSAPP_2}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp secondary">💬 Entrar no Grupo 2 do WhatsApp</a>
-        <a href="${TIKTOK}" target="_blank" rel="noopener noreferrer" class="ale-action ale-tiktok">♪ Acompanhar minhas Lives no TikTok</a>
-      `
-      heroCta.insertAdjacentElement('afterend', links)
+    const whatsappFloat = doc.querySelector<HTMLAnchorElement>('.whatsapp-btn')
+    if (whatsappFloat) {
+      whatsappFloat.href = WHATSAPP_1
+      whatsappFloat.target = '_blank'
+      whatsappFloat.rel = 'noopener noreferrer'
+      const label = whatsappFloat.querySelector('.whatsapp-text')
+      if (label) label.textContent = 'Grupo VIP'
     }
 
-    const style = doc.createElement('style')
-    style.textContent = `
-      #ale-links{display:flex;flex-direction:column;gap:12px;margin-top:24px;max-width:520px}
-      .ale-action{display:flex;align-items:center;justify-content:center;min-height:56px;padding:14px 22px;border-radius:14px;color:#fff!important;text-decoration:none!important;font-weight:800;font-size:15px;letter-spacing:.1px;transition:transform .2s ease,box-shadow .2s ease}
-      .ale-action:hover{transform:translateY(-2px)}
-      .ale-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 10px 28px rgba(37,211,102,.28)}
-      .ale-whatsapp.secondary{background:linear-gradient(135deg,#20bd5a,#087d6b)}
-      .ale-tiktok{background:linear-gradient(135deg,#111,#272727);border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 28px rgba(0,0,0,.28)}
-      @media(max-width:991px){#ale-links{margin:24px auto 0}}
-      @media(max-width:520px){.ale-action{font-size:14px;min-height:54px;padding:13px 16px}}
-    `
-    doc.head.appendChild(style)
+    doc.querySelectorAll<HTMLAnchorElement>('a[href*="instagram.com"], a[data-copyai-link-type="email"]').forEach((link) => {
+      link.style.display = 'none'
+    })
+
   }
 
   return (

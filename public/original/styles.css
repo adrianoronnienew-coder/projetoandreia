@@ -973,6 +973,13 @@ h1, h2, h3, h4, h5, h6 { font-family: Montserrat, sans-serif; font-weight: 700; 
 .stat-symbol { font-size: 2.5rem; font-weight: 800; color: var(--accent-green); }
 .stat-label { display: block; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.ale-links { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; max-width: 520px; }
+.ale-action { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0.875rem 1.375rem; border-radius: 14px; color: white; text-decoration: none; font-weight: 800; font-size: 0.95rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.ale-action:hover { color: white; transform: translateY(-2px); }
+.ale-action i { font-size: 1.25rem; margin-right: 0.625rem; }
+.ale-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); box-shadow: rgba(37, 211, 102, 0.28) 0px 10px 28px; }
+.ale-whatsapp.secondary { background: linear-gradient(135deg, #20bd5a, #087d6b); }
+.ale-tiktok { background: linear-gradient(135deg, #111, #272727); border: 1px solid rgba(255, 255, 255, 0.18); box-shadow: rgba(0, 0, 0, 0.28) 0px 10px 28px; }
 .hero-image { position: relative; z-index: 2; }
 .image-container { position: relative; display: inline-block; }
 .image-glow { position: absolute; inset: -20px; background: var(--gradient-primary); border-radius: 50%; filter: blur(30px); opacity: 0.3; animation: 3s ease-in-out 0s infinite normal none running pulse; }
@@ -1035,7 +1042,7 @@ h1, h2, h3, h4, h5, h6 { font-family: Montserrat, sans-serif; font-weight: 700; 
 .btn-orange:hover { background: rgb(204, 68, 0); transform: translateY(-2px); box-shadow: rgba(255, 102, 0, 0.3) 0px 10px 30px; }
 .service-badge { position: absolute; top: 20px; right: 20px; background: var(--accent-green); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
 .about-image { position: relative; }
-.about-image img { box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px; }
+.about-image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px; }
 .about-badge { position: absolute; bottom: 20px; left: 20px; background: var(--gradient-primary); color: white; padding: 1rem 1.5rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; font-weight: 700; box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 30px; }
 .about-text { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7; }
 .about-achievements { margin: 2rem 0px; }
@@ -1076,12 +1083,14 @@ h1, h2, h3, h4, h5, h6 { font-family: Montserrat, sans-serif; font-weight: 700; 
 .btn-back-to-top.show { opacity: 1; visibility: visible; }
 .btn-back-to-top:hover { transform: translateY(-3px); box-shadow: rgba(0, 255, 136, 0.3) 0px 10px 30px; }
 @media (max-width: 768px) {
+  html, body { overflow-x: hidden; }
   .hero-title { font-size: 2.5rem; }
   .hero-subtitle { font-size: 1.1rem; }
   .hero-stats { justify-content: center; gap: 1rem; }
   .stat-number { font-size: 2rem; }
   .hero-photo { width: 300px; height: 300px; }
   .hero-cta { justify-content: center; }
+  .ale-links { margin: 1.5rem auto 0; }
   .section-title { font-size: 2rem; }
   .service-card { margin-bottom: 2rem; }
   .testimonials-carousel { padding: 1rem; }
@@ -1093,6 +1102,7 @@ h1, h2, h3, h4, h5, h6 { font-family: Montserrat, sans-serif; font-weight: 700; 
   .hero-title { font-size: 2rem; }
   .hero-photo { width: 250px; height: 250px; }
   .btn { font-size: 0.9rem; padding: 0.75rem 1.5rem; }
+  .ale-action { min-height: 54px; padding: 0.8rem 1rem; font-size: 0.875rem; }
   .service-card { padding: 1.5rem; }
   .contact-form { padding: 1.5rem; }
 }
