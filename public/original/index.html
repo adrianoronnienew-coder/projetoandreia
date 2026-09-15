@@ -91,7 +91,15 @@
         gtag('js', new Date());
         gtag('config', 'GA_MEASUREMENT_ID');
     </script> -->
-<link rel="stylesheet" href="styles.css"></head>
+<link rel="stylesheet" href="styles.css"><style id="ale-refinement">
+.ale-brand-animated{display:inline-block;background:linear-gradient(90deg,#fff 0%,#fff 30%,#c53cc5 52%,#ff55c8 72%,#fff 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:aleBrandFlow 3.2s ease-in-out infinite;text-shadow:0 0 16px rgba(197,60,197,.12)}
+@keyframes aleBrandFlow{0%,100%{background-position:100% 50%;filter:brightness(1)}50%{background-position:0% 50%;filter:brightness(1.18)}}
+.ale-links{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:12px!important;max-width:none!important;margin-top:24px!important}
+.ale-links .ale-action{width:auto!important;min-width:0!important;min-height:42px!important;padding:9px 14px!important;border-radius:999px!important;font-size:12px!important;line-height:1!important;gap:7px!important;box-shadow:0 6px 18px rgba(0,0,0,.16)!important}
+.ale-links .ale-action i{font-size:17px!important;margin:0!important}
+.ale-links .ale-action span{white-space:nowrap}
+@media(max-width:600px){.ale-links{gap:8px!important;flex-wrap:wrap!important}.ale-links .ale-action{padding:9px 12px!important;font-size:11px!important}}
+</style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
     <div id="loading-spinner" class="loading-spinner" style="display: none;" data-copyai-node-id="n31">
@@ -102,7 +110,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="transform: translateY(0px);" data-copyai-temporal-id="t13" data-copyai-node-id="n33">
         <div class="container" data-copyai-node-id="n34">
             <a class="navbar-brand" href="#home" data-copyai-node-id="n35" data-copyai-nav-kind="brand-logo" data-copyai-nav-href="#home">
-                <strong data-copyai-node-id="n36">Ale Marques</strong>
+                <strong class="ale-brand-animated" data-copyai-node-id="n36">Ale Marques</strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" data-copyai-node-id="n37">
                 <span class="navbar-toggler-icon" data-copyai-node-id="n38"></span>
@@ -195,9 +203,9 @@
                         </div>
                     </div>
                     <div id="ale-links" class="ale-links">
-                        <a href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp"><i class="fab fa-whatsapp" aria-hidden="true"></i> Entrar no Grupo VIP do WhatsApp</a>
-                        <a href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp secondary"><i class="fab fa-whatsapp" aria-hidden="true"></i> Entrar no Grupo 2 do WhatsApp</a>
-                        <a href="https://www.tiktok.com/@alesocialmedia.com.br" target="_blank" rel="noopener noreferrer" class="ale-action ale-tiktok"><i class="fab fa-tiktok" aria-hidden="true"></i> Acompanhar minhas Lives no TikTok</a>
+                        <a href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp" title="Grupo VIP do WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Grupo VIP</span></a>
+                        <a href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp secondary" title="Grupo 2 do WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Grupo 2</span></a>
+                        <a href="https://www.tiktok.com/@alesocialmedia.com.br" target="_blank" rel="noopener noreferrer" class="ale-action ale-tiktok" title="Perfil de Lives no TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i><span>Lives</span></a>
                     </div>
                 </div>
             </div>
