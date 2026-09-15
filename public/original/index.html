@@ -328,6 +328,32 @@
  #ale-native-rail .ale-rail-item.active{width:min(260px,calc(100vw - 42px))!important;height:64px!important}
  #ale-native-rail .ale-rail-item.active i{width:50px!important;height:50px!important;min-width:50px!important}
 }
+</style><style id="ale-rail-mobile-v18">
+@media(max-width:600px){
+ #servicos{position:relative!important}
+ #servicos .service-card:first-of-type{
+   position:relative!important;min-height:720px!important;overflow:hidden!important;
+ }
+ #servicos .service-card:first-of-type > *{display:none!important}
+ #servicos .service-card:first-of-type #ale-native-rail{display:flex!important}
+ #ale-native-rail{
+   position:absolute!important;inset:0!important;transform:none!important;z-index:20!important;
+   padding:42px 22px!important;box-sizing:border-box!important;
+   display:flex!important;flex-direction:column!important;align-items:flex-end!important;
+   justify-content:center!important;gap:24px!important;max-height:none!important;width:100%!important;
+ }
+ #ale-native-rail .ale-rail-item{
+   position:relative!important;width:66px!important;height:66px!important;min-width:66px!important;
+   padding:5px!important;overflow:hidden!important;flex:none!important;margin:0!important;
+ }
+ #ale-native-rail .ale-rail-item i{width:54px!important;height:54px!important;min-width:54px!important}
+ #ale-native-rail .ale-rail-item .ale-rail-copy{display:none!important}
+ #ale-native-rail .ale-rail-item.active{
+   width:min(310px,calc(100% - 10px))!important;height:76px!important;
+ }
+ #ale-native-rail .ale-rail-item.active .ale-rail-copy{display:flex!important}
+ #servicos .service-card:first-of-type.ale-focus-card{filter:none!important;opacity:1!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -1077,6 +1103,30 @@
     if(d<dist){dist=d;best=i}
    });
    activate(Math.min(best,items.length-1));
+  }
+  items.forEach(function(x,i){x.addEventListener('click',function(){activate(i)});x.addEventListener('touchstart',function(){activate(i)},{passive:true})});
+  addEventListener('scroll',sync,{passive:true});addEventListener('resize',sync,{passive:true});activate(0);sync();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script><script id="ale-rail-mobile-v18-js">
+(function(){
+ function init(){
+  var sec=document.getElementById('servicos'),rail=document.getElementById('ale-native-rail');if(!sec||!rail)return;
+  var card=sec.querySelector('.service-card');if(!card)return;
+  if(rail.parentNode!==card)card.appendChild(rail);
+  var items=[].slice.call(rail.querySelectorAll('.ale-rail-item')),active=-1;
+  function activate(i){
+   if(!items.length)return;i=Math.max(0,Math.min(items.length-1,i));
+   if(i===active)return;active=i;
+   items.forEach(function(x,n){x.classList.toggle('active',n===i)});
+  }
+  function sync(){
+   if(innerWidth>600)return;
+   var r=card.getBoundingClientRect(),vh=innerHeight;
+   var travel=Math.max(1,r.height+vh);
+   var p=Math.max(0,Math.min(.999,(vh-r.top)/travel));
+   activate(Math.floor(p*items.length));
   }
   items.forEach(function(x,i){x.addEventListener('click',function(){activate(i)});x.addEventListener('touchstart',function(){activate(i)},{passive:true})});
   addEventListener('scroll',sync,{passive:true});addEventListener('resize',sync,{passive:true});activate(0);sync();
