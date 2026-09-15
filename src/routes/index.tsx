@@ -69,7 +69,8 @@ function HomePage() {
     if (achievementTitles[2]) achievementTitles[2].textContent = 'Destaque'
     if (achievementTexts[2]) achievementTexts[2].textContent = 'Entre as melhores do Brasil'
 
-    doc.querySelectorAll<HTMLAnchorElement>('a[href*="instagram.com"], a[data-copyai-link-type="email"]').forEach(link => { link.style.display = 'none' })
+    doc.querySelectorAll<HTMLAnchorElement>('a[href*="instagram.com"]').forEach(link => { link.href = INSTAGRAM; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.style.display = '' })
+    doc.querySelectorAll<HTMLAnchorElement>('a[data-copyai-link-type="email"]').forEach(link => { link.style.display = 'none' })
 
     doc.querySelector('.whatsapp-float')?.remove()
 
