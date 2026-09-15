@@ -17,7 +17,7 @@ export const Route = createFileRoute('/')({
 function HomePage() {
   return (
     <iframe
-      className="block h-screen w-full border-0"
+      className="original-frame"
       src="/original/index.html"
       title="Anna Karoliny - Especialista em TikTok"
     />
