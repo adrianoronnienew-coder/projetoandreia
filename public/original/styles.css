@@ -1083,6 +1083,7 @@ h1, h2, h3, h4, h5, h6 { font-family: Montserrat, sans-serif; font-weight: 700; 
 .btn-back-to-top.show { opacity: 1; visibility: visible; }
 .btn-back-to-top:hover { transform: translateY(-3px); box-shadow: rgba(0, 255, 136, 0.3) 0px 10px 30px; }
 @media (max-width: 768px) {
+  html, body { overflow-x: hidden; }
   .hero-title { font-size: 2.5rem; }
   .hero-subtitle { font-size: 1.1rem; }
   .hero-stats { justify-content: center; gap: 1rem; }
