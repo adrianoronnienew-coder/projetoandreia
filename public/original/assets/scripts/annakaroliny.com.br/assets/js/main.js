@@ -1,5 +1,5 @@
 /**
- * Anna Karoliny Website - Main JavaScript
+ * Ale Marques Website - Main JavaScript
  */
 
 // Configuration
@@ -7,9 +7,9 @@ const CONFIG = {
     whatsappNumber: '5531989167511', // Substitua pelo número real
     apiUrl: 'api/contact.php',
     whatsappMessages: {
-        curso: 'Olá Anna! Tenho interesse no Curso Monetize TikTok. Pode me enviar mais informações sobre o conteúdo, metodologia e como posso me inscrever?',
-        mentoria: 'Olá Anna! Gostaria de saber mais sobre a gestao de perfil. Quando podemos conversar para discutir meus objetivos no TikTok?',
-        analise: 'Olá Anna! Quero fazer a análise do meu perfil do TikTok. Como funciona o processo e quando posso receber o relatório?'
+        curso: 'Olá Ale! Tenho interesse na Formação Digital. Pode me enviar mais informações?',
+        mentoria: 'Olá Ale! Gostaria de saber mais sobre a gestão de perfil nas redes sociais.',
+        analise: 'Olá Ale! Quero fazer uma análise da minha presença nas redes sociais.'
     }
 };
 
@@ -359,7 +359,7 @@ function createTestimonialCard(testimonial) {
 // Get service name in Portuguese
 function getServiceName(service) {
     const names = {
-        curso: 'Curso Monetize TikTok',
+        curso: 'Formação Digital',
         mentoria: 'Mentoria Individual',
         analise: 'Análise de Perfil'
     };

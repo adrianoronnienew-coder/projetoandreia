@@ -3,7 +3,6 @@ import { useRef } from 'react'
 
 const WHATSAPP_1 = 'https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&p=a&mlu=4&ilr=4'
 const WHATSAPP_2 = 'https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&p=a&mlu=4&ilr=4'
-const SOCIAL = 'https://www.tiktok.com/@alesocialmedia.com.br'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -30,8 +29,6 @@ function HomePage() {
     doc.title = 'Ale Marques - Especialista em Redes Sociais'
 
     const replacements: Array<[string, string]> = [
-      ['Especialista em TikTok', 'Especialista em Redes Sociais'],
-      ['especialista em TikTok', 'especialista em redes sociais'],
       ['Mais de 86 mil seguidores e 448 alunos já transformaram suas vidas.', 'Estratégias que já ajudaram diversos alunos a crescer, se posicionar e monetizar nas redes sociais.'],
       ['86 mil seguidores', 'diversos resultados'],
       ['86.240', 'Muitos'],
@@ -42,15 +39,7 @@ function HomePage() {
       ['+1.500', 'Diversos'],
       ['Top 1%', 'Destaque'],
       ['Especialistas Brasil', 'Entre as melhores do Brasil'],
-      ['transformar seu TikTok em uma fonte de renda', 'transformar sua presença nas redes sociais em uma fonte de oportunidades'],
-      ['apenas com TikTok', 'através das redes sociais'],
       ['monetizarem suas contas', 'monetizarem sua presença digital'],
-      ['Curso Monetize TikTok', 'Formação em Monetização'],
-      ['monetizar o TikTok', 'monetizar nas redes sociais'],
-      ['crescer no TikTok', 'crescer nas redes sociais'],
-      ['perfil do TikTok', 'perfil nas redes sociais'],
-      ['sobre TikTok', 'sobre redes sociais'],
-      ['Curso TikTok', 'Formação Digital'],
     ]
 
     const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
@@ -91,7 +80,6 @@ function HomePage() {
       links.innerHTML = `
         <a href="${WHATSAPP_1}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp"><i class="fab fa-whatsapp"></i><span><b>Grupo VIP</b><small>Futuros alunos</small></span></a>
         <a href="${WHATSAPP_2}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp"><i class="fab fa-whatsapp"></i><span><b>Grupo 2</b><small>Comunidade e novidades</small></span></a>
-        <a href="${SOCIAL}" target="_blank" rel="noopener noreferrer" class="ale-action ale-social"><i class="fas fa-broadcast-tower"></i><span><b>Conteúdos</b><small>Perfil e transmissões</small></span></a>
       `
       const image = doc.querySelector('.hero-image')
       image?.appendChild(links)
@@ -99,7 +87,7 @@ function HomePage() {
 
     const style = doc.createElement('style')
     style.textContent = `
-      #ale-links-live{width:100%;max-width:500px;margin:24px auto 0;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+      #ale-links-live{width:100%;max-width:420px;margin:24px auto 0;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
       #ale-links-live .ale-action{height:58px!important;padding:8px 11px!important;border-radius:999px!important;display:flex!important;align-items:center!important;gap:9px!important;text-decoration:none!important;color:#fff!important;background:linear-gradient(145deg,#19191d,#0b0b0e)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 10px 28px rgba(0,0,0,.24)!important}
       #ale-links-live .ale-action i{width:34px!important;height:34px!important;min-width:34px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:linear-gradient(135deg,#d43bc4,#7f5cff)!important}
       #ale-links-live .ale-whatsapp i{background:linear-gradient(135deg,#2bd66f,#119d62)!important}
