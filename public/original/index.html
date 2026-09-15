@@ -195,6 +195,10 @@
  #mainNav .navbar-nav{gap:2px!important}
  #mainNav .nav-link{padding:11px 8px!important}
 }
+</style><style id="ale-scroll-cue-once-v8">
+/* Indicador de rolagem: dica rápida, nunca persistente */
+.scroll-indicator{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .22s ease!important}
+.scroll-indicator.ale-scroll-cue{opacity:1!important;visibility:visible!important}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -724,5 +728,20 @@
    window.addEventListener('scroll',syncBack,{passive:true}); syncBack();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAleControls);else initAleControls();
+})();
+</script><script id="ale-scroll-cue-once-v8">
+(function(){
+ function initScrollCue(){
+   var cue=document.querySelector('.scroll-indicator');
+   if(!cue)return;
+   cue.classList.remove('ale-scroll-cue');
+   var hidden=false;
+   function hide(){if(hidden)return;hidden=true;cue.classList.remove('ale-scroll-cue');window.removeEventListener('scroll',hide);window.removeEventListener('touchmove',hide)}
+   setTimeout(function(){if(!hidden&&window.scrollY<30)cue.classList.add('ale-scroll-cue')},250);
+   setTimeout(hide,1250);
+   window.addEventListener('scroll',hide,{passive:true});
+   window.addEventListener('touchmove',hide,{passive:true});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initScrollCue);else initScrollCue();
 })();
 </script></body></html>
