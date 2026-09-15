@@ -214,6 +214,16 @@
 
 #ale-native-rail.ale-rail-visible{display:flex!important;isolation:isolate} .service-card.ale-local-focus{filter:blur(7px);opacity:.38;transition:filter .25s ease,opacity .25s ease}
 @media(max-width:600px){#ale-native-rail{right:7px;gap:8px}#ale-native-rail .ale-rail-item{width:44px;height:44px}#ale-native-rail .ale-rail-item i{width:36px;height:36px;min-width:36px;font-size:15px}#ale-native-rail .ale-rail-item.active{width:188px}#ale-native-rail .ale-rail-item b{font-size:10px}#ale-native-rail .ale-rail-item small{font-size:7px}}
+</style><style id="ale-rail-scoped-v10">
+#servicos{position:relative!important}
+#ale-native-rail{display:flex!important;position:absolute!important;right:8px!important;top:110px!important;transform:none!important;z-index:30!important}
+#ale-native-rail:not(.ale-rail-visible){opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#ale-native-rail.ale-rail-visible{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#servicos .service-card{filter:none!important;opacity:1!important;transition:filter .28s ease,opacity .28s ease!important}
+#servicos .service-card.ale-local-focus{filter:blur(8px)!important;opacity:.32!important}
+@media(max-width:600px){
+ #ale-native-rail{right:7px!important;top:115px!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -782,5 +792,40 @@
   items.forEach(function(el,i){el.addEventListener('mouseenter',function(){setActive(i,false)});el.addEventListener('mouseleave',function(){setActive(-1,false)});el.addEventListener('touchstart',function(){setActive(i,false)},{passive:true})});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initRail);else initRail();
+})();
+</script><script id="ale-rail-scoped-v10-js">
+(function(){
+ function scopeRail(){
+  var rail=document.getElementById('ale-native-rail'), sec=document.getElementById('servicos');
+  if(!rail||!sec)return;
+  if(rail.parentElement!==sec)sec.appendChild(rail);
+  var items=[].slice.call(rail.querySelectorAll('.ale-rail-item'));
+  var cards=[].slice.call(sec.querySelectorAll('.service-card'));
+  var timer=null,last=-1;
+  function clear(){
+   items.forEach(function(x){x.classList.remove('active')});
+   cards.forEach(function(x){x.classList.remove('ale-local-focus')});
+   last=-1;
+  }
+  function reveal(i){
+   if(i<0||i>=items.length)return clear();
+   clear(); last=i; items[i].classList.add('active');
+   cards.forEach(function(x){x.classList.add('ale-local-focus')});
+   clearTimeout(timer);timer=setTimeout(clear,1200);
+  }
+  function sync(){
+   var r=sec.getBoundingClientRect();
+   var inZone=r.top<innerHeight*.72&&r.bottom>innerHeight*.28;
+   rail.classList.toggle('ale-rail-visible',inZone);
+   if(!inZone){clear();return}
+   var inside=Math.max(0,Math.min(1,(innerHeight*.55-r.top)/Math.max(1,r.height)));
+   var i=Math.min(items.length-1,Math.floor(inside*items.length));
+   if(i!==last)reveal(i);
+  }
+  addEventListener('scroll',sync,{passive:true});addEventListener('resize',sync,{passive:true});
+  items.forEach(function(x,i){x.addEventListener('touchstart',function(){reveal(i)},{passive:true});x.addEventListener('mouseenter',function(){reveal(i)})});
+  clear();sync();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scopeRail);else scopeRail();
 })();
 </script></body></html>
