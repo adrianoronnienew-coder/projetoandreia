@@ -52,10 +52,7 @@ function HomePage() {
       node.nodeValue = value
     })
 
-    doc.querySelectorAll<HTMLElement>('.stat-number').forEach((el, i) => {
-      el.removeAttribute('data-count')
-      el.textContent = i === 0 ? 'Muitos' : 'Diversos'
-    })
+    doc.querySelectorAll<HTMLElement>('.stat-number').forEach(el => el.removeAttribute('data-count'))
 
     const aboutBadge = doc.querySelector('.about-badge span')
     if (aboutBadge) aboutBadge.textContent = 'Especialista em Redes Sociais'
