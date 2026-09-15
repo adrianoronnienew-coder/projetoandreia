@@ -3,15 +3,15 @@ import { useRef } from 'react'
 
 const WHATSAPP_1 = 'https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&p=a&mlu=4&ilr=4'
 const WHATSAPP_2 = 'https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&p=a&mlu=4&ilr=4'
-const TIKTOK = 'https://www.tiktok.com/@alesocialmedia.com.br'
+const SOCIAL = 'https://www.tiktok.com/@alesocialmedia.com.br'
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Ale Marques - Especialista em TikTok' },
-      { name: 'description', content: 'Ale Marques: conteúdo, estratégia e crescimento no TikTok. Entre nos grupos do WhatsApp e acompanhe as lives.' },
-      { property: 'og:title', content: 'Ale Marques - Especialista em TikTok' },
-      { property: 'og:description', content: 'Conteúdo, estratégia e crescimento no TikTok com Ale Marques.' },
+      { title: 'Ale Marques - Especialista em Redes Sociais' },
+      { name: 'description', content: 'Ale Marques: estratégia, conteúdo e crescimento nas redes sociais.' },
+      { property: 'og:title', content: 'Ale Marques - Especialista em Redes Sociais' },
+      { property: 'og:description', content: 'Estratégia, conteúdo e crescimento nas redes sociais com Ale Marques.' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://alemarques.site/' },
       { name: 'twitter:card', content: 'summary_large_image' },
@@ -27,52 +27,88 @@ function HomePage() {
   const personalize = () => {
     const doc = frameRef.current?.contentDocument
     if (!doc) return
+    doc.title = 'Ale Marques - Especialista em Redes Sociais'
 
-    doc.title = 'Ale Marques - Especialista em TikTok'
+    const replacements: Array<[string, string]> = [
+      ['Especialista em TikTok', 'Especialista em Redes Sociais'],
+      ['especialista em TikTok', 'especialista em redes sociais'],
+      ['Mais de 86 mil seguidores e 448 alunos já transformaram suas vidas.', 'Estratégias que já ajudaram diversos alunos a crescer, se posicionar e monetizar nas redes sociais.'],
+      ['86 mil seguidores', 'diversos resultados'],
+      ['86.240', 'Muitos'],
+      ['Seguidores', 'Resultados'],
+      ['448 alunos', 'diversos alunos'],
+      ['448', 'Muitos'],
+      ['+448 Alunos', 'Muitos Alunos'],
+      ['+1.500', 'Diversos'],
+      ['Top 1%', 'Destaque'],
+      ['Especialistas Brasil', 'Entre as melhores do Brasil'],
+      ['transformar seu TikTok em uma fonte de renda', 'transformar sua presença nas redes sociais em uma fonte de oportunidades'],
+      ['apenas com TikTok', 'através das redes sociais'],
+      ['monetizarem suas contas', 'monetizarem sua presença digital'],
+      ['Curso Monetize TikTok', 'Formação em Monetização'],
+      ['monetizar o TikTok', 'monetizar nas redes sociais'],
+      ['crescer no TikTok', 'crescer nas redes sociais'],
+      ['perfil do TikTok', 'perfil nas redes sociais'],
+      ['sobre TikTok', 'sobre redes sociais'],
+      ['Curso TikTok', 'Formação Digital'],
+    ]
 
     const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
     const nodes: Text[] = []
     while (walker.nextNode()) nodes.push(walker.currentNode as Text)
-    nodes.forEach((node) => {
-      if (node.nodeValue) {
-        node.nodeValue = node.nodeValue
-          .replaceAll('Anna Karoliny', 'Ale Marques')
-          .replaceAll('ANNA KAROLINY', 'ALE MARQUES')
-          .replaceAll('Anna', 'Ale')
-          .replaceAll('385.000', '86.240')
-          .replaceAll('380k', '86 mil')
-          .replaceAll('2.000', '448')
-      }
+    nodes.forEach(node => {
+      if (!node.nodeValue) return
+      let value = node.nodeValue
+      replacements.forEach(([from, to]) => { value = value.replaceAll(from, to) })
+      node.nodeValue = value
     })
 
-    doc.querySelectorAll('a[href*="tiktok.com"]').forEach((el) => {
-      el.setAttribute('href', TIKTOK)
-      el.setAttribute('target', '_blank')
-      el.setAttribute('rel', 'noopener noreferrer')
+    doc.querySelectorAll<HTMLElement>('.stat-number').forEach((el, i) => {
+      el.removeAttribute('data-count')
+      el.textContent = i === 0 ? 'Muitos' : 'Diversos'
     })
 
-    const whatsappFloat = doc.querySelector<HTMLAnchorElement>('.whatsapp-btn')
-    if (whatsappFloat) {
-      whatsappFloat.href = WHATSAPP_1
-      whatsappFloat.target = '_blank'
-      whatsappFloat.rel = 'noopener noreferrer'
-      const label = whatsappFloat.querySelector('.whatsapp-text')
-      if (label) label.textContent = 'Grupo VIP'
+    const aboutBadge = doc.querySelector('.about-badge span')
+    if (aboutBadge) aboutBadge.textContent = 'Especialista em Redes Sociais'
+
+    const achievementTitles = doc.querySelectorAll<HTMLElement>('.achievement-content h4')
+    const achievementTexts = doc.querySelectorAll<HTMLElement>('.achievement-content p')
+    if (achievementTitles[0]) achievementTitles[0].textContent = 'Muitos Alunos'
+    if (achievementTexts[0]) achievementTexts[0].textContent = 'Pessoas transformadas'
+    if (achievementTitles[1]) achievementTitles[1].textContent = 'Diversos'
+    if (achievementTexts[1]) achievementTexts[1].textContent = 'Alunos monetizados'
+    if (achievementTitles[2]) achievementTitles[2].textContent = 'Destaque'
+    if (achievementTexts[2]) achievementTexts[2].textContent = 'Entre as melhores do Brasil'
+
+    doc.querySelectorAll<HTMLAnchorElement>('a[href*="instagram.com"], a[data-copyai-link-type="email"]').forEach(link => { link.style.display = 'none' })
+
+    doc.querySelector('.whatsapp-float')?.remove()
+
+    if (!doc.getElementById('ale-links-live')) {
+      const links = doc.createElement('div')
+      links.id = 'ale-links-live'
+      links.className = 'ale-links'
+      links.innerHTML = `
+        <a href="${WHATSAPP_1}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp"><i class="fab fa-whatsapp"></i><span><b>Grupo VIP</b><small>Futuros alunos</small></span></a>
+        <a href="${WHATSAPP_2}" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp"><i class="fab fa-whatsapp"></i><span><b>Grupo 2</b><small>Comunidade e novidades</small></span></a>
+        <a href="${SOCIAL}" target="_blank" rel="noopener noreferrer" class="ale-action ale-social"><i class="fas fa-broadcast-tower"></i><span><b>Conteúdos</b><small>Perfil e transmissões</small></span></a>
+      `
+      const image = doc.querySelector('.hero-image')
+      image?.appendChild(links)
     }
 
-    doc.querySelectorAll<HTMLAnchorElement>('a[href*="instagram.com"], a[data-copyai-link-type="email"]').forEach((link) => {
-      link.style.display = 'none'
-    })
-
+    const style = doc.createElement('style')
+    style.textContent = `
+      #ale-links-live{width:100%;max-width:500px;margin:24px auto 0;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+      #ale-links-live .ale-action{height:58px!important;padding:8px 11px!important;border-radius:999px!important;display:flex!important;align-items:center!important;gap:9px!important;text-decoration:none!important;color:#fff!important;background:linear-gradient(145deg,#19191d,#0b0b0e)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 10px 28px rgba(0,0,0,.24)!important}
+      #ale-links-live .ale-action i{width:34px!important;height:34px!important;min-width:34px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:linear-gradient(135deg,#d43bc4,#7f5cff)!important}
+      #ale-links-live .ale-whatsapp i{background:linear-gradient(135deg,#2bd66f,#119d62)!important}
+      #ale-links-live span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;min-width:0}
+      #ale-links-live b{font-size:12px;white-space:nowrap} #ale-links-live small{font-size:8px;opacity:.68;white-space:nowrap}
+      @media(max-width:600px){#ale-links-live{gap:6px!important}#ale-links-live .ale-action{height:50px!important;padding:6px 7px!important;gap:5px!important}#ale-links-live .ale-action i{width:28px!important;height:28px!important;min-width:28px!important}#ale-links-live b{font-size:9px!important}#ale-links-live small{font-size:6.5px!important}}
+    `
+    doc.head.appendChild(style)
   }
 
-  return (
-    <iframe
-      ref={frameRef}
-      className="original-frame"
-      src="/original/index.html"
-      title="Ale Marques - Especialista em TikTok"
-      onLoad={personalize}
-    />
-  )
+  return <iframe ref={frameRef} className="original-frame" src="/original/index.html" title="Ale Marques - Especialista em Redes Sociais" onLoad={personalize} />
 }
