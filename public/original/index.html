@@ -108,6 +108,16 @@
 .ale-links .ale-whatsapp i{background:linear-gradient(135deg,#2bd66f,#119d62)!important}
 .ale-links .ale-action span b{font-size:11px!important;letter-spacing:.15px}.ale-links .ale-action span small{font-size:8px!important;color:rgba(255,255,255,.62)!important}
 @media(max-width:600px){#mainNav{position:fixed!important}.ale-links{gap:7px!important}.ale-links .ale-action{padding:9px 11px!important}}
+</style><style id="ale-social-orbit-v3">
+.floating-elements,.floating-icon{display:none!important}
+.image-container{position:relative!important}
+.social-orbit{position:absolute;inset:-24px;pointer-events:none;z-index:3}
+.social-node{position:absolute;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:16px;border:1px solid rgba(255,255,255,.22);box-shadow:0 10px 28px rgba(0,0,0,.28);backdrop-filter:blur(8px);animation:socialFloat 5.5s ease-in-out infinite}
+.social-node-instagram{top:8%;right:5%;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}
+.social-node-youtube{right:-1%;bottom:25%;background:linear-gradient(135deg,#ff0033,#b90025);animation-delay:-1.8s}
+.social-node-community{left:3%;bottom:10%;background:linear-gradient(135deg,#8b5cf6,#d946ef);animation-delay:-3.4s}
+@keyframes socialFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.05)}}
+@media(max-width:600px){.social-orbit{inset:-12px}.social-node{width:32px;height:32px;font-size:13px}}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -198,16 +208,12 @@
                 <div class="hero-image" data-copyai-node-id="n79">
                     <div class="image-container" data-copyai-node-id="n80">
                         <div class="image-glow" data-copyai-temporal-id="t24" data-copyai-node-id="n81"></div>
-                        <img src="assets/images/ale-marques-profile.png" alt="Ale Marques, especialista em redes sociais" class="img-fluid hero-photo" data-copyai-temporal-id="t44" data-copyai-node-id="n82" data-copyai-asset-id="a1">
-                        <div class="floating-elements" data-copyai-temporal-id="t1" data-copyai-node-id="n83">
-                            
-                            <div class="floating-icon floating-icon-2" data-copyai-temporal-id="t3" data-copyai-node-id="n86">
-                                <i class="fas fa-dollar-sign" data-copyai-node-id="n87"></i>
-                            </div>
-                            <div class="floating-icon floating-icon-3" data-copyai-temporal-id="t4" data-copyai-node-id="n88">
-                                <i class="fas fa-chart-line" data-copyai-node-id="n89"></i>
-                            </div>
-                        </div>
+                        <img src="assets/images/ale-marques-studio.png" alt="Ale Marques, especialista em redes sociais" class="img-fluid hero-photo" data-copyai-temporal-id="t44" data-copyai-node-id="n82" data-copyai-asset-id="a1">
+                        <div class="social-orbit" aria-hidden="true">
+  <span class="social-node social-node-instagram"><i class="fab fa-instagram"></i></span>
+  <span class="social-node social-node-youtube"><i class="fab fa-youtube"></i></span>
+  <span class="social-node social-node-community"><i class="fas fa-users"></i></span>
+</div>
                     </div>
                     <div id="ale-links" class="ale-links">
                         <a href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" class="ale-action ale-whatsapp" title="Grupo VIP do WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i><span><b>Grupo VIP</b><small>Futuros alunos</small></span></a>
