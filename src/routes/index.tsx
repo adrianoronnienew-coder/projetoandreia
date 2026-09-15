@@ -71,6 +71,30 @@ function HomePage() {
 
     doc.querySelector('.whatsapp-float')?.remove()
 
+    // Barra lateral premium: apenas um atalho se expande por vez conforme a rolagem.
+    doc.getElementById('ale-smart-rail')?.remove()
+    const rail = doc.createElement('nav')
+    rail.id = 'ale-smart-rail'
+    rail.setAttribute('aria-label', 'Atalhos da Ale Marques')
+    rail.innerHTML = `
+      <a class="rail-item" data-zone="0" href="${WHATSAPP_1}" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span><b>Novos alunos</b><small>Grupo para futuros alunos</small></span></a>
+      <a class="rail-item" data-zone="1" href="${WHATSAPP_2}" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span><b>Networking</b><small>Comunidade e novidades</small></span></a>
+      <a class="rail-item" data-zone="2" href="${INSTAGRAM}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i><span><b>Instagram</b><small>@ale.marques.social</small></span></a>
+      <a class="rail-item" data-zone="3" href="${SOCIAL}" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i><span><b>Novo perfil</b><small>Perfil futuro da Ale</small></span></a>
+      <a class="rail-item" data-zone="4" href="${LIVE_PROFILE}" target="_blank" rel="noopener noreferrer"><i class="fas fa-video"></i><span><b>Lives</b><small>Perfil atual de lives</small></span></a>
+    `
+    doc.body.appendChild(rail)
+
+    const railItems = Array.from(rail.querySelectorAll<HTMLElement>('.rail-item'))
+    const updateRail = () => {
+      const max = Math.max(1, doc.documentElement.scrollHeight - doc.defaultView!.innerHeight)
+      const progress = Math.min(1, Math.max(0, doc.defaultView!.scrollY / max))
+      const active = Math.min(railItems.length - 1, Math.floor(progress * railItems.length))
+      railItems.forEach((item, i) => item.classList.toggle('active', i === active))
+    }
+    doc.defaultView?.addEventListener('scroll', updateRail, { passive: true })
+    updateRail()
+
     if (!doc.getElementById('ale-links-live')) {
       const links = doc.createElement('div')
       links.id = 'ale-links-live'
@@ -85,6 +109,17 @@ function HomePage() {
 
     const style = doc.createElement('style')
     style.textContent = `
+      #ale-smart-rail{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:99990;display:flex;flex-direction:column;gap:10px;align-items:flex-end;pointer-events:none}
+      #ale-smart-rail .rail-item{pointer-events:auto;width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:flex-start;gap:10px;padding:5px;text-decoration:none;color:#fff;background:rgba(12,13,18,.94);border:1px solid rgba(255,255,255,.13);box-shadow:0 9px 24px rgba(0,0,0,.28);overflow:hidden;transition:width .34s ease,transform .28s ease,box-shadow .28s ease}
+      #ale-smart-rail .rail-item i{width:38px;height:38px;min-width:38px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:linear-gradient(135deg,#a83bd6,#168dff)}
+      #ale-smart-rail .rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)}
+      #ale-smart-rail .rail-item span{display:flex;flex-direction:column;line-height:1.08;opacity:0;white-space:nowrap;transition:opacity .18s ease}
+      #ale-smart-rail .rail-item b{font-size:11px;font-weight:800} #ale-smart-rail .rail-item small{font-size:7.5px;opacity:.68}
+      #ale-smart-rail .rail-item.active{width:205px;transform:translateX(0);box-shadow:0 12px 30px rgba(89,57,210,.25)}
+      #ale-smart-rail .rail-item.active span{opacity:1}
+      @media(hover:hover){#ale-smart-rail .rail-item:hover{width:205px}#ale-smart-rail .rail-item:hover span{opacity:1}#ale-smart-rail:hover .rail-item.active:not(:hover){width:48px}#ale-smart-rail:hover .rail-item.active:not(:hover) span{opacity:0}}
+      @media(max-width:600px){#ale-smart-rail{right:8px;gap:8px}#ale-smart-rail .rail-item{width:43px;height:43px;padding:4px}#ale-smart-rail .rail-item i{width:35px;height:35px;min-width:35px;font-size:15px}#ale-smart-rail .rail-item.active{width:178px}#ale-smart-rail .rail-item b{font-size:10px}#ale-smart-rail .rail-item small{font-size:7px}}
+
       #ale-links-live{width:100%;max-width:420px;margin:24px auto 0;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
       #ale-links-live .ale-action{height:58px!important;padding:8px 11px!important;border-radius:999px!important;display:flex!important;align-items:center!important;gap:9px!important;text-decoration:none!important;color:#fff!important;background:linear-gradient(145deg,#19191d,#0b0b0e)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 10px 28px rgba(0,0,0,.24)!important}
       #ale-links-live .ale-action i{width:34px!important;height:34px!important;min-width:34px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:linear-gradient(135deg,#d43bc4,#7f5cff)!important}
