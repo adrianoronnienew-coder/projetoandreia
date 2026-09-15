@@ -37,6 +37,9 @@ function HomePage() {
           .replaceAll('Anna Karoliny', 'Ale Marques')
           .replaceAll('ANNA KAROLINY', 'ALE MARQUES')
           .replaceAll('Anna', 'Ale')
+          .replaceAll('385.000', '86.240')
+          .replaceAll('380k', '86 mil')
+          .replaceAll('2.000', '448')
       }
     })
 
