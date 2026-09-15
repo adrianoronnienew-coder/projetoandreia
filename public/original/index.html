@@ -308,6 +308,26 @@
  #servicos .service-card{filter:none!important;opacity:1!important}
  #servicos .service-card.ale-focus-card{filter:blur(5px)!important;opacity:.42!important;transition:filter .25s ease,opacity .25s ease!important}
 }
+</style><style id="ale-rail-mobile-v17">
+@media(max-width:600px){
+ #servicos{position:relative!important;overflow:hidden!important}
+ #ale-native-rail{
+  position:absolute!important;
+  right:12px!important;
+  top:clamp(300px,32%,430px)!important;
+  transform:none!important;
+  z-index:40!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  gap:16px!important;
+  max-height:390px!important;
+ }
+ #ale-native-rail .ale-rail-item{width:58px!important;height:58px!important;min-width:58px!important;padding:4px!important;flex:none!important}
+ #ale-native-rail .ale-rail-item i{width:48px!important;height:48px!important;min-width:48px!important}
+ #ale-native-rail .ale-rail-item.active{width:min(260px,calc(100vw - 42px))!important;height:64px!important}
+ #ale-native-rail .ale-rail-item.active i{width:50px!important;height:50px!important;min-width:50px!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
