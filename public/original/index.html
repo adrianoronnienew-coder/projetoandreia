@@ -224,6 +224,19 @@
 @media(max-width:600px){
  #ale-native-rail{right:7px!important;top:115px!important}
 }
+</style><style id="ale-rail-mobile-hardfix-v11">
+/* Trilho pertence fisicamente à seção Serviços; nunca à viewport */
+#servicos{position:relative!important;overflow:hidden!important}
+#ale-native-rail{position:absolute!important;display:flex!important;right:10px!important;top:clamp(210px,18vw,290px)!important;transform:none!important;height:auto!important;max-height:none!important;z-index:20!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#ale-native-rail .ale-rail-item{flex:0 0 auto!important}
+#servicos .service-card{filter:none!important;opacity:1!important}
+#servicos.ale-links-engaged .service-card{filter:blur(8px)!important;opacity:.32!important}
+@media(max-width:600px){
+ #servicos{padding-right:62px!important}
+ #ale-native-rail{right:7px!important;top:190px!important;gap:9px!important}
+ #ale-native-rail .ale-rail-item{width:44px!important;height:44px!important}
+ #ale-native-rail .ale-rail-item.active{width:min(188px,calc(100vw - 28px))!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -827,5 +840,23 @@
   clear();sync();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scopeRail);else scopeRail();
+})();
+</script><script id="ale-rail-mobile-hardfix-v11-js">
+(function(){
+ function hardFix(){
+  var sec=document.getElementById('servicos'),rail=document.getElementById('ale-native-rail');
+  if(!sec||!rail)return;
+  sec.appendChild(rail);
+  rail.classList.add('ale-rail-visible');
+  var items=[].slice.call(rail.querySelectorAll('.ale-rail-item')),timer;
+  function closeAll(){items.forEach(function(x){x.classList.remove('active')});sec.classList.remove('ale-links-engaged');clearTimeout(timer)}
+  function openOne(i){closeAll();items[i].classList.add('active');sec.classList.add('ale-links-engaged');timer=setTimeout(closeAll,1250)}
+  items.forEach(function(x,i){x.onclick=function(){openOne(i)};x.addEventListener('mouseenter',function(){openOne(i)})});
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(!e.isIntersecting)closeAll()})
+  },{threshold:.05});obs.observe(sec);
+  closeAll();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hardFix);else hardFix();
 })();
 </script></body></html>
