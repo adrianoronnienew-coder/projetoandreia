@@ -93,7 +93,7 @@ function HomePage() {
       #ale-links-live .ale-action i{width:34px!important;height:34px!important;min-width:34px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:linear-gradient(135deg,#d43bc4,#7f5cff)!important}
       #ale-links-live .ale-whatsapp i{background:linear-gradient(135deg,#2bd66f,#119d62)!important}
       #ale-links-live span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;min-width:0}
-      #ale-links-live b{font-size:12px;white-space:nowrap} #ale-links-live small{font-size:8px;opacity:.68;white-space:nowrap}
+      #ale-links-live .ale-live i{background:linear-gradient(135deg,#ff4d8d,#8b5cf6)!important} #ale-links-live b{font-size:12px;white-space:nowrap} #ale-links-live small{font-size:8px;opacity:.68;white-space:nowrap}
       @media(max-width:600px){#ale-links-live{gap:6px!important}#ale-links-live .ale-action{height:50px!important;padding:6px 7px!important;gap:5px!important}#ale-links-live .ale-action i{width:28px!important;height:28px!important;min-width:28px!important}#ale-links-live b{font-size:9px!important}#ale-links-live small{font-size:6.5px!important}}
     `
     doc.head.appendChild(style)
