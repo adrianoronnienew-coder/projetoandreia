@@ -340,6 +340,11 @@
 /* Transições contínuas entre as áreas e melhor aproveitamento vertical */
 #home{padding-bottom:0!important}
 #servicos,#sobre,#depoimentos{position:relative;isolation:isolate}
+#home{position:relative;z-index:2}
+#home .hero-image,#home .image-container{position:relative!important;z-index:3!important;isolation:isolate}
+#home .image-glow{z-index:0!important}
+#home .hero-photo{z-index:2!important}
+#home .social-orbit{z-index:4!important}
 #servicos{background:var(--secondary-bg)!important}
 #sobre{background:var(--tertiary-bg)!important}
 #depoimentos{background:var(--secondary-bg)!important}
