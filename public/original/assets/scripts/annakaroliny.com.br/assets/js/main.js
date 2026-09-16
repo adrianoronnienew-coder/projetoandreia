@@ -301,117 +301,141 @@ function setupTestimonialsDrag() {
   if (!track) return;
   viewport.dataset.dragReady = '1';
 
-  // 1) CÍRCULO: cria cópias suficientes e mantém a posição sempre no miolo.
-  const source = Array.from(track.children).map(el => el.cloneNode(true));
-  if (!source.length) return;
-  const N = source.length;
+  const originals = Array.from(track.children).map(el => el.cloneNode(true));
+  if (!originals.length) return;
+  const N = originals.length;
+
+  // Trilho realmente circular: várias voltas idênticas e sempre trabalhamos no miolo.
   track.replaceChildren();
-  for (let set = 0; set < 7; set++) source.forEach(el => track.appendChild(el.cloneNode(true)));
+  for (let copy = 0; copy < 9; copy++) originals.forEach(el => track.appendChild(el.cloneNode(true)));
 
   let x = 0;
+  let targetX = 0;
   let pressed = false;
-  let moved = false;
   let pointerId = null;
   let lastClientX = 0;
+  let lastTime = 0;
+  let velocity = 0;
   let resumeAt = 0;
   let lastFrame = performance.now();
-  const AUTO_SPEED = 14;
+  const AUTO_SPEED = 11;
 
-  const allCards = () => track.children;
+  const cards = () => track.children;
   const cycleWidth = () => {
-    const cards = allCards();
-    if (cards.length <= N) return 0;
-    return cards[N].offsetLeft - cards[0].offsetLeft;
+    const c = cards();
+    return c.length > N ? c[N].offsetLeft - c[0].offsetLeft : 0;
   };
-  const paint = () => {
-    track.style.setProperty('transform', `translate3d(${x}px,0,0)`, 'important');
+
+  const render = () => {
+    track.style.setProperty('transform', 'translate3d(' + x.toFixed(3) + 'px,0,0)', 'important');
   };
+
   const wrap = () => {
     const w = cycleWidth();
     if (!w) return;
-    // Só teleporta para uma posição VISUALMENTE IDÊNTICA.
-    // Não há limite, mola, clamp, snap ou força contrária ao dedo.
-    while (x > -2 * w) x -= w;
-    while (x < -4 * w) x += w;
-  };
-  const goMiddle = () => {
-    const w = cycleWidth();
-    if (!w) return;
-    x = -3 * w;
-    paint();
+    // Reposicionamento invisível por uma volta inteira; nunca corta/encaixa card.
+    while (x > -3 * w) { x -= w; targetX -= w; }
+    while (x < -5 * w) { x += w; targetX += w; }
   };
 
-  // 2) MANUAL: o dedo manda 1:1. Direita vai para direita; esquerda para esquerda.
-  const pointerDown = e => {
+  const down = e => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     pressed = true;
-    moved = false;
     pointerId = e.pointerId;
     lastClientX = e.clientX;
+    lastTime = performance.now();
+    velocity = 0;
+    targetX = x;
     resumeAt = Infinity;
+    viewport.style.cursor = 'grabbing';
     try { viewport.setPointerCapture(pointerId); } catch (_) {}
   };
-  const pointerMove = e => {
+
+  const move = e => {
     if (!pressed || e.pointerId !== pointerId) return;
+    const now = performance.now();
     const dx = e.clientX - lastClientX;
+    const dt = Math.max(now - lastTime, 8);
     lastClientX = e.clientX;
-    if (Math.abs(dx) > 0) moved = true;
+    lastTime = now;
+
+    // Movimento direto e contínuo, pixel por pixel, sem snap de card.
     x += dx;
+    targetX = x;
+    velocity = velocity * 0.55 + (dx / dt) * 0.45;
     wrap();
-    paint();
+    render();
     if (e.cancelable) e.preventDefault();
   };
-  const pointerEnd = e => {
+
+  const end = e => {
     if (!pressed || (e.pointerId != null && e.pointerId !== pointerId)) return;
     pressed = false;
     pointerId = null;
+    viewport.style.cursor = 'grab';
     try { viewport.releasePointerCapture?.(e.pointerId); } catch (_) {}
-    // 3) AUTOMÁTICO: somente depois de soltar. Nunca disputa com o toque.
-    resumeAt = performance.now() + 1200;
+    // Pequena inércia natural após soltar; depois o automático retoma devagar.
+    velocity = Math.max(-1.2, Math.min(1.2, velocity));
+    resumeAt = performance.now() + 1400;
   };
 
   const frame = now => {
-    const dt = Math.min((now - lastFrame) / 1000, 0.05);
+    const dtMs = Math.min(now - lastFrame, 34);
+    const dt = dtMs / 1000;
     lastFrame = now;
-    if (!pressed && now >= resumeAt) {
-      x -= AUTO_SPEED * dt;
+
+    if (!pressed) {
+      if (Math.abs(velocity) > 0.003) {
+        x += velocity * dtMs;
+        velocity *= Math.pow(0.90, dtMs / 16.67);
+      } else {
+        velocity = 0;
+        if (now >= resumeAt) x -= AUTO_SPEED * dt;
+      }
+      targetX = x;
       wrap();
-      paint();
+      render();
     }
     requestAnimationFrame(frame);
   };
 
-  // Mata qualquer comportamento antigo que possa competir com o gesto.
+  // Nenhum CSS antigo pode disputar o transform controlado pelo JS.
   track.style.setProperty('animation', 'none', 'important');
   track.style.setProperty('transition', 'none', 'important');
   track.style.setProperty('scroll-snap-type', 'none', 'important');
   track.style.setProperty('width', 'max-content', 'important');
-  track.style.setProperty('will-change', 'transform');
+  track.style.setProperty('will-change', 'transform', 'important');
+  track.style.setProperty('backface-visibility', 'hidden', 'important');
+  viewport.style.setProperty('overflow-x', 'hidden', 'important');
   viewport.style.setProperty('touch-action', 'pan-y', 'important');
-  viewport.style.setProperty('overscroll-behavior-x', 'none', 'important');
+  viewport.style.setProperty('overscroll-behavior-x', 'contain', 'important');
   viewport.style.cursor = 'grab';
 
-  viewport.addEventListener('pointerdown', pointerDown, { passive: true });
-  viewport.addEventListener('pointermove', pointerMove, { passive: false });
-  viewport.addEventListener('pointerup', pointerEnd, { passive: true });
-  viewport.addEventListener('pointercancel', pointerEnd, { passive: true });
-  viewport.addEventListener('lostpointercapture', pointerEnd, { passive: true });
+  viewport.addEventListener('pointerdown', down, {passive:true});
+  viewport.addEventListener('pointermove', move, {passive:false});
+  viewport.addEventListener('pointerup', end, {passive:true});
+  viewport.addEventListener('pointercancel', end, {passive:true});
+  viewport.addEventListener('lostpointercapture', end, {passive:true});
   viewport.addEventListener('dragstart', e => e.preventDefault());
 
-  Array.from(track.querySelectorAll('img')).forEach(img => {
-    img.draggable = false;
-    img.style.userSelect = 'none';
-    img.style.pointerEvents = 'none';
+  track.querySelectorAll('img, a').forEach(el => {
+    el.draggable = false;
+    el.style.setProperty('user-select','none','important');
+    el.style.setProperty('-webkit-user-drag','none','important');
   });
 
   const start = () => {
-    goMiddle();
+    const w = cycleWidth();
+    if (!w) return requestAnimationFrame(start);
+    x = targetX = -4 * w;
+    render();
     lastFrame = performance.now();
-    resumeAt = performance.now() + 500;
+    resumeAt = performance.now() + 700;
     requestAnimationFrame(frame);
   };
-  if (document.fonts?.ready) document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(start)));
-  else requestAnimationFrame(() => requestAnimationFrame(start));
+
+  if (document.fonts?.ready) document.fonts.ready.then(() => requestAnimationFrame(start));
+  else requestAnimationFrame(start);
 }
 
 function createTestimonialCard(testimonial) {
