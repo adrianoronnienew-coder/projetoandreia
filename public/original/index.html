@@ -336,29 +336,25 @@
   }
   #home .image-glow{opacity:.5!important}
 }
-</style><style id="ale-compact-sections-v24">
-/* Transições contínuas entre as áreas e melhor aproveitamento vertical */
-#home{padding-bottom:0!important}
-#home{position:relative}
-#servicos,#sobre,#depoimentos{position:relative;z-index:1;isolation:isolate}
-#home .hero-image,#home .image-container{position:relative!important;z-index:3!important;isolation:isolate}
+</style><style id="ale-background-fusion-v27">
+/* As fusões fazem parte do próprio fundo; nunca são camadas sobre o conteúdo. */
+#home{position:relative!important;z-index:2!important;overflow:visible!important;padding-bottom:0!important}
+#home>.container{position:relative!important;z-index:2!important}
+#home .hero-background,#home .hero-overlay,#home .hero-particles{z-index:0!important;pointer-events:none!important}
+#home .hero-image,#home .image-container{position:relative!important;z-index:4!important;isolation:isolate!important}
 #home .image-glow{z-index:0!important}
-#home .hero-photo{z-index:2!important}
-#home .social-orbit{z-index:4!important}
-#servicos{background:var(--secondary-bg)!important}
-#sobre{background:var(--tertiary-bg)!important}
-#depoimentos{background:var(--secondary-bg)!important}
-#servicos:before,#sobre:before,#depoimentos:before{
-  content:"";position:absolute;z-index:0;left:-4%;right:-4%;top:-42px;height:104px;pointer-events:none;
-  filter:blur(18px);opacity:.82;mask-image:linear-gradient(to bottom,transparent 0%,#000 38%,#000 72%,transparent 100%);
-}
-#servicos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
-#sobre:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--tertiary-bg) 48%,transparent),var(--tertiary-bg))}
-#depoimentos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
-#servicos>.container,#sobre>.container,#depoimentos>.container{position:relative;z-index:1}
+#home .hero-photo{position:relative!important;z-index:2!important;filter:none!important;opacity:1!important}
+#home .social-orbit{z-index:3!important}
+
+#servicos,#sobre,#depoimentos,.contact-section,.footer{position:relative!important;z-index:1!important}
+#servicos:before,#sobre:before,#depoimentos:before,#servicos:after,#sobre:after,#depoimentos:after{display:none!important;content:none!important}
+#servicos{background:linear-gradient(to bottom,var(--tertiary-bg) 0,var(--secondary-bg) 118px)!important}
+#sobre{background:linear-gradient(to bottom,var(--secondary-bg) 0,var(--tertiary-bg) 118px)!important}
+#depoimentos{background:linear-gradient(to bottom,var(--tertiary-bg) 0,var(--secondary-bg) 118px)!important}
+.contact-section{background:linear-gradient(to bottom,var(--secondary-bg) 0,var(--primary-bg) 118px)!important}
+#servicos>.container,#sobre>.container,#depoimentos>.container,.contact-section>.container,.footer>.container{position:relative!important;z-index:2!important}
+
 @media(max-width:600px){
-  #servicos:before,#sobre:before,#depoimentos:before{top:-22px;height:64px;filter:blur(16px);opacity:.76}
-  #home{padding-bottom:0!important}
   #home .hero-image{margin-top:4px!important;margin-bottom:-22px!important}
   #servicos{padding-top:8px!important;padding-bottom:26px!important}
   #sobre,#depoimentos{padding-top:22px!important;padding-bottom:26px!important}
@@ -376,47 +372,6 @@
   .footer{padding-top:32px!important;padding-bottom:32px!important}
   .footer .mb-4{margin-bottom:20px!important}
 }
-</style><style id="ale-background-fusion-fix-v25">
-/* Transições pertencem ao FUNDO. Nunca cobrem fotos, textos, ícones ou botões. */
-#home,#servicos,#sobre,#depoimentos,.footer{position:relative!important;isolation:isolate!important}
-#home>.container,#servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container{position:relative!important;z-index:5!important}
-#home .hero-image,#home .image-container{position:relative!important;z-index:6!important;isolation:isolate!important}
-#home .hero-photo{position:relative!important;z-index:7!important;filter:none!important;-webkit-filter:none!important;opacity:1!important}
-#home .social-orbit{z-index:8!important}
-#home .hero-content,#home .hero-title,#home .hero-subtitle,#home .hero-buttons{position:relative!important;z-index:7!important}
-
-/* Neutraliza a faixa de blur antiga que estava passando por cima do conteúdo. */
-#servicos:before,#sobre:before,#depoimentos:before{
-  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
-  z-index:-1!important;top:-92px!important;height:184px!important;
-  mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 100%)!important;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 100%)!important;
-}
-
-/* Fusão natural entre fundos, sempre atrás do conteúdo. */
-#servicos:before{
- background:linear-gradient(to bottom,transparent 0%,rgba(25,25,46,.30) 36%,#19192e 100%)!important;
-}
-#sobre:before{
- background:linear-gradient(to bottom,transparent 0%,rgba(13,13,32,.34) 36%,#0d0d20 100%)!important;
-}
-#depoimentos:before{
- background:linear-gradient(to bottom,transparent 0%,rgba(24,24,44,.34) 36%,#18182c 100%)!important;
-}
-
-/* Garante que pseudo-elementos/overlays de fundo nunca fiquem acima do conteúdo. */
-#home .hero-background,#home .hero-overlay,#home .hero-particles{z-index:0!important;pointer-events:none!important}
-#servicos:after,#sobre:after,#depoimentos:after{z-index:-1!important;pointer-events:none!important}
-</style><style id="ale-fusion-v26">
-#servicos:before{display:none!important;content:none!important}
-#home{position:relative!important;z-index:3!important;isolation:isolate!important}
-#home:after{display:none!important;content:none!important}
-#home>.container{position:relative!important;z-index:10!important}
-#home .hero-image,#home .image-container{position:relative!important;z-index:12!important}
-#home .hero-photo{position:relative!important;z-index:13!important;filter:none!important}
-#home .social-orbit{z-index:14!important}
-#servicos{position:relative!important;z-index:1!important;background:linear-gradient(to bottom,#0f0f23 0,#151527 46px,#19192e 96px)!important}
-#servicos>.container{position:relative!important;z-index:10!important}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
