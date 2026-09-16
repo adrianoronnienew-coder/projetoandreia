@@ -14,9 +14,9 @@ const CONFIG = {
 };
 
 const TESTIMONIALS = [
-  { nome_cliente: 'Desireé', foto: 'https://i.pravatar.cc/120?img=47', depoimento: 'Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria. @desidesiculy' },
-  { nome_cliente: 'Alda Mendes', foto: 'https://i.pravatar.cc/120?img=45', depoimento: 'Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV! @apenasalda' },
-  { nome_cliente: 'Anne Danielle', foto: 'https://i.pravatar.cc/120?img=32', depoimento: 'Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui! @annedeliverymassas' },
+  { nome_cliente: 'Desireé', foto: 'https://i.pravatar.cc/120?img=47', depoimento: 'Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria.' },
+  { nome_cliente: 'Alda Mendes', foto: 'https://i.pravatar.cc/120?img=45', depoimento: 'Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV!' },
+  { nome_cliente: 'Anne Danielle', foto: 'https://i.pravatar.cc/120?img=32', depoimento: 'Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui!' },
   { nome_cliente: 'Camila Martins', foto: 'https://i.pravatar.cc/120?img=49', depoimento: 'Depois que organizei meu conteúdo com a estratégia, comecei a entender o que realmente fazia as pessoas pararem e interagirem.' },
   { nome_cliente: 'Juliana Souza', foto: 'https://i.pravatar.cc/120?img=44', depoimento: 'Meu perfil ficou muito mais profissional e organizado. Hoje consigo comunicar com clareza o que faço e para quem faço.' },
   { nome_cliente: 'Renata Ferreira', foto: 'https://i.pravatar.cc/120?img=26', depoimento: 'A mentoria me deu direção. Parei de postar sem estratégia e comecei a produzir conteúdo com um objetivo claro.' },
@@ -43,6 +43,7 @@ function initializeApp() {
   setupSmoothScrolling();
   setupTestimonialsStyle();
   renderTestimonials(TESTIMONIALS);
+  setupTestimonialsDrag();
   setupAleRailButtons();
   setupAleRailTyping();
   animateCounters();
@@ -221,7 +222,9 @@ function setupTestimonialsStyle() {
   const style = document.createElement('style');
   style.id = 'ale-testimonials-photo-slow-style';
   style.textContent = `
-    #depoimentos .testimonials-track { animation-duration: 150s !important; }
+    #depoimentos .testimonials-marquee { overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; cursor: grab !important; touch-action: pan-x !important; }
+    #depoimentos .testimonials-marquee::-webkit-scrollbar { display: none !important; }
+    #depoimentos .testimonials-track { animation: none !important; transform: none !important; width: max-content !important; }
     #depoimentos .testimonial-header { align-items: center !important; }
     #depoimentos .testimonial-avatar.testimonial-photo {
       width: 62px !important; height: 62px !important; min-width: 62px !important;
@@ -233,7 +236,7 @@ function setupTestimonialsStyle() {
     #depoimentos .testimonial-info p { display: none !important; }
     #depoimentos .testimonial-info h4 { margin-bottom: 0 !important; }
     @media(max-width:768px) {
-      #depoimentos .testimonials-track { animation-duration: 145s !important; }
+      #depoimentos .testimonials-track { animation: none !important; transform: none !important; }
       #depoimentos .testimonial-avatar.testimonial-photo { width: 58px !important; height: 58px !important; min-width: 58px !important; }
     }
   `;
@@ -289,6 +292,17 @@ function renderTestimonials(testimonials) {
   const duplicated = testimonials.concat(testimonials);
   carousel.classList.add('testimonials-marquee');
   carousel.innerHTML = `<div class="testimonials-track">${duplicated.map(createTestimonialCard).join('')}</div>`;
+}
+
+function setupTestimonialsDrag() {
+  const carousel = document.getElementById('testimonialsCarousel');
+  if (!carousel || carousel.dataset.dragReady === '1') return;
+  carousel.dataset.dragReady = '1';
+  let down = false, startX = 0, startScroll = 0;
+  carousel.addEventListener('pointerdown', e => { down = true; startX = e.clientX; startScroll = carousel.scrollLeft; carousel.setPointerCapture?.(e.pointerId); carousel.style.cursor = 'grabbing'; });
+  carousel.addEventListener('pointermove', e => { if (down) carousel.scrollLeft = startScroll - (e.clientX - startX); });
+  const stop = e => { down = false; carousel.style.cursor = 'grab'; try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {} };
+  carousel.addEventListener('pointerup', stop); carousel.addEventListener('pointercancel', stop);
 }
 
 function createTestimonialCard(testimonial) {
