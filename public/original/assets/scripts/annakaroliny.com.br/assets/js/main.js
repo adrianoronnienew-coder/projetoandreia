@@ -302,43 +302,83 @@ function setupTestimonialsDrag() {
   carousel.dataset.dragReady = '1';
 
   let holding = false;
+  let dragging = false;
   let startX = 0;
-  let startOffset = 0;
+  let currentX = 0;
+  let resumeTimer = null;
 
-  const pauseNow = e => {
-    if (holding) return;
-    holding = true;
-    startX = e.clientX;
+  const readX = () => {
     const matrix = new DOMMatrixReadOnly(getComputedStyle(track).transform);
-    startOffset = matrix.m41;
-    track.style.setProperty('animation-play-state', 'paused', 'important');
-    track.style.setProperty('transform', `translate3d(${startOffset}px,0,0)`, 'important');
+    return Number.isFinite(matrix.m41) ? matrix.m41 : 0;
+  };
+
+  const halfWidth = () => track.scrollWidth / 2;
+
+  const normalizeX = value => {
+    const half = halfWidth();
+    if (!half) return value;
+    while (value <= -half) value += half;
+    while (value > 0) value -= half;
+    return value;
+  };
+
+  const freeze = () => {
+    currentX = normalizeX(readX());
+    track.style.setProperty('animation', 'none', 'important');
+    track.style.setProperty('transform', `translate3d(${currentX}px,0,0)`, 'important');
+  };
+
+  const restart = () => {
+    currentX = normalizeX(currentX);
+    track.style.removeProperty('animation');
+    track.style.removeProperty('transform');
+    track.style.setProperty('animation-play-state', 'running', 'important');
+  };
+
+  const down = e => {
+    clearTimeout(resumeTimer);
+    holding = true;
+    dragging = false;
+    startX = e.clientX;
+    freeze();
     carousel.classList.add('is-reading');
     carousel.style.cursor = 'grabbing';
     try { carousel.setPointerCapture?.(e.pointerId); } catch (_) {}
   };
 
-  const moveWhileHeld = e => {
+  const move = e => {
     if (!holding) return;
-    const next = startOffset + (e.clientX - startX);
-    track.style.setProperty('transform', `translate3d(${next}px,0,0)`, 'important');
+    const delta = e.clientX - startX;
+    if (Math.abs(delta) > 3) dragging = true;
+    if (!dragging) return;
+    currentX = normalizeX(currentX + delta);
+    startX = e.clientX;
+    track.style.setProperty('transform', `translate3d(${currentX}px,0,0)`, 'important');
   };
 
-  const resumeNow = e => {
+  const up = e => {
     if (!holding) return;
     holding = false;
+    dragging = false;
     try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
     carousel.classList.remove('is-reading');
     carousel.style.cursor = 'grab';
-    track.style.removeProperty('transform');
-    track.style.setProperty('animation-play-state', 'running', 'important');
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(restart, 900);
   };
 
-  carousel.addEventListener('pointerdown', pauseNow, { passive: true });
-  carousel.addEventListener('pointermove', moveWhileHeld, { passive: true });
-  carousel.addEventListener('pointerup', resumeNow, { passive: true });
-  carousel.addEventListener('pointercancel', resumeNow, { passive: true });
-  window.addEventListener('pointerup', resumeNow, { passive: true });
+  carousel.addEventListener('pointerdown', down, { passive: true });
+  carousel.addEventListener('pointermove', move, { passive: true });
+  carousel.addEventListener('pointerup', up, { passive: true });
+  carousel.addEventListener('pointercancel', up, { passive: true });
+  window.addEventListener('pointerup', up, { passive: true });
+
+  carousel.addEventListener('dragstart', e => e.preventDefault());
+  carousel.querySelectorAll('img').forEach(img => {
+    img.draggable = false;
+    img.style.userSelect = 'none';
+    img.style.webkitUserDrag = 'none';
+  });
 }
 
 function createTestimonialCard(testimonial) {
