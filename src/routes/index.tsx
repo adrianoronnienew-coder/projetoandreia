@@ -17,5 +17,5 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
-  return <iframe className="original-frame" src="/original/index.html?v=autoplay-depoimentos-2" title="Ale Marques - Especialista em Redes Sociais" />
+  return <iframe className="original-frame" src="/original/index.html?v=frases-removidas-3" title="Ale Marques - Especialista em Redes Sociais" />
 }
