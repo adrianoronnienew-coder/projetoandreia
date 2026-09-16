@@ -298,23 +298,65 @@ function setupTestimonialsDrag() {
   const carousel = document.getElementById('testimonialsCarousel');
   if (!carousel || carousel.dataset.dragReady === '1') return;
   carousel.dataset.dragReady = '1';
-  let down = false, startX = 0, startScroll = 0, pausedUntil = 0, raf = 0, last = 0;
-  const speed = 0.22;
-  const autoMove = t => {
-    if (!last) last = t;
-    const dt = Math.min(t - last, 40); last = t;
-    if (!down && Date.now() > pausedUntil) {
-      carousel.scrollLeft += speed * dt;
-      const half = carousel.scrollWidth / 2;
-      if (half > 0 && carousel.scrollLeft >= half) carousel.scrollLeft -= half;
-    }
-    raf = requestAnimationFrame(autoMove);
+
+  let dragging = false;
+  let startX = 0;
+  let startScroll = 0;
+  let resumeTimer = null;
+  let autoTimer = null;
+  const STEP = 1;
+
+  const normalizeLoop = () => {
+    const half = carousel.scrollWidth / 2;
+    if (!half) return;
+    if (carousel.scrollLeft >= half) carousel.scrollLeft -= half;
+    if (carousel.scrollLeft < 0) carousel.scrollLeft += half;
   };
-  raf = requestAnimationFrame(autoMove);
-  carousel.addEventListener('pointerdown', e => { down = true; pausedUntil = Date.now() + 4500; startX = e.clientX; startScroll = carousel.scrollLeft; carousel.setPointerCapture?.(e.pointerId); carousel.style.cursor = 'grabbing'; });
-  carousel.addEventListener('pointermove', e => { if (down) carousel.scrollLeft = startScroll - (e.clientX - startX); });
-  const stop = e => { down = false; pausedUntil = Date.now() + 4500; carousel.style.cursor = 'grab'; try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {} };
-  carousel.addEventListener('pointerup', stop); carousel.addEventListener('pointercancel', stop);
+
+  const startAuto = () => {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      if (dragging) return;
+      carousel.scrollLeft += STEP;
+      normalizeLoop();
+    }, 35);
+  };
+
+  const pauseThenResume = () => {
+    clearInterval(autoTimer);
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(startAuto, 3500);
+  };
+
+  carousel.addEventListener('pointerdown', e => {
+    dragging = true;
+    clearInterval(autoTimer);
+    clearTimeout(resumeTimer);
+    startX = e.clientX;
+    startScroll = carousel.scrollLeft;
+    carousel.setPointerCapture?.(e.pointerId);
+    carousel.style.cursor = 'grabbing';
+  });
+
+  carousel.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    carousel.scrollLeft = startScroll - (e.clientX - startX);
+    normalizeLoop();
+  });
+
+  const stop = e => {
+    if (!dragging) return;
+    dragging = false;
+    carousel.style.cursor = 'grab';
+    try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
+    pauseThenResume();
+  };
+
+  carousel.addEventListener('pointerup', stop);
+  carousel.addEventListener('pointercancel', stop);
+  carousel.addEventListener('mouseleave', e => { if (dragging) stop(e); });
+
+  startAuto();
 }
 
 function createTestimonialCard(testimonial) {
