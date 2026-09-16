@@ -44,6 +44,7 @@ function initializeApp() {
   setupTestimonialsStyle();
   renderTestimonials(TESTIMONIALS);
   setupAleRailButtons();
+  setupAleRailTyping();
   animateCounters();
   setupNavbarEffects();
   console.log('Ale Marques Website initialized successfully!');
@@ -148,6 +149,71 @@ function setupAleRailButtons() {
     }
   `;
   document.head.appendChild(style);
+}
+
+
+function setupAleRailTyping() {
+  const rail = document.getElementById('ale-native-rail');
+  if (!rail) return;
+
+  const descriptions = Array.from(rail.querySelectorAll('.ale-rail-item small'));
+  descriptions.forEach((desc, index) => {
+    const fullText = desc.textContent.trim();
+    if (!fullText) return;
+
+    desc.setAttribute('aria-label', fullText);
+    desc.textContent = '';
+
+    let position = 0;
+    let deleting = false;
+
+    const tick = () => {
+      if (!deleting) {
+        position++;
+        desc.textContent = fullText.slice(0, position);
+        if (position >= fullText.length) {
+          deleting = true;
+          setTimeout(tick, 2200);
+          return;
+        }
+        setTimeout(tick, 105);
+      } else {
+        position--;
+        desc.textContent = fullText.slice(0, Math.max(0, position));
+        if (position <= 0) {
+          deleting = false;
+          setTimeout(tick, 900);
+          return;
+        }
+        setTimeout(tick, 45);
+      }
+    };
+
+    // Pequeno desencontro entre os botões para a animação ficar natural.
+    setTimeout(tick, 350 + (index * 500));
+  });
+
+  if (!document.getElementById('ale-rail-typing-style')) {
+    const style = document.createElement('style');
+    style.id = 'ale-rail-typing-style';
+    style.textContent = `
+      #ale-native-rail .ale-rail-item small::after {
+        content: '|';
+        display: inline-block;
+        margin-left: 2px;
+        opacity: .9;
+        animation: aleTypingCursor .8s steps(1) infinite;
+      }
+      @keyframes aleTypingCursor {
+        0%, 48% { opacity: .9; }
+        49%, 100% { opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #ale-native-rail .ale-rail-item small::after { animation: none; opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
 }
 
 function setupTestimonialsStyle() {
