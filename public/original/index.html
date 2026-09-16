@@ -207,10 +207,13 @@
 #ale-native-rail .ale-rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)}
 #ale-native-rail .ale-rail-item{position:relative}
 #ale-native-rail .ale-live-badge{position:absolute;left:28px;top:1px;background:#ff2449;color:#fff;border:2px solid #111;border-radius:999px;padding:1px 4px;font-size:6px;font-style:normal;font-weight:900;letter-spacing:.3px;z-index:3}
-#ale-native-rail .ale-rail-item.active{box-shadow:0 12px 34px rgba(108,55,210,.3);transform:translateX(10px)}
+#ale-native-rail .ale-rail-item span{display:flex;min-width:0;flex:1;flex-direction:column;justify-content:center;line-height:1.15;white-space:nowrap;opacity:0;transform:translateX(8px);transition:opacity .2s ease,transform .25s ease}
+#ale-native-rail .ale-rail-item b{font-size:11px;font-weight:800}#ale-native-rail .ale-rail-item small{font-size:7.5px;opacity:.72}
+#ale-native-rail .ale-rail-item.active{width:210px;box-shadow:0 12px 34px rgba(108,55,210,.3)}
+#ale-native-rail .ale-rail-item.active span{opacity:1;transform:translateX(0)}
 
 #ale-native-rail.ale-rail-visible{display:flex!important;isolation:isolate}
-@media(max-width:600px){#ale-native-rail{left:18px;right:auto;top:140px;gap:18px}#ale-native-rail .ale-rail-item{width:76px;height:76px;padding:7px}#ale-native-rail .ale-rail-item i{width:60px;height:60px;min-width:60px;font-size:25px}}
+@media(max-width:600px){#ale-native-rail{left:18px;right:auto;top:140px;gap:18px}#ale-native-rail .ale-rail-item{width:76px;height:76px;padding:7px}#ale-native-rail .ale-rail-item i{width:60px;height:60px;min-width:60px;font-size:25px}#ale-native-rail .ale-rail-item.active{width:250px}#ale-native-rail .ale-rail-item b{font-size:13px}#ale-native-rail .ale-rail-item small{font-size:10px}}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -749,11 +752,11 @@
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initScrollCue);else initScrollCue();
 })();
 </script><nav id="ale-native-rail" aria-label="Atalhos da Ale Marques">
-<a class="ale-rail-item" href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Grupo de novos alunos" title="Grupo de novos alunos"><i class="fab fa-whatsapp"></i></a>
-<a class="ale-rail-item" href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Grupo de networking" title="Grupo de networking"><i class="fab fa-whatsapp"></i></a>
-<a class="ale-rail-item" href="https://www.instagram.com/ale.marques.social?stkn=bTE3aDkwbG5kcjc3" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-<a class="ale-rail-item" href="https://www.tiktok.com/@alemarques.com.br?_r=1&amp;_t=ZS-99lTQRZwlPz" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok"><i class="fab fa-tiktok"></i></a>
-<a class="ale-rail-item" href="https://www.tiktok.com/@alesocialmedia.com.br" target="_blank" rel="noopener noreferrer" aria-label="Lives" title="Lives"><i class="fab fa-tiktok"></i></a>
+<a class="ale-rail-item" href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Grupo de novos alunos"><i class="fab fa-whatsapp"></i><span><b>Novos alunos</b><small>Entre no grupo</small></span></a>
+<a class="ale-rail-item" href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Grupo de networking"><i class="fab fa-whatsapp"></i><span><b>Networking</b><small>Entre na comunidade</small></span></a>
+<a class="ale-rail-item" href="https://www.instagram.com/ale.marques.social?stkn=bTE3aDkwbG5kcjc3" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i><span><b>Instagram</b><small>@ale.marques.social</small></span></a>
+<a class="ale-rail-item" href="https://www.tiktok.com/@alemarques.com.br?_r=1&amp;_t=ZS-99lTQRZwlPz" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i><span><b>TikTok</b><small>@alemarques.com.br</small></span></a>
+<a class="ale-rail-item" href="https://www.tiktok.com/@alesocialmedia.com.br" target="_blank" rel="noopener noreferrer" aria-label="Lives"><i class="fab fa-tiktok"></i><span><b>Lives</b><small>@alesocialmedia.com.br</small></span></a>
 </nav><script id="ale-native-rail-v9-js">
 (function(){
  function initRail(){
