@@ -875,7 +875,7 @@
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initScrollCue);else initScrollCue();
 })();
 </script><nav id="ale-native-rail" aria-label="Atalhos da Ale Marques">
-<a class="ale-rail-item" href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Mentoria Gold"><i class="fab fa-whatsapp"></i><span><b>Mentoria Gold</b><small>Grupo para interessados na Mentoria Gold indicada pela Ale</small></span></a>
+<a class="ale-rail-item" href="https://chat.whatsapp.com/FjQNMkhQcO13fQYq9TExiZ?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Mentoria Gold"><i class="fab fa-whatsapp"></i><span><b>Mentoria Gold</b><small>Para interessados na Mentoria Gold indicada pela Ale</small></span></a>
 <a class="ale-rail-item" href="https://chat.whatsapp.com/Hndy5zUtIi6LyFJdrmcCk1?s=sh&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener noreferrer" aria-label="Comunidade Ale"><i class="fab fa-whatsapp"></i><span><b>Comunidade Ale</b><small>Conversas, avisos, lives, novidades e produtos da Ale</small></span></a>
 <a class="ale-rail-item" href="https://www.instagram.com/ale.marques.social?stkn=bTE3aDkwbG5kcjc3" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i><span><b>Instagram</b><small>Conteúdos, bastidores, dicas e novidades</small></span></a>
 <a class="ale-rail-item" href="https://www.tiktok.com/@alemarques.com.br?_r=1&amp;_t=ZS-99lTQRZwlPz" target="_blank" rel="noopener noreferrer" aria-label="Novo TikTok"><i class="fab fa-tiktok"></i><span><b>Novo TikTok</b><small>Novo perfil oficial da Ale com conteúdos atualizados</small></span></a>
@@ -905,5 +905,15 @@
    items.forEach(function(el,i){el.addEventListener('mouseenter',function(){setActive(i)});el.addEventListener('focus',function(){setActive(i)});el.addEventListener('touchstart',function(){setActive(i)},{passive:true})});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initRail);else initRail();
+})();
+</script><script id="ale-hard-remove-up-arrow-v31">
+(function(){
+ function removeUp(){
+   ['#backToTop','.scroll-indicator','.ale-scroll-cue'].forEach(function(sel){
+     document.querySelectorAll(sel).forEach(function(el){el.remove();});
+   });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeUp);else removeUp();
+ new MutationObserver(removeUp).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script></body></html>
