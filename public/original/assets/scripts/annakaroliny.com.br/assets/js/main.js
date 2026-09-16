@@ -301,39 +301,44 @@ function setupTestimonialsDrag() {
   if (!track) return;
   carousel.dataset.dragReady = '1';
 
-  let dragging = false;
+  let holding = false;
   let startX = 0;
   let startOffset = 0;
 
-  carousel.addEventListener('pointerdown', e => {
-    dragging = true;
+  const pauseNow = e => {
+    if (holding) return;
+    holding = true;
     startX = e.clientX;
     const matrix = new DOMMatrixReadOnly(getComputedStyle(track).transform);
     startOffset = matrix.m41;
+    track.style.setProperty('animation-play-state', 'paused', 'important');
+    track.style.setProperty('transform', `translate3d(${startOffset}px,0,0)`, 'important');
     carousel.classList.add('is-reading');
-    track.style.animationPlayState = 'paused';
-    track.style.transform = `translateX(${startOffset}px)`;
-    carousel.setPointerCapture?.(e.pointerId);
     carousel.style.cursor = 'grabbing';
-  });
-
-  carousel.addEventListener('pointermove', e => {
-    if (!dragging) return;
-    track.style.transform = `translateX(${startOffset + e.clientX - startX}px)`;
-  });
-
-  const resume = e => {
-    if (!dragging) return;
-    dragging = false;
-    carousel.style.cursor = 'grab';
-    try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
-    track.style.removeProperty('transform');
-    carousel.classList.remove('is-reading');
-    track.style.animationPlayState = 'running';
+    try { carousel.setPointerCapture?.(e.pointerId); } catch (_) {}
   };
 
-  carousel.addEventListener('pointerup', resume);
-  carousel.addEventListener('pointercancel', resume);
+  const moveWhileHeld = e => {
+    if (!holding) return;
+    const next = startOffset + (e.clientX - startX);
+    track.style.setProperty('transform', `translate3d(${next}px,0,0)`, 'important');
+  };
+
+  const resumeNow = e => {
+    if (!holding) return;
+    holding = false;
+    try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
+    carousel.classList.remove('is-reading');
+    carousel.style.cursor = 'grab';
+    track.style.removeProperty('transform');
+    track.style.setProperty('animation-play-state', 'running', 'important');
+  };
+
+  carousel.addEventListener('pointerdown', pauseNow, { passive: true });
+  carousel.addEventListener('pointermove', moveWhileHeld, { passive: true });
+  carousel.addEventListener('pointerup', resumeNow, { passive: true });
+  carousel.addEventListener('pointercancel', resumeNow, { passive: true });
+  window.addEventListener('pointerup', resumeNow, { passive: true });
 }
 
 function createTestimonialCard(testimonial) {
