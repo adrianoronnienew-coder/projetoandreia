@@ -295,134 +295,123 @@ function renderTestimonials(testimonials) {
 }
 
 function setupTestimonialsDrag() {
-  const carousel = document.getElementById('testimonialsCarousel');
-  if (!carousel || carousel.dataset.dragReady === '1') return;
-  const track = carousel.querySelector('.testimonials-track');
+  const viewport = document.getElementById('testimonialsCarousel');
+  if (!viewport || viewport.dataset.dragReady === '1') return;
+  const track = viewport.querySelector('.testimonials-track');
   if (!track) return;
-  carousel.dataset.dragReady = '1';
+  viewport.dataset.dragReady = '1';
 
-  const originals = Array.from(track.children);
-  if (!originals.length) return;
+  // 1) CÍRCULO: cria cópias suficientes e mantém a posição sempre no miolo.
+  const source = Array.from(track.children).map(el => el.cloneNode(true));
+  if (!source.length) return;
+  const N = source.length;
+  track.replaceChildren();
+  for (let set = 0; set < 7; set++) source.forEach(el => track.appendChild(el.cloneNode(true)));
 
-  // Cinco voltas reais: duas antes + centro + duas depois.
-  // Assim nunca existe uma borda física perto da área visível.
-  track.innerHTML = '';
-  for (let copy = 0; copy < 5; copy++) {
-    originals.forEach(card => track.appendChild(card.cloneNode(true)));
-  }
+  let x = 0;
+  let pressed = false;
+  let moved = false;
+  let pointerId = null;
+  let lastClientX = 0;
+  let resumeAt = 0;
+  let lastFrame = performance.now();
+  const AUTO_SPEED = 14;
 
-  let holding = false, dragging = false, startX = 0, currentX = 0;
-  let last = performance.now();
-  const SPEED = 18;
-  const count = originals.length;
-
-  const cards = () => Array.from(track.children);
-  const loopWidth = () => {
-    const all = cards();
-    // Distância EXATA entre o primeiro card de duas voltas consecutivas.
-    // Inclui gap/margens e evita o erro de scrollWidth / número de cópias.
-    if (all.length <= count) return 0;
-    return all[count].offsetLeft - all[0].offsetLeft;
+  const allCards = () => track.children;
+  const cycleWidth = () => {
+    const cards = allCards();
+    if (cards.length <= N) return 0;
+    return cards[N].offsetLeft - cards[0].offsetLeft;
   };
-
-  const setX = x => {
-    currentX = x;
-    track.style.setProperty('transform', 'translate3d(' + currentX + 'px,0,0)', 'important');
+  const paint = () => {
+    track.style.setProperty('transform', `translate3d(${x}px,0,0)`, 'important');
   };
-
-  const normalize = () => {
-    const w = loopWidth();
+  const wrap = () => {
+    const w = cycleWidth();
     if (!w) return;
-    // A posição equivalente é deslocada exatamente uma volta.
-    // Mantemos o viewport permanentemente dentro das 3 voltas centrais.
-    const leftSafe = -w * 1.25;
-    const rightSafe = -w * 2.75;
-    while (currentX > leftSafe) currentX -= w;
-    while (currentX < rightSafe) currentX += w;
+    // Só teleporta para uma posição VISUALMENTE IDÊNTICA.
+    // Não há limite, mola, clamp, snap ou força contrária ao dedo.
+    while (x > -2 * w) x -= w;
+    while (x < -4 * w) x += w;
+  };
+  const goMiddle = () => {
+    const w = cycleWidth();
+    if (!w) return;
+    x = -3 * w;
+    paint();
   };
 
-  const center = () => {
-    const w = loopWidth();
-    if (w) setX(-2 * w);
+  // 2) MANUAL: o dedo manda 1:1. Direita vai para direita; esquerda para esquerda.
+  const pointerDown = e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    pressed = true;
+    moved = false;
+    pointerId = e.pointerId;
+    lastClientX = e.clientX;
+    resumeAt = Infinity;
+    try { viewport.setPointerCapture(pointerId); } catch (_) {}
   };
-
-  const tick = now => {
-    const dt = Math.min((now - last) / 1000, 0.05);
-    last = now;
-    if (!holding && Date.now() >= (carousel._resumeAt || 0)) {
-      currentX -= SPEED * dt;
-      normalize();
-      setX(currentX);
-    }
-    requestAnimationFrame(tick);
-  };
-
-  const down = e => {
-    holding = true;
-    dragging = false;
-    startX = e.clientX;
-    carousel.style.cursor = 'grabbing';
-    try { carousel.setPointerCapture?.(e.pointerId); } catch (_) {}
-  };
-
-  const move = e => {
-    if (!holding) return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 2) dragging = true;
-    if (!dragging) return;
-    currentX += dx;
-    startX = e.clientX;
-    normalize();
-    setX(currentX);
+  const pointerMove = e => {
+    if (!pressed || e.pointerId !== pointerId) return;
+    const dx = e.clientX - lastClientX;
+    lastClientX = e.clientX;
+    if (Math.abs(dx) > 0) moved = true;
+    x += dx;
+    wrap();
+    paint();
     if (e.cancelable) e.preventDefault();
   };
-
-  const up = e => {
-    if (!holding) return;
-    holding = false;
-    dragging = false;
-    carousel.style.cursor = 'grab';
-    try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
-    carousel._resumeAt = Date.now() + 900;
+  const pointerEnd = e => {
+    if (!pressed || (e.pointerId != null && e.pointerId !== pointerId)) return;
+    pressed = false;
+    pointerId = null;
+    try { viewport.releasePointerCapture?.(e.pointerId); } catch (_) {}
+    // 3) AUTOMÁTICO: somente depois de soltar. Nunca disputa com o toque.
+    resumeAt = performance.now() + 1200;
   };
 
-  carousel.style.touchAction = 'pan-y';
-  carousel.style.cursor = 'grab';
-  track.style.setProperty('animation', 'none', 'important');
-  track.style.setProperty('will-change', 'transform');
-  track.style.setProperty('width', 'max-content', 'important');
+  const frame = now => {
+    const dt = Math.min((now - lastFrame) / 1000, 0.05);
+    lastFrame = now;
+    if (!pressed && now >= resumeAt) {
+      x -= AUTO_SPEED * dt;
+      wrap();
+      paint();
+    }
+    requestAnimationFrame(frame);
+  };
 
-  carousel.addEventListener('pointerdown', down, { passive: true });
-  carousel.addEventListener('pointermove', move, { passive: false });
-  carousel.addEventListener('pointerup', up, { passive: true });
-  carousel.addEventListener('pointercancel', up, { passive: true });
-  carousel.addEventListener('lostpointercapture', up, { passive: true });
-  carousel.addEventListener('dragstart', e => e.preventDefault());
-  carousel.querySelectorAll('img').forEach(img => {
+  // Mata qualquer comportamento antigo que possa competir com o gesto.
+  track.style.setProperty('animation', 'none', 'important');
+  track.style.setProperty('transition', 'none', 'important');
+  track.style.setProperty('scroll-snap-type', 'none', 'important');
+  track.style.setProperty('width', 'max-content', 'important');
+  track.style.setProperty('will-change', 'transform');
+  viewport.style.setProperty('touch-action', 'pan-y', 'important');
+  viewport.style.setProperty('overscroll-behavior-x', 'none', 'important');
+  viewport.style.cursor = 'grab';
+
+  viewport.addEventListener('pointerdown', pointerDown, { passive: true });
+  viewport.addEventListener('pointermove', pointerMove, { passive: false });
+  viewport.addEventListener('pointerup', pointerEnd, { passive: true });
+  viewport.addEventListener('pointercancel', pointerEnd, { passive: true });
+  viewport.addEventListener('lostpointercapture', pointerEnd, { passive: true });
+  viewport.addEventListener('dragstart', e => e.preventDefault());
+
+  Array.from(track.querySelectorAll('img')).forEach(img => {
     img.draggable = false;
     img.style.userSelect = 'none';
     img.style.pointerEvents = 'none';
   });
 
-  const boot = () => {
-    center();
-    last = performance.now();
-    requestAnimationFrame(tick);
+  const start = () => {
+    goMiddle();
+    lastFrame = performance.now();
+    resumeAt = performance.now() + 500;
+    requestAnimationFrame(frame);
   };
-  // Aguarda layout/fontes/imagens para medir a volta pelo offset real.
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => requestAnimationFrame(boot));
-  } else {
-    requestAnimationFrame(() => requestAnimationFrame(boot));
-  }
-
-  window.addEventListener('resize', () => {
-    const w = loopWidth();
-    if (w) {
-      normalize();
-      setX(currentX);
-    }
-  }, { passive: true });
+  if (document.fonts?.ready) document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(start)));
+  else requestAnimationFrame(() => requestAnimationFrame(start));
 }
 
 function createTestimonialCard(testimonial) {
