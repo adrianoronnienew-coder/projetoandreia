@@ -336,6 +336,32 @@
   }
   #home .image-glow{opacity:.5!important}
 }
+</style><style id="ale-compact-sections-v24">
+/* Transições contínuas entre as áreas e melhor aproveitamento vertical */
+#home{padding-bottom:0!important}
+#servicos,#sobre,#depoimentos{position:relative;isolation:isolate}
+#servicos{background:linear-gradient(180deg,var(--tertiary-bg) 0,var(--secondary-bg) 110px)!important}
+#sobre{background:linear-gradient(180deg,var(--secondary-bg) 0,var(--tertiary-bg) 110px)!important}
+#depoimentos{background:linear-gradient(180deg,var(--tertiary-bg) 0,var(--secondary-bg) 110px)!important}
+#servicos>.container,#sobre>.container,#depoimentos>.container{position:relative;z-index:1}
+@media(max-width:600px){
+  #home{padding-bottom:10px!important}
+  #home .hero-image{margin-top:8px!important;margin-bottom:0!important}
+  #servicos,#sobre,#depoimentos{padding-top:30px!important;padding-bottom:30px!important}
+  #servicos>.container,#sobre>.container,#depoimentos>.container{padding-top:0!important;padding-bottom:0!important}
+  #servicos .row:first-child .col-12,
+  #depoimentos .row:first-child .col-12{margin-bottom:24px!important}
+  #servicos .section-title,#depoimentos .section-title{margin-bottom:8px!important}
+  #servicos .section-subtitle,#depoimentos .section-subtitle{line-height:1.45!important}
+  #sobre .about-image{margin-bottom:24px!important}
+  #sobre .about-content{padding-top:0!important}
+  #sobre .section-title{margin-bottom:14px!important}
+  #sobre .about-text{margin-bottom:14px!important}
+  #sobre .about-achievements{margin:20px 0!important}
+  #depoimentos .testimonials-carousel{margin-top:0!important}
+  .footer{padding-top:32px!important;padding-bottom:32px!important}
+  .footer .mb-4{margin-bottom:20px!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
