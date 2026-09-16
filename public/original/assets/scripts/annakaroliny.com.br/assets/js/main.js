@@ -301,36 +301,49 @@ function setupTestimonialsDrag() {
   if (!track) return;
   carousel.dataset.dragReady = '1';
 
-  // Começa no conjunto central para existir conteúdo real dos dois lados.
-  const original = Array.from(track.children);
-  if (!original.length) return;
+  const originals = Array.from(track.children);
+  if (!originals.length) return;
+
+  // Cinco voltas reais: duas antes + centro + duas depois.
+  // Assim nunca existe uma borda física perto da área visível.
   track.innerHTML = '';
-  for (let copy = 0; copy < 3; copy++) {
-    original.forEach(card => track.appendChild(card.cloneNode(true)));
+  for (let copy = 0; copy < 5; copy++) {
+    originals.forEach(card => track.appendChild(card.cloneNode(true)));
   }
 
   let holding = false, dragging = false, startX = 0, currentX = 0;
-  let resumeTimer = null, raf = 0, last = performance.now();
+  let last = performance.now();
   const SPEED = 18;
+  const count = originals.length;
 
-  const setX = value => {
-    currentX = value;
+  const cards = () => Array.from(track.children);
+  const loopWidth = () => {
+    const all = cards();
+    // Distância EXATA entre o primeiro card de duas voltas consecutivas.
+    // Inclui gap/margens e evita o erro de scrollWidth / número de cópias.
+    if (all.length <= count) return 0;
+    return all[count].offsetLeft - all[0].offsetLeft;
+  };
+
+  const setX = x => {
+    currentX = x;
     track.style.setProperty('transform', 'translate3d(' + currentX + 'px,0,0)', 'important');
   };
 
-  const segmentWidth = () => track.scrollWidth / 3;
-
-  const recenter = () => {
-    const w = segmentWidth();
+  const normalize = () => {
+    const w = loopWidth();
     if (!w) return;
-    // Mantém sempre a cópia do meio visível: visualmente é um círculo sem começo/fim.
-    while (currentX > -w * 0.5) currentX -= w;
-    while (currentX < -w * 1.5) currentX += w;
+    // A posição equivalente é deslocada exatamente uma volta.
+    // Mantemos o viewport permanentemente dentro das 3 voltas centrais.
+    const leftSafe = -w * 1.25;
+    const rightSafe = -w * 2.75;
+    while (currentX > leftSafe) currentX -= w;
+    while (currentX < rightSafe) currentX += w;
   };
 
-  const startCentered = () => {
-    const w = segmentWidth();
-    if (w) setX(-w);
+  const center = () => {
+    const w = loopWidth();
+    if (w) setX(-2 * w);
   };
 
   const tick = now => {
@@ -338,48 +351,78 @@ function setupTestimonialsDrag() {
     last = now;
     if (!holding && Date.now() >= (carousel._resumeAt || 0)) {
       currentX -= SPEED * dt;
-      recenter();
+      normalize();
       setX(currentX);
     }
-    raf = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   };
 
   const down = e => {
-    clearTimeout(resumeTimer);
-    holding = true; dragging = false; startX = e.clientX;
+    holding = true;
+    dragging = false;
+    startX = e.clientX;
     carousel.style.cursor = 'grabbing';
     try { carousel.setPointerCapture?.(e.pointerId); } catch (_) {}
   };
 
   const move = e => {
     if (!holding) return;
-    const delta = e.clientX - startX;
-    if (Math.abs(delta) > 2) dragging = true;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 2) dragging = true;
     if (!dragging) return;
-    currentX += delta;
+    currentX += dx;
     startX = e.clientX;
-    recenter();
+    normalize();
     setX(currentX);
+    if (e.cancelable) e.preventDefault();
   };
 
   const up = e => {
     if (!holding) return;
-    holding = false; dragging = false;
-    try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
+    holding = false;
+    dragging = false;
     carousel.style.cursor = 'grab';
+    try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
     carousel._resumeAt = Date.now() + 900;
   };
 
+  carousel.style.touchAction = 'pan-y';
+  carousel.style.cursor = 'grab';
+  track.style.setProperty('animation', 'none', 'important');
+  track.style.setProperty('will-change', 'transform');
+  track.style.setProperty('width', 'max-content', 'important');
+
   carousel.addEventListener('pointerdown', down, { passive: true });
-  carousel.addEventListener('pointermove', move, { passive: true });
+  carousel.addEventListener('pointermove', move, { passive: false });
   carousel.addEventListener('pointerup', up, { passive: true });
   carousel.addEventListener('pointercancel', up, { passive: true });
-  window.addEventListener('pointerup', up, { passive: true });
+  carousel.addEventListener('lostpointercapture', up, { passive: true });
   carousel.addEventListener('dragstart', e => e.preventDefault());
-  carousel.querySelectorAll('img').forEach(img => { img.draggable = false; img.style.userSelect = 'none'; });
+  carousel.querySelectorAll('img').forEach(img => {
+    img.draggable = false;
+    img.style.userSelect = 'none';
+    img.style.pointerEvents = 'none';
+  });
 
-  track.style.setProperty('animation', 'none', 'important');
-  requestAnimationFrame(() => { startCentered(); requestAnimationFrame(tick); });
+  const boot = () => {
+    center();
+    last = performance.now();
+    requestAnimationFrame(tick);
+  };
+  // Aguarda layout/fontes/imagens para medir a volta pelo offset real.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => requestAnimationFrame(boot));
+  } else {
+    requestAnimationFrame(() => requestAnimationFrame(boot));
+  }
+
+  window.addEventListener('resize', () => {
+    const w = loopWidth();
+    if (w) {
+      normalize();
+      setX(currentX);
+    }
+  }, { passive: true });
 }
 
 function createTestimonialCard(testimonial) {
