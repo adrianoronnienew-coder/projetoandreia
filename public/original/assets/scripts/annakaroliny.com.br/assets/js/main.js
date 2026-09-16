@@ -298,10 +298,22 @@ function setupTestimonialsDrag() {
   const carousel = document.getElementById('testimonialsCarousel');
   if (!carousel || carousel.dataset.dragReady === '1') return;
   carousel.dataset.dragReady = '1';
-  let down = false, startX = 0, startScroll = 0;
-  carousel.addEventListener('pointerdown', e => { down = true; startX = e.clientX; startScroll = carousel.scrollLeft; carousel.setPointerCapture?.(e.pointerId); carousel.style.cursor = 'grabbing'; });
+  let down = false, startX = 0, startScroll = 0, pausedUntil = 0, raf = 0, last = 0;
+  const speed = 0.22;
+  const autoMove = t => {
+    if (!last) last = t;
+    const dt = Math.min(t - last, 40); last = t;
+    if (!down && Date.now() > pausedUntil) {
+      carousel.scrollLeft += speed * dt;
+      const half = carousel.scrollWidth / 2;
+      if (half > 0 && carousel.scrollLeft >= half) carousel.scrollLeft -= half;
+    }
+    raf = requestAnimationFrame(autoMove);
+  };
+  raf = requestAnimationFrame(autoMove);
+  carousel.addEventListener('pointerdown', e => { down = true; pausedUntil = Date.now() + 4500; startX = e.clientX; startScroll = carousel.scrollLeft; carousel.setPointerCapture?.(e.pointerId); carousel.style.cursor = 'grabbing'; });
   carousel.addEventListener('pointermove', e => { if (down) carousel.scrollLeft = startScroll - (e.clientX - startX); });
-  const stop = e => { down = false; carousel.style.cursor = 'grab'; try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {} };
+  const stop = e => { down = false; pausedUntil = Date.now() + 4500; carousel.style.cursor = 'grab'; try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {} };
   carousel.addEventListener('pointerup', stop); carousel.addEventListener('pointercancel', stop);
 }
 
