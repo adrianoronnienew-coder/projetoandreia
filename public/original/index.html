@@ -340,17 +340,25 @@
 /* Transições contínuas entre as áreas e melhor aproveitamento vertical */
 #home{padding-bottom:0!important}
 #servicos,#sobre,#depoimentos{position:relative;isolation:isolate}
-#servicos{background:linear-gradient(180deg,var(--tertiary-bg) 0,var(--secondary-bg) 110px)!important}
-#sobre{background:linear-gradient(180deg,var(--secondary-bg) 0,var(--tertiary-bg) 110px)!important}
-#depoimentos{background:linear-gradient(180deg,var(--tertiary-bg) 0,var(--secondary-bg) 110px)!important}
+#servicos{background:var(--secondary-bg)!important}
+#sobre{background:var(--tertiary-bg)!important}
+#depoimentos{background:var(--secondary-bg)!important}
+#servicos:before,#sobre:before,#depoimentos:before{
+  content:"";position:absolute;z-index:0;left:0;right:0;top:-72px;height:144px;pointer-events:none;
+  backdrop-filter:blur(12px);mask-image:linear-gradient(to bottom,transparent,#000 32%,#000 68%,transparent);
+}
+#servicos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
+#sobre:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--tertiary-bg) 48%,transparent),var(--tertiary-bg))}
+#depoimentos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
 #servicos>.container,#sobre>.container,#depoimentos>.container{position:relative;z-index:1}
 @media(max-width:600px){
-  #home{padding-bottom:10px!important}
-  #home .hero-image{margin-top:8px!important;margin-bottom:0!important}
-  #servicos,#sobre,#depoimentos{padding-top:30px!important;padding-bottom:30px!important}
+  #home{padding-bottom:0!important}
+  #home .hero-image{margin-top:4px!important;margin-bottom:-22px!important}
+  #servicos{padding-top:8px!important;padding-bottom:26px!important}
+  #sobre,#depoimentos{padding-top:22px!important;padding-bottom:26px!important}
   #servicos>.container,#sobre>.container,#depoimentos>.container{padding-top:0!important;padding-bottom:0!important}
-  #servicos .row:first-child .col-12,
-  #depoimentos .row:first-child .col-12{margin-bottom:24px!important}
+  #servicos .row:first-child .col-12{margin-bottom:16px!important}
+  #depoimentos .row:first-child .col-12{margin-bottom:20px!important}
   #servicos .section-title,#depoimentos .section-title{margin-bottom:8px!important}
   #servicos .section-subtitle,#depoimentos .section-subtitle{line-height:1.45!important}
   #sobre .about-image{margin-bottom:24px!important}
