@@ -1,0 +1,106 @@
+/* Modern visual enhancement layer for pagina-de-perfil */
+:root{
+  --fx-accent:#d63bc7;
+  --fx-accent-2:#7a5cff;
+  --fx-accent-3:#ff5bcf;
+  --fx-surface:rgba(18,18,24,.78);
+  --fx-border:rgba(255,255,255,.12);
+  --fx-shadow:0 18px 50px rgba(0,0,0,.22);
+}
+
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+
+/* Modern section rhythm without changing the captured layout */
+section,.section,.card,.service-card,.testimonial-card,.faq-item,.pricing-card{
+  transition:transform .32s cubic-bezier(.22,1,.36,1),box-shadow .32s ease,border-color .32s ease,filter .32s ease;
+}
+
+.card:hover,.service-card:hover,.testimonial-card:hover,.pricing-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--fx-shadow);
+  border-color:rgba(214,59,199,.28)!important;
+}
+
+/* Inputs and interactive fields */
+input,textarea,select{
+  transition:border-color .22s ease,box-shadow .22s ease,background-color .22s ease,transform .22s ease;
+}
+input:focus,textarea:focus,select:focus{
+  outline:none!important;
+  border-color:rgba(214,59,199,.58)!important;
+  box-shadow:0 0 0 4px rgba(214,59,199,.10)!important;
+}
+
+/* Primary interactive controls: subtle premium motion, no functionality changes */
+a.btn,button,.btn,[role="button"],.ale-action,.social-link,#backToTop{
+  position:relative;
+  isolation:isolate;
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease,filter .22s ease,border-color .22s ease!important;
+}
+
+a.btn:hover,button:hover,.btn:hover,[role="button"]:hover,.ale-action:hover,.social-link:hover,#backToTop:hover{
+  transform:translateY(-2px) scale(1.015);
+  filter:saturate(1.06) brightness(1.04);
+}
+
+a.btn:active,button:active,.btn:active,[role="button"]:active,.ale-action:active,.social-link:active,#backToTop:active{
+  transform:translateY(0) scale(.975)!important;
+}
+
+/* Cursor-reactive glow. Coordinates are updated by modern-effects.js */
+.fx-interactive{overflow:hidden!important;--fx-x:50%;--fx-y:50%}
+.fx-interactive::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:-1;
+  opacity:0;
+  background:radial-gradient(circle at var(--fx-x) var(--fx-y),rgba(255,255,255,.30),rgba(214,59,199,.16) 28%,transparent 58%);
+  transition:opacity .22s ease;
+}
+.fx-interactive:hover::before{opacity:1}
+
+/* Goo-style accent for main CTA buttons only */
+.fx-goo{overflow:hidden!important}
+.fx-goo::after{
+  content:"";
+  position:absolute;
+  width:170px;height:170px;
+  left:var(--fx-x,50%);top:var(--fx-y,50%);
+  transform:translate(-50%,-50%) scale(0);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.30) 0%,rgba(255,91,207,.26) 35%,rgba(122,92,255,.12) 58%,transparent 72%);
+  pointer-events:none;
+  z-index:0;
+  transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .32s ease;
+  opacity:.9;
+}
+.fx-goo:hover::after{transform:translate(-50%,-50%) scale(1)}
+.fx-goo>*{position:relative;z-index:1}
+
+/* Scroll reveal */
+.fx-reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.fx-reveal.fx-visible{opacity:1;transform:none}
+
+/* Slight glass depth for selected navigation / floating UI */
+#mainNav,.navbar,.floating-card,.widget-panel{
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+}
+
+/* Better visual response on FAQ/accordion rows */
+[aria-expanded]{transition:background-color .22s ease,border-color .22s ease,transform .22s ease}
+[aria-expanded]:hover{border-color:rgba(214,59,199,.24)!important}
+
+/* Respect accessibility and keep mobile lightweight */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+  .fx-reveal{opacity:1!important;transform:none!important}
+}
+@media (hover:none),(pointer:coarse){
+  .fx-interactive::before,.fx-goo::after{display:none!important}
+  a.btn:hover,button:hover,.btn:hover,[role="button"]:hover,.ale-action:hover,.social-link:hover,#backToTop:hover{transform:none}
+}
