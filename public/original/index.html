@@ -340,7 +340,6 @@
 /* Transições contínuas entre as áreas e melhor aproveitamento vertical */
 #home{padding-bottom:0!important}
 #servicos,#sobre,#depoimentos{position:relative;isolation:isolate}
-#home{position:relative;z-index:2}
 #home .hero-image,#home .image-container{position:relative!important;z-index:3!important;isolation:isolate}
 #home .image-glow{z-index:0!important}
 #home .hero-photo{z-index:2!important}
@@ -357,6 +356,7 @@
 #depoimentos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
 #servicos>.container,#sobre>.container,#depoimentos>.container{position:relative;z-index:1}
 @media(max-width:600px){
+  #servicos:before,#sobre:before,#depoimentos:before{top:-72px;height:86px}
   #home{padding-bottom:0!important}
   #home .hero-image{margin-top:4px!important;margin-bottom:-22px!important}
   #servicos{padding-top:8px!important;padding-bottom:26px!important}
