@@ -201,7 +201,7 @@
 .scroll-indicator.ale-scroll-cue{opacity:1!important;visibility:visible!important}
 </style><style id="ale-native-rail-v9">
 #ale-links-live,.hero-image>.ale-links{display:none!important}
-#ale-native-rail{display:flex!important;position:fixed;left:10px;right:auto;top:50%;transform:translateY(-50%);z-index:99980;flex-direction:column;align-items:flex-start;gap:9px}
+#ale-native-rail{display:flex!important;position:absolute;left:18px;right:auto;top:140px;transform:none;z-index:20;flex-direction:column;align-items:flex-start;gap:18px}
 #ale-native-rail .ale-rail-item{position:relative;width:46px;height:46px;padding:4px;border-radius:999px;display:flex;align-items:center;gap:9px;overflow:hidden;text-decoration:none;color:#fff;background:rgba(10,11,16,.9);border:1px solid rgba(255,255,255,.14);box-shadow:0 9px 24px rgba(0,0,0,.3);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:width .36s cubic-bezier(.2,.8,.2,1),transform .25s ease,box-shadow .25s ease}
 #ale-native-rail .ale-rail-item i{width:38px;height:38px;min-width:38px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:linear-gradient(135deg,#a83bd6,#168dff)}
 #ale-native-rail .ale-rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)}
@@ -213,7 +213,7 @@
 #ale-native-rail .ale-rail-item.active span{opacity:1;transform:translateX(0)}
 
 #ale-native-rail.ale-rail-visible{display:flex!important;isolation:isolate}
-@media(max-width:600px){#ale-native-rail{left:7px;right:auto;gap:8px}#ale-native-rail .ale-rail-item{width:44px;height:44px}#ale-native-rail .ale-rail-item i{width:36px;height:36px;min-width:36px;font-size:15px}#ale-native-rail .ale-rail-item.active{width:188px}#ale-native-rail .ale-rail-item b{font-size:10px}#ale-native-rail .ale-rail-item small{font-size:7px}}
+@media(max-width:600px){#ale-native-rail{left:18px;right:auto;top:140px;gap:18px}#ale-native-rail .ale-rail-item{width:76px;height:76px;padding:7px}#ale-native-rail .ale-rail-item i{width:60px;height:60px;min-width:60px;font-size:25px}#ale-native-rail .ale-rail-item.active{width:205px;border-radius:38px}#ale-native-rail .ale-rail-item b{font-size:10px}#ale-native-rail .ale-rail-item small{font-size:7px}}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -761,6 +761,9 @@
 (function(){
  function initRail(){
   var rail=document.getElementById('ale-native-rail'); if(!rail)return;
+   var services=document.getElementById('servicos'); if(!services)return;
+   if(rail.parentNode!==services)services.appendChild(rail);
+   services.style.position='relative';
    var items=[].slice.call(rail.querySelectorAll('.ale-rail-item'));
    var active=-1;
    function setActive(i){
@@ -768,8 +771,8 @@
    items.forEach(function(el,n){el.classList.toggle('active',n===i)});
   }
   function onScroll(){
-   var max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-   var p=Math.max(0,Math.min(1,scrollY/max));
+    var box=services.getBoundingClientRect();
+    var p=Math.max(0,Math.min(.999,(innerHeight*.5-box.top)/Math.max(1,box.height)));
     setActive(Math.min(items.length-1,Math.floor(p*items.length)));
   }
   var ticking=false;
