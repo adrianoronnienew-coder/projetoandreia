@@ -301,47 +301,52 @@ function setupTestimonialsDrag() {
   if (!track) return;
   carousel.dataset.dragReady = '1';
 
-  let holding = false;
-  let dragging = false;
-  let startX = 0;
-  let currentX = 0;
-  let resumeTimer = null;
+  // Começa no conjunto central para existir conteúdo real dos dois lados.
+  const original = Array.from(track.children);
+  if (!original.length) return;
+  track.innerHTML = '';
+  for (let copy = 0; copy < 3; copy++) {
+    original.forEach(card => track.appendChild(card.cloneNode(true)));
+  }
 
-  const readX = () => {
-    const matrix = new DOMMatrixReadOnly(getComputedStyle(track).transform);
-    return Number.isFinite(matrix.m41) ? matrix.m41 : 0;
+  let holding = false, dragging = false, startX = 0, currentX = 0;
+  let resumeTimer = null, raf = 0, last = performance.now();
+  const SPEED = 18;
+
+  const setX = value => {
+    currentX = value;
+    track.style.setProperty('transform', 'translate3d(' + currentX + 'px,0,0)', 'important');
   };
 
-  const halfWidth = () => track.scrollWidth / 2;
+  const segmentWidth = () => track.scrollWidth / 3;
 
-  const normalizeX = value => {
-    const half = halfWidth();
-    if (!half) return value;
-    while (value <= -half) value += half;
-    while (value > 0) value -= half;
-    return value;
+  const recenter = () => {
+    const w = segmentWidth();
+    if (!w) return;
+    // Mantém sempre a cópia do meio visível: visualmente é um círculo sem começo/fim.
+    while (currentX > -w * 0.5) currentX -= w;
+    while (currentX < -w * 1.5) currentX += w;
   };
 
-  const freeze = () => {
-    currentX = normalizeX(readX());
-    track.style.setProperty('animation', 'none', 'important');
-    track.style.setProperty('transform', `translate3d(${currentX}px,0,0)`, 'important');
+  const startCentered = () => {
+    const w = segmentWidth();
+    if (w) setX(-w);
   };
 
-  const restart = () => {
-    currentX = normalizeX(currentX);
-    track.style.removeProperty('animation');
-    track.style.removeProperty('transform');
-    track.style.setProperty('animation-play-state', 'running', 'important');
+  const tick = now => {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    if (!holding && Date.now() >= (carousel._resumeAt || 0)) {
+      currentX -= SPEED * dt;
+      recenter();
+      setX(currentX);
+    }
+    raf = requestAnimationFrame(tick);
   };
 
   const down = e => {
     clearTimeout(resumeTimer);
-    holding = true;
-    dragging = false;
-    startX = e.clientX;
-    freeze();
-    carousel.classList.add('is-reading');
+    holding = true; dragging = false; startX = e.clientX;
     carousel.style.cursor = 'grabbing';
     try { carousel.setPointerCapture?.(e.pointerId); } catch (_) {}
   };
@@ -349,22 +354,20 @@ function setupTestimonialsDrag() {
   const move = e => {
     if (!holding) return;
     const delta = e.clientX - startX;
-    if (Math.abs(delta) > 3) dragging = true;
+    if (Math.abs(delta) > 2) dragging = true;
     if (!dragging) return;
-    currentX = normalizeX(currentX + delta);
+    currentX += delta;
     startX = e.clientX;
-    track.style.setProperty('transform', `translate3d(${currentX}px,0,0)`, 'important');
+    recenter();
+    setX(currentX);
   };
 
   const up = e => {
     if (!holding) return;
-    holding = false;
-    dragging = false;
+    holding = false; dragging = false;
     try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
-    carousel.classList.remove('is-reading');
     carousel.style.cursor = 'grab';
-    clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(restart, 900);
+    carousel._resumeAt = Date.now() + 900;
   };
 
   carousel.addEventListener('pointerdown', down, { passive: true });
@@ -372,13 +375,11 @@ function setupTestimonialsDrag() {
   carousel.addEventListener('pointerup', up, { passive: true });
   carousel.addEventListener('pointercancel', up, { passive: true });
   window.addEventListener('pointerup', up, { passive: true });
-
   carousel.addEventListener('dragstart', e => e.preventDefault());
-  carousel.querySelectorAll('img').forEach(img => {
-    img.draggable = false;
-    img.style.userSelect = 'none';
-    img.style.webkitUserDrag = 'none';
-  });
+  carousel.querySelectorAll('img').forEach(img => { img.draggable = false; img.style.userSelect = 'none'; });
+
+  track.style.setProperty('animation', 'none', 'important');
+  requestAnimationFrame(() => { startCentered(); requestAnimationFrame(tick); });
 }
 
 function createTestimonialCard(testimonial) {
