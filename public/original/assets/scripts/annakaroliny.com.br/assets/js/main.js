@@ -57,8 +57,8 @@ function setupAleRailButtons() {
   const info = [
     {
       match: 'Hndy5zUtIi6LyFJdrmcCk1',
-      title: 'Mentoria Gold',
-      description: 'Para interessados na mentoria da Ale',
+      title: 'Mentoria Profissional',
+      description: 'Grupo para interessados na Mentoria Gold',
       label: 'Entrar no grupo da Mentoria Gold'
     },
     {
