@@ -224,7 +224,9 @@ function setupTestimonialsStyle() {
   style.textContent = `
     #depoimentos .testimonials-marquee { overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; cursor: grab !important; touch-action: pan-x !important; }
     #depoimentos .testimonials-marquee::-webkit-scrollbar { display: none !important; }
-    #depoimentos .testimonials-track { width: max-content !important; }
+    #depoimentos .testimonials-track { width: max-content !important; animation-duration: 110s !important; }
+    #depoimentos .testimonials-marquee:active .testimonials-track,
+    #depoimentos .testimonials-marquee:hover .testimonials-track { animation-play-state: paused !important; }
     #depoimentos .testimonial-header { align-items: center !important; }
     #depoimentos .testimonial-avatar.testimonial-photo {
       width: 62px !important; height: 62px !important; min-width: 62px !important;
@@ -301,6 +303,7 @@ function setupTestimonialsDrag() {
   let dragging = false;
   let startX = 0;
   let startOffset = 0;
+  let resumeTimer = null;
   const track = carousel.querySelector('.testimonials-track');
   if (!track) return;
 
@@ -309,6 +312,7 @@ function setupTestimonialsDrag() {
     startX = e.clientX;
     const matrix = new DOMMatrixReadOnly(getComputedStyle(track).transform);
     startOffset = matrix.m41;
+    clearTimeout(resumeTimer);
     track.style.animationPlayState = 'paused';
     track.style.transform = `translateX(${startOffset}px)`;
     carousel.setPointerCapture?.(e.pointerId);
@@ -326,7 +330,10 @@ function setupTestimonialsDrag() {
     carousel.style.cursor = 'grab';
     try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
     track.style.removeProperty('transform');
-    track.style.animationPlayState = 'running';
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      track.style.animationPlayState = 'running';
+    }, 5000);
   };
 
   carousel.addEventListener('pointerup', stop);
