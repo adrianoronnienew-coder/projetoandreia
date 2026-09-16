@@ -254,6 +254,48 @@
  #ale-native-rail .ale-rail-item b{font-size:15px!important}
  #ale-native-rail .ale-rail-item small{font-size:11px!important}
 }
+</style><style id="ale-services-cosmic-v22">
+@media(max-width:600px){
+ #servicos .row.g-4>.col-lg-6:first-child .service-card{
+   min-height:0!important;height:auto!important;padding:26px 18px!important;
+   position:relative!important;isolation:isolate!important;overflow:hidden!important;
+   background:
+    radial-gradient(circle at 18% 22%,rgba(25,145,255,.20),transparent 28%),
+    radial-gradient(circle at 82% 72%,rgba(204,48,214,.17),transparent 30%),
+    linear-gradient(145deg,#17172c,#29283f)!important;
+ }
+ #servicos .row.g-4>.col-lg-6:first-child .service-card:before,
+ #servicos .row.g-4>.col-lg-6:first-child .service-card:after{
+   content:""!important;position:absolute!important;inset:-45%!important;z-index:-1!important;pointer-events:none!important;
+ }
+ #servicos .row.g-4>.col-lg-6:first-child .service-card:before{
+   background-image:
+    radial-gradient(circle,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle,#7bc8ff 0 1px,transparent 1.6px),
+    radial-gradient(circle,#fff 0 1.4px,transparent 1.9px)!important;
+   background-size:47px 47px,73px 73px,109px 109px!important;
+   background-position:0 0,17px 29px,53px 11px!important;
+   opacity:.58!important;animation:aleStarsDrift 18s linear infinite!important;
+ }
+ #servicos .row.g-4>.col-lg-6:first-child .service-card:after{
+   background:
+    linear-gradient(118deg,transparent 44%,rgba(255,255,255,.0) 47%,rgba(170,220,255,.72) 49%,transparent 50%) 15% 20%/220px 90px no-repeat,
+    linear-gradient(118deg,transparent 44%,rgba(255,255,255,.0) 47%,rgba(255,120,220,.58) 49%,transparent 50%) 80% 70%/180px 80px no-repeat!important;
+   opacity:.55!important;animation:aleMeteors 7s linear infinite!important;
+ }
+ #ale-native-rail{gap:13px!important;padding-left:8px!important}
+ #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active{
+   animation:aleLinkFloat 3.2s ease-in-out infinite!important;
+ }
+ #ale-native-rail .ale-rail-item:nth-child(2){animation-delay:-.6s!important}
+ #ale-native-rail .ale-rail-item:nth-child(3){animation-delay:-1.2s!important}
+ #ale-native-rail .ale-rail-item:nth-child(4){animation-delay:-1.8s!important}
+ #ale-native-rail .ale-rail-item:nth-child(5){animation-delay:-2.4s!important}
+}
+@keyframes aleStarsDrift{0%{transform:translate3d(-4%,-5%,0) rotate(0)}100%{transform:translate3d(8%,10%,0) rotate(5deg)}}
+@keyframes aleMeteors{0%{transform:translate3d(45%,-45%,0);opacity:0}12%{opacity:.7}55%{opacity:.35}100%{transform:translate3d(-45%,45%,0);opacity:0}}
+@keyframes aleLinkFloat{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 0 rgba(100,90,255,0))}50%{transform:translateY(-5px);filter:drop-shadow(0 7px 12px rgba(80,120,255,.18))}}
+@media(prefers-reduced-motion:reduce){#servicos .service-card:before,#servicos .service-card:after,#ale-native-rail .ale-rail-item{animation:none!important}}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
