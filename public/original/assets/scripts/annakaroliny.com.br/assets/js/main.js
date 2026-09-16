@@ -224,7 +224,7 @@ function setupTestimonialsStyle() {
   style.textContent = `
     #depoimentos .testimonials-marquee { overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; cursor: grab !important; touch-action: pan-x !important; }
     #depoimentos .testimonials-marquee::-webkit-scrollbar { display: none !important; }
-    #depoimentos .testimonials-track { animation: none !important; transform: none !important; width: max-content !important; }
+    #depoimentos .testimonials-track { width: max-content !important; }
     #depoimentos .testimonial-header { align-items: center !important; }
     #depoimentos .testimonial-avatar.testimonial-photo {
       width: 62px !important; height: 62px !important; min-width: 62px !important;
@@ -236,7 +236,6 @@ function setupTestimonialsStyle() {
     #depoimentos .testimonial-info p { display: none !important; }
     #depoimentos .testimonial-info h4 { margin-bottom: 0 !important; }
     @media(max-width:768px) {
-      #depoimentos .testimonials-track { animation: none !important; transform: none !important; }
       #depoimentos .testimonial-avatar.testimonial-photo { width: 58px !important; height: 58px !important; min-width: 58px !important; }
     }
   `;
@@ -301,47 +300,24 @@ function setupTestimonialsDrag() {
 
   let dragging = false;
   let startX = 0;
-  let startScroll = 0;
-  let resumeTimer = null;
-  let autoTimer = null;
-  const STEP = 1;
-
-  const normalizeLoop = () => {
-    const half = carousel.scrollWidth / 2;
-    if (!half) return;
-    if (carousel.scrollLeft >= half) carousel.scrollLeft -= half;
-    if (carousel.scrollLeft < 0) carousel.scrollLeft += half;
-  };
-
-  const startAuto = () => {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => {
-      if (dragging) return;
-      carousel.scrollLeft += STEP;
-      normalizeLoop();
-    }, 35);
-  };
-
-  const pauseThenResume = () => {
-    clearInterval(autoTimer);
-    clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(startAuto, 3500);
-  };
+  let startOffset = 0;
+  const track = carousel.querySelector('.testimonials-track');
+  if (!track) return;
 
   carousel.addEventListener('pointerdown', e => {
     dragging = true;
-    clearInterval(autoTimer);
-    clearTimeout(resumeTimer);
     startX = e.clientX;
-    startScroll = carousel.scrollLeft;
+    const matrix = new DOMMatrixReadOnly(getComputedStyle(track).transform);
+    startOffset = matrix.m41;
+    track.style.animationPlayState = 'paused';
+    track.style.transform = `translateX(${startOffset}px)`;
     carousel.setPointerCapture?.(e.pointerId);
     carousel.style.cursor = 'grabbing';
   });
 
   carousel.addEventListener('pointermove', e => {
     if (!dragging) return;
-    carousel.scrollLeft = startScroll - (e.clientX - startX);
-    normalizeLoop();
+    track.style.transform = `translateX(${startOffset + e.clientX - startX}px)`;
   });
 
   const stop = e => {
@@ -349,14 +325,14 @@ function setupTestimonialsDrag() {
     dragging = false;
     carousel.style.cursor = 'grab';
     try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
-    pauseThenResume();
+    track.style.removeProperty('transform');
+    track.style.animationPlayState = 'running';
   };
 
   carousel.addEventListener('pointerup', stop);
   carousel.addEventListener('pointercancel', stop);
   carousel.addEventListener('mouseleave', e => { if (dragging) stop(e); });
 
-  startAuto();
 }
 
 function createTestimonialCard(testimonial) {
