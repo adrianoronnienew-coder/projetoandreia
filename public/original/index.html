@@ -339,7 +339,8 @@
 </style><style id="ale-compact-sections-v24">
 /* Transições contínuas entre as áreas e melhor aproveitamento vertical */
 #home{padding-bottom:0!important}
-#servicos,#sobre,#depoimentos{position:relative;isolation:isolate}
+#home{position:relative}
+#servicos,#sobre,#depoimentos{position:relative;z-index:1;isolation:isolate}
 #home .hero-image,#home .image-container{position:relative!important;z-index:3!important;isolation:isolate}
 #home .image-glow{z-index:0!important}
 #home .hero-photo{z-index:2!important}
@@ -348,15 +349,15 @@
 #sobre{background:var(--tertiary-bg)!important}
 #depoimentos{background:var(--secondary-bg)!important}
 #servicos:before,#sobre:before,#depoimentos:before{
-  content:"";position:absolute;z-index:0;left:0;right:0;top:-72px;height:144px;pointer-events:none;
-  backdrop-filter:blur(12px);mask-image:linear-gradient(to bottom,transparent,#000 32%,#000 68%,transparent);
+  content:"";position:absolute;z-index:0;left:-4%;right:-4%;top:-42px;height:104px;pointer-events:none;
+  filter:blur(18px);opacity:.82;mask-image:linear-gradient(to bottom,transparent 0%,#000 38%,#000 72%,transparent 100%);
 }
 #servicos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
 #sobre:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--tertiary-bg) 48%,transparent),var(--tertiary-bg))}
 #depoimentos:before{background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--secondary-bg) 48%,transparent),var(--secondary-bg))}
 #servicos>.container,#sobre>.container,#depoimentos>.container{position:relative;z-index:1}
 @media(max-width:600px){
-  #servicos:before,#sobre:before,#depoimentos:before{top:-72px;height:86px}
+  #servicos:before,#sobre:before,#depoimentos:before{top:-22px;height:64px;filter:blur(16px);opacity:.76}
   #home{padding-bottom:0!important}
   #home .hero-image{margin-top:4px!important;margin-bottom:-22px!important}
   #servicos{padding-top:8px!important;padding-bottom:26px!important}
@@ -409,7 +410,7 @@
 </style><style id="ale-fusion-v26">
 #servicos:before{display:none!important;content:none!important}
 #home{position:relative!important;isolation:isolate!important}
-#home:after{content:"";position:absolute;left:0;right:0;bottom:-55px;height:150px;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(25,25,46,0),rgba(25,25,46,.35) 35%,rgba(25,25,46,.75) 70%,#19192e);filter:blur(10px)}
+#home:after{content:"";position:absolute;left:-4%;right:-4%;bottom:-72px;height:112px;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(25,25,46,0),rgba(25,25,46,.28) 28%,rgba(25,25,46,.72) 62%,#19192e 100%);filter:blur(18px)}
 #home>.container{position:relative!important;z-index:10!important}
 #home .hero-image,#home .image-container{position:relative!important;z-index:12!important}
 #home .hero-photo{position:relative!important;z-index:13!important;filter:none!important}
