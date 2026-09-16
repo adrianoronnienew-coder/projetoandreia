@@ -16,47 +16,47 @@ const CONFIG = {
 const TESTIMONIALS = [
   {
     nome_cliente: 'Desireé',
-    servico: 'Análise de Perfil',
+    foto: 'https://i.pravatar.cc/120?img=47',
     depoimento: 'Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria. @desidesiculy'
   },
   {
     nome_cliente: 'Alda Mendes',
-    servico: 'Análise de Perfil',
+    foto: 'https://i.pravatar.cc/120?img=45',
     depoimento: 'Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV! @apenasalda'
   },
   {
     nome_cliente: 'Anne Danielle',
-    servico: 'Mentoria Individual',
+    foto: 'https://i.pravatar.cc/120?img=32',
     depoimento: 'Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui! @annedeliverymassas'
   },
   {
     nome_cliente: 'Camila Martins',
-    servico: 'Estratégia de Conteúdo',
+    foto: 'https://i.pravatar.cc/120?img=49',
     depoimento: 'Depois que organizei meu conteúdo com a estratégia, comecei a entender o que realmente fazia as pessoas pararem e interagirem.'
   },
   {
     nome_cliente: 'Juliana Souza',
-    servico: 'Gestão de Perfil',
+    foto: 'https://i.pravatar.cc/120?img=44',
     depoimento: 'Meu perfil ficou muito mais profissional e organizado. Hoje consigo comunicar com clareza o que faço e para quem faço.'
   },
   {
     nome_cliente: 'Renata Ferreira',
-    servico: 'Mentoria Individual',
+    foto: 'https://i.pravatar.cc/120?img=26',
     depoimento: 'A mentoria me deu direção. Parei de postar sem estratégia e comecei a produzir conteúdo com um objetivo claro.'
   },
   {
     nome_cliente: 'Patrícia Barbosa',
-    servico: 'Análise de Perfil',
+    foto: 'https://i.pravatar.cc/120?img=56',
     depoimento: 'A análise mostrou detalhes que eu nunca tinha percebido. Fiz os ajustes e meu posicionamento ficou muito mais claro.'
   },
   {
     nome_cliente: 'Larissa Santos',
-    servico: 'Estratégia de Conteúdo',
+    foto: 'https://i.pravatar.cc/120?img=29',
     depoimento: 'Passei a ter muito mais segurança para criar. Agora tenho uma linha de conteúdo e sei exatamente o que comunicar.'
   },
   {
     nome_cliente: 'Mariana Freitas',
-    servico: 'Gestão de Perfil',
+    foto: 'https://i.pravatar.cc/120?img=16',
     depoimento: 'O trabalho mudou completamente a apresentação do meu perfil. Ficou mais profissional, coerente e fácil de entender.'
   }
 ];
@@ -77,10 +77,54 @@ function initializeApp() {
   setupServiceButtons();
   setupScrollEffects();
   setupSmoothScrolling();
+  setupTestimonialsStyle();
   renderTestimonials(TESTIMONIALS);
   animateCounters();
   setupNavbarEffects();
   console.log('Ale Marques Website initialized successfully!');
+}
+
+function setupTestimonialsStyle() {
+  if (document.getElementById('ale-testimonials-photo-slow-style')) return;
+  const style = document.createElement('style');
+  style.id = 'ale-testimonials-photo-slow-style';
+  style.textContent = `
+    #depoimentos .testimonials-track {
+      animation-duration: 95s !important;
+    }
+    #depoimentos .testimonial-header {
+      align-items: center !important;
+    }
+    #depoimentos .testimonial-avatar.testimonial-photo {
+      width: 58px !important;
+      height: 58px !important;
+      min-width: 58px !important;
+      border-radius: 50% !important;
+      object-fit: cover !important;
+      padding: 0 !important;
+      display: block !important;
+      border: 2px solid rgba(255,255,255,.18) !important;
+      box-shadow: 0 8px 18px rgba(0,0,0,.25) !important;
+      background: linear-gradient(135deg,#b83bd8,#168dff) !important;
+    }
+    #depoimentos .testimonial-info p {
+      display: none !important;
+    }
+    #depoimentos .testimonial-info h4 {
+      margin-bottom: 0 !important;
+    }
+    @media(max-width:768px) {
+      #depoimentos .testimonials-track {
+        animation-duration: 88s !important;
+      }
+      #depoimentos .testimonial-avatar.testimonial-photo {
+        width: 54px !important;
+        height: 54px !important;
+        min-width: 54px !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
 }
 
 function setupServiceButtons() {
@@ -135,19 +179,12 @@ function renderTestimonials(testimonials) {
 }
 
 function createTestimonialCard(testimonial) {
-  const initials = testimonial.nome_cliente
-    .split(' ')
-    .map(part => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
   return `
     <div class="testimonial-card">
       <div class="testimonial-header">
-        <div class="testimonial-avatar">${initials}</div>
+        <img class="testimonial-avatar testimonial-photo" src="${testimonial.foto}" alt="${testimonial.nome_cliente}" loading="lazy">
         <div class="testimonial-info">
           <h4>${testimonial.nome_cliente}</h4>
-          <p>${testimonial.servico}</p>
         </div>
       </div>
       <div class="testimonial-text">"${testimonial.depoimento}"</div>
