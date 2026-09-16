@@ -298,26 +298,44 @@
 @media(prefers-reduced-motion:reduce){#servicos .service-card:before,#servicos .service-card:after,#ale-native-rail .ale-rail-item{animation:none!important}}
 </style><style id="ale-hero-mobile-fix-v23">
 @media(max-width:600px){
-  /* Corrige o hero ficando escondido sob o header fixo */
-  #inicio{scroll-margin-top:112px!important}
-  #inicio .hero-content{
-    padding-top:clamp(30px,7vw,48px)!important;
-    padding-bottom:18px!important;
+  /* Mantém todo o conteúdo abaixo do menu fixo */
+  #home{
+    min-height:auto!important;
+    height:auto!important;
+    padding-top:86px!important;
+    padding-bottom:34px!important;
+    scroll-margin-top:86px!important;
+    align-items:flex-start!important;
+  }
+  #home>.container{height:auto!important;min-height:0!important}
+  #home .row.min-vh-100{
+    min-height:0!important;
+    height:auto!important;
+    align-content:flex-start!important;
+    align-items:flex-start!important;
+  }
+  #home .hero-content{
+    padding-top:10px!important;
+    padding-bottom:0!important;
     min-height:auto!important;
   }
-  #inicio .hero-title{
+  #home .hero-title{
     margin-top:0!important;
+    margin-bottom:18px!important;
     padding-top:0!important;
     line-height:1.04!important;
   }
-  /* Compacta somente os vazios marcados, sem apertar a leitura */
-  #inicio .hero-description{margin-top:22px!important;margin-bottom:24px!important}
-  #inicio .hero-stats{margin-top:10px!important;margin-bottom:20px!important}
-  #inicio .hero-buttons{margin-top:12px!important;gap:12px!important}
-  #inicio .hero-image{margin-top:22px!important}
-  /* Evita que a foto fique apagada/cortada por altura artificial */
-  #inicio,#inicio .container,#inicio .row{height:auto!important;min-height:0!important}
-  #inicio .hero-image img{opacity:1!important;filter:none!important}
+  #home .hero-subtitle{margin-top:0!important;margin-bottom:22px!important}
+  #home .hero-stats{margin-top:0!important;margin-bottom:22px!important}
+  #home .hero-cta{margin-top:0!important;gap:10px!important}
+  #home .hero-image{margin-top:28px!important;margin-bottom:12px!important}
+  #home .hero-photo{
+    width:280px!important;
+    height:280px!important;
+    opacity:1!important;
+    filter:brightness(1.08) contrast(1.04) saturate(1.08)!important;
+  }
+  #home .image-glow{opacity:.5!important}
 }
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
