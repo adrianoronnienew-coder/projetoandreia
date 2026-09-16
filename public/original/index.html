@@ -226,6 +226,34 @@
  .hero-title .text-accent-green,.hero-title br:first-of-type{display:none!important}
  .hero-title{margin-top:0!important}
 }
+</style><style id="ale-services-links-panel-v21">
+@media(max-width:600px){
+ #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:100%!important;flex:0 0 100%!important}
+ #servicos .row.g-4>.col-lg-6:first-child .service-card{
+   min-height:760px!important;padding:34px 18px!important;overflow:hidden!important;
+   background:#29283f!important;border-color:rgba(255,255,255,.08)!important;
+ }
+ #servicos .row.g-4>.col-lg-6:first-child .service-card>.service-icon,
+ #servicos .row.g-4>.col-lg-6:first-child .service-card>.service-content,
+ #servicos .row.g-4>.col-lg-6:first-child .service-card>.service-badge{display:none!important}
+ #ale-native-rail{
+   position:static!important;left:auto!important;right:auto!important;top:auto!important;
+   transform:none!important;width:100%!important;height:auto!important;margin:0!important;
+   padding:0 0 0 10px!important;display:flex!important;flex-direction:column!important;
+   align-items:flex-start!important;gap:18px!important;z-index:2!important;
+ }
+ #ale-native-rail .ale-rail-item,
+ #ale-native-rail .ale-rail-item.active{
+   width:min(100%,330px)!important;height:82px!important;min-height:82px!important;
+   padding:7px!important;border-radius:999px!important;overflow:hidden!important;
+   transform:none!important;flex:none!important;
+ }
+ #ale-native-rail .ale-rail-item i{width:66px!important;height:66px!important;min-width:66px!important;font-size:27px!important}
+ #ale-native-rail .ale-rail-item span,
+ #ale-native-rail .ale-rail-item.active span{opacity:1!important;transform:none!important}
+ #ale-native-rail .ale-rail-item b{font-size:15px!important}
+ #ale-native-rail .ale-rail-item small{font-size:11px!important}
+}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -774,8 +802,9 @@
  function initRail(){
   var rail=document.getElementById('ale-native-rail'); if(!rail)return;
    var services=document.getElementById('servicos'); if(!services)return;
-   if(rail.parentNode!==services)services.appendChild(rail);
-   services.style.position='relative';
+   var firstCard=services.querySelector('.row.g-4 > .col-lg-6:first-child .service-card');
+   if(firstCard && rail.parentNode!==firstCard) firstCard.appendChild(rail);
+   else if(!firstCard && rail.parentNode!==services) services.appendChild(rail);
    var items=[].slice.call(rail.querySelectorAll('.ale-rail-item'));
    var active=-1;
    function setActive(i){
