@@ -388,6 +388,15 @@
   .footer{padding-top:32px!important;padding-bottom:32px!important}
   .footer .mb-4{margin-bottom:20px!important}
 }
+</style><style id="testimonials-infinite-v27">
+#depoimentos .testimonials-carousel{width:100%;overflow:hidden!important;position:relative}
+#depoimentos .testimonials-track{display:flex;width:max-content;gap:24px;animation:testimonialsClockwise 48s linear infinite;will-change:transform}
+#depoimentos .testimonial-card{flex:0 0 360px;min-height:285px}
+#depoimentos .testimonial-rating{white-space:nowrap}
+#depoimentos .testimonial-rating i{font-style:normal;color:#ffd700}
+@keyframes testimonialsClockwise{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 12px))}}
+@media(max-width:768px){#depoimentos .testimonials-track{gap:16px;animation-duration:42s}#depoimentos .testimonial-card{flex-basis:min(82vw,340px)}}
+@media(prefers-reduced-motion:reduce){#depoimentos .testimonials-track{animation-duration:90s}}
 </style></head>
 <body data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0" data-copyai-node-id="n30">
     <!-- Loading Spinner -->
@@ -645,49 +654,7 @@
         
         <div class="row" data-copyai-node-id="n189">
             <div class="col-12" data-copyai-node-id="n190">
-                <div class="testimonials-carousel" id="testimonialsCarousel" data-copyai-temporal-id="t7" data-copyai-node-id="n191"><div class="testimonial-card" data-copyai-node-id="n192">
-        <div class="testimonial-header" data-copyai-node-id="n193">
-            <div class="testimonial-avatar" data-copyai-node-id="n194">D</div>
-            <div class="testimonial-info" data-copyai-node-id="n195">
-                <h4 data-copyai-node-id="n196">Desireé</h4>
-                <p data-copyai-node-id="n197">Análise de Perfil</p>
-            </div>
-        </div>
-        <div class="testimonial-text" data-copyai-node-id="n198">
-            "Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria. @desidesiculy"
-        </div>
-        <div class="testimonial-rating" data-copyai-node-id="n199">
-            <i class="fas fa-star" data-copyai-node-id="n200">★</i><i class="fas fa-star" data-copyai-node-id="n201">★</i><i class="fas fa-star" data-copyai-node-id="n202">★</i><i class="fas fa-star" data-copyai-node-id="n203">★</i><i class="fas fa-star" data-copyai-node-id="n204">★</i>
-        </div>
-    </div><div class="testimonial-card" data-copyai-node-id="n205">
-        <div class="testimonial-header" data-copyai-node-id="n206">
-            <div class="testimonial-avatar" data-copyai-node-id="n207">AM</div>
-            <div class="testimonial-info" data-copyai-node-id="n208">
-                <h4 data-copyai-node-id="n209">Alda Mendes</h4>
-                <p data-copyai-node-id="n210">Análise de Perfil</p>
-            </div>
-        </div>
-        <div class="testimonial-text" data-copyai-node-id="n211">
-            "Mulher amanha vou dar um estrevista pra uma filial da Globo, em pesar que foi você que me ajudou. Não tinha nenhum seguidor e agora aparecer na TV! @apenasalda"
-        </div>
-        <div class="testimonial-rating" data-copyai-node-id="n212">
-            <i class="fas fa-star" data-copyai-node-id="n213">★</i><i class="fas fa-star" data-copyai-node-id="n214">★</i><i class="fas fa-star" data-copyai-node-id="n215">★</i><i class="fas fa-star" data-copyai-node-id="n216">★</i><i class="fas fa-star" data-copyai-node-id="n217">★</i>
-        </div>
-    </div><div class="testimonial-card" data-copyai-node-id="n218">
-        <div class="testimonial-header" data-copyai-node-id="n219">
-            <div class="testimonial-avatar" data-copyai-node-id="n220">AD</div>
-            <div class="testimonial-info" data-copyai-node-id="n221">
-                <h4 data-copyai-node-id="n222">Anne Danielle</h4>
-                <p data-copyai-node-id="n223">Mentoria Individual</p>
-            </div>
-        </div>
-        <div class="testimonial-text" data-copyai-node-id="n224">
-            "Ontem bati meus 10k, hoje tenho 3 semanas que abrir minha conta e 2 que iniciamos a mentoria, não estava conseguir tão rapido mas consegui! @annedeliverymassas"
-        </div>
-        <div class="testimonial-rating" data-copyai-node-id="n225">
-            <i class="fas fa-star" data-copyai-node-id="n226">★</i><i class="fas fa-star" data-copyai-node-id="n227">★</i><i class="fas fa-star" data-copyai-node-id="n228">★</i><i class="fas fa-star" data-copyai-node-id="n229">★</i><i class="fas fa-star" data-copyai-node-id="n230">★</i>
-        </div>
-    </div></div>
+                <div class="testimonials-carousel testimonials-marquee" id="testimonialsCarousel"><div class="testimonials-track"><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">D</div><div class="testimonial-info"><h4>Desireé</h4><p>Análise de Perfil</p></div></div><div class="testimonial-text">"Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria. @desidesiculy"</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">AM</div><div class="testimonial-info"><h4>Alda Mendes</h4><p>Análise de Perfil</p></div></div><div class="testimonial-text">"Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV! @apenasalda"</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">AD</div><div class="testimonial-info"><h4>Anne Danielle</h4><p>Mentoria Individual</p></div></div><div class="testimonial-text">"Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui! @annedeliverymassas"</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">CM</div><div class="testimonial-info"><h4>Camila Martins</h4><p>Estratégia de Conteúdo</p></div></div><div class="testimonial-text">"Depois que organizei meu conteúdo com a estratégia, comecei a entender o que realmente fazia as pessoas pararem e interagirem."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">JS</div><div class="testimonial-info"><h4>Juliana Souza</h4><p>Gestão de Perfil</p></div></div><div class="testimonial-text">"Meu perfil ficou muito mais profissional e organizado. Hoje consigo comunicar com clareza o que faço e para quem faço."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">RF</div><div class="testimonial-info"><h4>Renata Ferreira</h4><p>Mentoria Individual</p></div></div><div class="testimonial-text">"A mentoria me deu direção. Parei de postar sem estratégia e comecei a produzir conteúdo com um objetivo claro."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">PB</div><div class="testimonial-info"><h4>Patrícia Barbosa</h4><p>Análise de Perfil</p></div></div><div class="testimonial-text">"A análise mostrou detalhes que eu nunca tinha percebido. Fiz os ajustes e meu posicionamento ficou muito mais claro."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">LS</div><div class="testimonial-info"><h4>Larissa Santos</h4><p>Estratégia de Conteúdo</p></div></div><div class="testimonial-text">"Passei a ter muito mais segurança para criar. Agora tenho uma linha de conteúdo e sei exatamente o que comunicar."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">MF</div><div class="testimonial-info"><h4>Mariana Freitas</h4><p>Gestão de Perfil</p></div></div><div class="testimonial-text">"O trabalho mudou completamente a apresentação do meu perfil. Ficou mais profissional, coerente e fácil de entender."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">D</div><div class="testimonial-info"><h4>Desireé</h4><p>Análise de Perfil</p></div></div><div class="testimonial-text">"Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria. @desidesiculy"</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">AM</div><div class="testimonial-info"><h4>Alda Mendes</h4><p>Análise de Perfil</p></div></div><div class="testimonial-text">"Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV! @apenasalda"</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">AD</div><div class="testimonial-info"><h4>Anne Danielle</h4><p>Mentoria Individual</p></div></div><div class="testimonial-text">"Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui! @annedeliverymassas"</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">CM</div><div class="testimonial-info"><h4>Camila Martins</h4><p>Estratégia de Conteúdo</p></div></div><div class="testimonial-text">"Depois que organizei meu conteúdo com a estratégia, comecei a entender o que realmente fazia as pessoas pararem e interagirem."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">JS</div><div class="testimonial-info"><h4>Juliana Souza</h4><p>Gestão de Perfil</p></div></div><div class="testimonial-text">"Meu perfil ficou muito mais profissional e organizado. Hoje consigo comunicar com clareza o que faço e para quem faço."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">RF</div><div class="testimonial-info"><h4>Renata Ferreira</h4><p>Mentoria Individual</p></div></div><div class="testimonial-text">"A mentoria me deu direção. Parei de postar sem estratégia e comecei a produzir conteúdo com um objetivo claro."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">PB</div><div class="testimonial-info"><h4>Patrícia Barbosa</h4><p>Análise de Perfil</p></div></div><div class="testimonial-text">"A análise mostrou detalhes que eu nunca tinha percebido. Fiz os ajustes e meu posicionamento ficou muito mais claro."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">LS</div><div class="testimonial-info"><h4>Larissa Santos</h4><p>Estratégia de Conteúdo</p></div></div><div class="testimonial-text">"Passei a ter muito mais segurança para criar. Agora tenho uma linha de conteúdo e sei exatamente o que comunicar."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div><div class="testimonial-card"><div class="testimonial-header"><div class="testimonial-avatar">MF</div><div class="testimonial-info"><h4>Mariana Freitas</h4><p>Gestão de Perfil</p></div></div><div class="testimonial-text">"O trabalho mudou completamente a apresentação do meu perfil. Ficou mais profissional, coerente e fácil de entender."</div><div class="testimonial-rating"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div></div></div></div>
             </div>
         </div>
     </div>
