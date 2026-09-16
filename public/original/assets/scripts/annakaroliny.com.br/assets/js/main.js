@@ -225,8 +225,7 @@ function setupTestimonialsStyle() {
     #depoimentos .testimonials-marquee { overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; cursor: grab !important; touch-action: pan-x !important; }
     #depoimentos .testimonials-marquee::-webkit-scrollbar { display: none !important; }
     #depoimentos .testimonials-track { width: max-content !important; animation-duration: 110s !important; }
-    #depoimentos .testimonials-marquee:active .testimonials-track,
-    #depoimentos .testimonials-marquee:hover .testimonials-track { animation-play-state: paused !important; }
+    #depoimentos .testimonials-marquee.is-reading .testimonials-track { animation-play-state: paused !important; }
     #depoimentos .testimonial-header { align-items: center !important; }
     #depoimentos .testimonial-avatar.testimonial-photo {
       width: 62px !important; height: 62px !important; min-width: 62px !important;
@@ -298,21 +297,20 @@ function renderTestimonials(testimonials) {
 function setupTestimonialsDrag() {
   const carousel = document.getElementById('testimonialsCarousel');
   if (!carousel || carousel.dataset.dragReady === '1') return;
+  const track = carousel.querySelector('.testimonials-track');
+  if (!track) return;
   carousel.dataset.dragReady = '1';
 
   let dragging = false;
   let startX = 0;
   let startOffset = 0;
-  let resumeTimer = null;
-  const track = carousel.querySelector('.testimonials-track');
-  if (!track) return;
 
   carousel.addEventListener('pointerdown', e => {
     dragging = true;
     startX = e.clientX;
     const matrix = new DOMMatrixReadOnly(getComputedStyle(track).transform);
     startOffset = matrix.m41;
-    clearTimeout(resumeTimer);
+    carousel.classList.add('is-reading');
     track.style.animationPlayState = 'paused';
     track.style.transform = `translateX(${startOffset}px)`;
     carousel.setPointerCapture?.(e.pointerId);
@@ -324,22 +322,18 @@ function setupTestimonialsDrag() {
     track.style.transform = `translateX(${startOffset + e.clientX - startX}px)`;
   });
 
-  const stop = e => {
+  const resume = e => {
     if (!dragging) return;
     dragging = false;
     carousel.style.cursor = 'grab';
     try { carousel.releasePointerCapture?.(e.pointerId); } catch (_) {}
     track.style.removeProperty('transform');
-    clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(() => {
-      track.style.animationPlayState = 'running';
-    }, 5000);
+    carousel.classList.remove('is-reading');
+    track.style.animationPlayState = 'running';
   };
 
-  carousel.addEventListener('pointerup', stop);
-  carousel.addEventListener('pointercancel', stop);
-  carousel.addEventListener('mouseleave', e => { if (dragging) stop(e); });
-
+  carousel.addEventListener('pointerup', resume);
+  carousel.addEventListener('pointercancel', resume);
 }
 
 function createTestimonialCard(testimonial) {
