@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useRef } from 'react'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -15,6 +16,7 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
+  const frameRef = useRef<HTMLIFrameElement>(null)
   const customize = (frame: HTMLIFrameElement) => {
     const doc = frame.contentDocument
     if (!doc || doc.getElementById('andreia-campaign-v1')) return
@@ -198,8 +200,23 @@ function HomePage() {
     doc.head.appendChild(style)
   }
 
+  useEffect(() => {
+    const applyCustomization = () => {
+      const frame = frameRef.current
+      if (frame?.contentDocument?.body) customize(frame)
+    }
+    applyCustomization()
+    const timer = window.setInterval(applyCustomization, 250)
+    const stopTimer = window.setTimeout(() => window.clearInterval(timer), 5000)
+    return () => {
+      window.clearInterval(timer)
+      window.clearTimeout(stopTimer)
+    }
+  }, [])
+
   return (
     <iframe
+      ref={frameRef}
       className="original-frame"
       src="/original/index.html?v=andreia-campaign-v1"
       title="Andreia | Especialista em Redes Sociais"
