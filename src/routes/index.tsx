@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
-import andreiaProfile from '@/assets/andreia-profile.png.asset.json'
+import andreiaProfile from '@/assets/andreia-profile-new.png.asset.json'
 import andreiaStudio from '@/assets/andreia-studio.png.asset.json'
 
 export const Route = createFileRoute('/')({
@@ -111,7 +111,7 @@ function HomePage() {
       #home .row{min-height:calc(100vh - 138px)!important;align-items:center!important}
       #home .col-lg-6:first-child{width:54%!important;position:relative!important;z-index:4!important}
       #home .col-lg-6:last-child{width:46%!important;position:relative!important;z-index:3!important}
-      #andreia-backword{position:absolute!important;z-index:1!important;left:50%!important;top:54%!important;transform:translate(-50%,-50%)!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:clamp(124px,14vw,236px)!important;font-weight:900!important;line-height:.8!important;color:rgba(255,255,255,.025)!important;white-space:nowrap!important;pointer-events:none!important}
+      #andreia-backword{display:none!important}
       #andreia-hero-label{display:inline-flex!important;margin-bottom:20px!important;padding:8px 13px!important;border:1px solid rgba(255,166,0,.36)!important;background:rgba(255,166,0,.06)!important;color:#ffa600!important;font-size:11px!important;font-weight:800!important;letter-spacing:2px!important}
       #home .hero-title{max-width:720px!important;margin:0 0 26px!important;font-size:clamp(58px,5.8vw,88px)!important;line-height:.93!important;font-weight:800!important;color:#fff!important}
       #home .hero-title .text-accent-green{display:block!important;color:#ffa600!important;background:none!important}
@@ -126,21 +126,23 @@ function HomePage() {
       #home .image-container:before{top:-15px!important;right:-15px!important;border-top:2px solid #ffa600!important;border-right:2px solid #ffa600!important}
       #home .image-container:after{bottom:-15px!important;left:-15px!important;border-bottom:2px solid #ffa600!important;border-left:2px solid #ffa600!important}
       #home .image-glow{inset:8% -8% 2%!important;background:radial-gradient(circle,rgba(255,166,0,.22),transparent 68%)!important;border-radius:0!important;filter:blur(42px)!important;opacity:.68!important;animation:andreiaHalo 5s ease-in-out infinite!important}
-      #home .hero-photo{width:100%!important;max-width:none!important;height:100%!important;margin:0!important;object-fit:cover!important;object-position:center!important;border:0!important;border-radius:0!important;filter:saturate(.94) contrast(1.03)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
+      #home .hero-photo{width:100%!important;max-width:none!important;height:100%!important;margin:0!important;object-fit:cover!important;object-position:center 30%!important;border:0!important;border-radius:0!important;filter:saturate(.94) contrast(1.03)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
       #home .social-orbit{inset:0!important;z-index:6!important}
       #home .social-node{width:44px!important;height:44px!important;border:1px solid rgba(255,166,0,.45)!important;background:#151515!important;color:#ffa600!important;box-shadow:0 10px 28px rgba(0,0,0,.3)!important;animation:socialFloat 6s ease-in-out infinite!important}
       #home .social-node-instagram{top:6%!important;right:4%!important}.social-node-youtube{right:1%!important}.social-node-tiktok{left:4%!important}
 
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
-      #servicos{padding-left:clamp(24px,4vw,64px)!important;padding-right:clamp(24px,4vw,64px)!important;box-sizing:border-box!important}
+      #servicos{padding-left:0!important;padding-right:0!important;box-sizing:border-box!important}
       #servicos:after,#sobre:after,#depoimentos:after{display:none!important}
       #servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container{width:min(1240px,calc(100% - 64px))!important;max-width:none!important}
       .section-title{font-size:clamp(44px,5vw,70px)!important;line-height:1!important;font-weight:800!important;color:#fff!important;text-align:left!important;margin-bottom:16px!important}
       .section-title span{color:#ffa600!important;background:none!important}
       .section-subtitle{max-width:680px!important;margin:0!important;text-align:left!important;color:rgba(255,255,255,.62)!important;font-size:18px!important}
       #servicos .row:first-child,#depoimentos .row:first-child{border-top:1px solid rgba(255,166,0,.25)!important;padding-top:28px!important}
-      #servicos .row.g-4{margin-top:36px!important;padding-left:clamp(14px,2vw,30px)!important;padding-right:0!important}
+      #servicos .row{margin-left:0!important;margin-right:0!important}
+      #servicos .row>[class*='col-']{padding-left:0!important;padding-right:0!important}
+      #servicos .row.g-4{margin-top:36px!important;padding-left:0!important;padding-right:0!important}
       #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:none!important}
       #servicos .service-card:has(#ale-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
       #servicos .service-card:has(#ale-native-rail):after{display:none!important}
@@ -194,11 +196,10 @@ function HomePage() {
         #home .hero-subtitle{margin-left:auto!important;margin-right:auto!important}
         #home .image-container{width:min(430px,78vw)!important;height:min(530px,96vw)!important}
         #home .hero-image{min-height:auto!important;margin-bottom:50px!important}
-        #andreia-backword{font-size:24vw!important;top:28%!important}
         #home .social-orbit{inset:0!important}
         #sobre .col-lg-6{width:100%!important}
         #sobre .about-image:before{font-size:54px!important;bottom:-30px!important}
-        #servicos .row.g-4{padding-left:8px!important;padding-right:0!important}
+        #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
       }
       @media(max-width:600px){
         #home{padding:80px 0 42px!important}
@@ -209,9 +210,9 @@ function HomePage() {
         #andreia-hero-cta{width:100%!important}
         #andreia-backword{display:none!important}
         #servicos,#sobre,#depoimentos{padding:72px 0!important}
-        #servicos{padding-left:16px!important;padding-right:16px!important}
+        #servicos{padding-left:0!important;padding-right:0!important}
         .section-title{font-size:38px!important}
-        #servicos .row.g-4{padding-left:6px!important;padding-right:0!important}
+        #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
         #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 12px!important}
         #ale-native-rail .ale-rail-item span b{font-size:19px!important}
         #ale-native-rail .ale-rail-item span small{font-size:12px!important}
@@ -240,7 +241,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-photos-services-v2"
+      src="/original/index.html?v=andreia-profile-alignment-v3"
       title="Andreia | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
