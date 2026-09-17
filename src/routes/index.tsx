@@ -222,7 +222,7 @@ function HomePage() {
         #home .hero-image{margin:8px 0 44px!important}
         #home .hero-title{max-width:100%!important;font-size:clamp(32px,9.2vw,38px)!important;line-height:1.04!important}
         #home .hero-title .text-accent-green{margin-bottom:8px!important}
-        #home .hero-title .andreia-role{margin-top:18px!important;font-size:clamp(25px,7.4vw,29px)!important;line-height:1.12!important}
+        #home .hero-title .andreia-role{max-width:270px!important;margin:18px auto 0!important;font-size:clamp(24px,7vw,28px)!important;line-height:1.15!important}
         #home .hero-subtitle{font-size:15px!important;line-height:1.6!important}
         #andreia-hero-cta{width:100%!important}
         #andreia-backword{display:none!important}
