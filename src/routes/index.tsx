@@ -164,7 +164,7 @@ function HomePage() {
       #sobre .row{gap:5%!important}
       #sobre .col-lg-6{width:47.5%!important}
       #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important}
-      #sobre .about-image:before{content:'ANDREIA'!important;position:absolute!important;left:-8px!important;bottom:-42px!important;z-index:3!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:78px!important;font-weight:900!important;color:#ffa600!important;line-height:1!important}
+      #sobre .about-image:before{display:none!important;content:none!important}
       #sobre .about-image img{width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
       #sobre .about-content{padding:20px 0 0!important}
       #sobre .about-text{font-size:17px!important;color:rgba(255,255,255,.66)!important}
@@ -198,7 +198,8 @@ function HomePage() {
         #home .hero-image{min-height:auto!important;margin-bottom:50px!important}
         #home .social-orbit{inset:0!important}
         #sobre .col-lg-6{width:100%!important}
-        #sobre .about-image:before{font-size:54px!important;bottom:-30px!important}
+        #sobre .row{gap:32px!important}
+        #sobre .about-content{padding-top:0!important}
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
       }
       @media(max-width:600px){
@@ -217,6 +218,7 @@ function HomePage() {
         #ale-native-rail .ale-rail-item span b{font-size:19px!important}
         #ale-native-rail .ale-rail-item span small{font-size:12px!important}
         .fp-banner-section,.gm-banner-section{padding:34px 0!important}
+        #sobre .about-image img{object-position:center 42%!important}
       }
       @media(prefers-reduced-motion:reduce){#home .image-glow,#andreia-hero-cta,#home .social-node{animation:none!important}}
     `
@@ -241,7 +243,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-profile-alignment-v3"
+      src="/original/index.html?v=andreia-mobile-consistency-v4"
       title="Andreia | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
