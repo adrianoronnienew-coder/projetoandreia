@@ -69,6 +69,15 @@ function HomePage() {
       heroContent.appendChild(cta)
     }
 
+    const heroTitle = doc.querySelector<HTMLHeadingElement>('#home .hero-title')
+    const titleBreak = heroTitle?.querySelector('br')
+    if (heroTitle && titleBreak && !heroTitle.querySelector('.andreia-role')) {
+      const role = doc.createElement('span')
+      role.className = 'andreia-role'
+      while (titleBreak.nextSibling) role.appendChild(titleBreak.nextSibling)
+      titleBreak.replaceWith(role)
+    }
+
     const hero = doc.getElementById('home')
     if (hero && !doc.getElementById('andreia-backword')) {
       const word = doc.createElement('span')
@@ -116,6 +125,7 @@ function HomePage() {
       #home .hero-title{max-width:720px!important;margin:0 0 26px!important;font-size:clamp(58px,5.8vw,88px)!important;line-height:.93!important;font-weight:800!important;color:#fff!important}
       #home .hero-title .text-accent-green{display:block!important;color:#ffa600!important;background:none!important}
       #home .hero-title .text-accent-blue{color:#ffa600!important;background:none!important}
+      #home .hero-title .andreia-role{display:block!important;margin-top:28px!important;font-size:clamp(38px,4vw,58px)!important;line-height:1.04!important;color:#fff!important}
       #home .hero-subtitle{max-width:610px!important;margin:0 0 28px!important;color:rgba(255,255,255,.68)!important;font-size:18px!important;line-height:1.7!important}
       #home .hero-subtitle strong{color:#ffa600!important}
       #andreia-hero-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:54px!important;padding:0 27px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:13px!important;font-weight:800!important;letter-spacing:.7px!important;border-radius:4px!important;box-shadow:0 12px 32px rgba(32,195,75,.18)!important;transition:transform .25s ease,filter .25s ease,box-shadow .25s ease!important;animation:andreiaCtaGlow 3s ease-in-out infinite!important}
@@ -166,6 +176,9 @@ function HomePage() {
       #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important}
       #sobre .about-image:before{display:none!important;content:none!important}
       #sobre .about-image img{width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
+      #sobre .about-badge{left:50%!important;right:auto!important;top:auto!important;bottom:-18px!important;width:max-content!important;max-width:calc(100% - 32px)!important;min-height:38px!important;padding:9px 14px!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;border:1px solid rgba(255,166,0,.42)!important;border-radius:4px!important;background:#151515!important;color:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.32)!important}
+      #sobre .about-badge i{font-size:13px!important;color:#ffa600!important}
+      #sobre .about-badge span{font-size:12px!important;line-height:1.2!important;font-weight:700!important;letter-spacing:.3px!important;white-space:nowrap!important}
       #sobre .about-content{padding:20px 0 0!important}
       #sobre .about-text{font-size:17px!important;color:rgba(255,255,255,.66)!important}
       #sobre .achievement-item{border-radius:0!important;border:0!important;border-top:1px solid rgba(255,255,255,.12)!important;background:transparent!important}
@@ -193,6 +206,7 @@ function HomePage() {
         #home .hero-content{text-align:center!important}
         #andreia-hero-label{margin-left:auto!important;margin-right:auto!important}
         #home .hero-title{font-size:clamp(45px,10vw,66px)!important;margin-left:auto!important;margin-right:auto!important}
+        #home .hero-title .andreia-role{margin-top:24px!important;font-size:clamp(34px,6.2vw,46px)!important;line-height:1.08!important}
         #home .hero-subtitle{margin-left:auto!important;margin-right:auto!important}
         #home .image-container{width:min(430px,78vw)!important;height:min(530px,96vw)!important}
         #home .hero-image{min-height:auto!important;margin-bottom:50px!important}
@@ -205,8 +219,10 @@ function HomePage() {
       @media(max-width:600px){
         #home{padding:80px 0 42px!important}
         #home .image-container{width:min(330px,82vw)!important;height:min(410px,102vw)!important}
-        #home .hero-image{margin:8px 0 36px!important}
-        #home .hero-title{font-size:42px!important;line-height:.96!important}
+        #home .hero-image{margin:8px 0 44px!important}
+        #home .hero-title{max-width:100%!important;font-size:clamp(32px,9.2vw,38px)!important;line-height:1.04!important}
+        #home .hero-title .text-accent-green{margin-bottom:8px!important}
+        #home .hero-title .andreia-role{max-width:270px!important;margin:18px auto 0!important;font-size:clamp(24px,7vw,28px)!important;line-height:1.15!important}
         #home .hero-subtitle{font-size:15px!important;line-height:1.6!important}
         #andreia-hero-cta{width:100%!important}
         #andreia-backword{display:none!important}
@@ -219,6 +235,9 @@ function HomePage() {
         #ale-native-rail .ale-rail-item span small{font-size:12px!important}
         .fp-banner-section,.gm-banner-section{padding:34px 0!important}
         #sobre .about-image img{object-position:center 42%!important}
+        #sobre .about-badge{bottom:-16px!important;max-width:calc(100% - 24px)!important;min-height:34px!important;padding:8px 11px!important}
+        #sobre .about-badge i{font-size:12px!important}
+        #sobre .about-badge span{font-size:11px!important;white-space:normal!important;text-align:center!important}
       }
       @media(prefers-reduced-motion:reduce){#home .image-glow,#andreia-hero-cta,#home .social-node{animation:none!important}}
     `
