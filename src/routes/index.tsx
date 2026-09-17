@@ -1,52 +1,209 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
-  head: () => ({meta:[
-    { title: 'Andreia - Especialista em Redes Sociais' },
-    { name:'description',content:'Andreia: estratégia, conteúdo e crescimento nas redes sociais.' },
-    { property:'og:title',content:'Andreia - Especialista em Redes Sociais' },
-    { property:'og:description',content:'Estratégia, conteúdo e crescimento nas redes sociais com Andreia.' },
-    { property:'og:type',content:'website' },{ name:'twitter:card',content:'summary_large_image' },
-  ]}),component:HomePage,
+  head: () => ({
+    meta: [
+      { title: 'Andreia | Especialista em Redes Sociais' },
+      { name: 'description', content: 'Estratégia, conteúdo e crescimento nas redes sociais com Andreia.' },
+      { property: 'og:title', content: 'Andreia | Especialista em Redes Sociais' },
+      { property: 'og:description', content: 'Fortaleça sua presença digital com estratégia, conteúdo e posicionamento.' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+  }),
+  component: HomePage,
 })
 
-function HomePage(){
- const customize=(frame:HTMLIFrameElement)=>{
-  const doc=frame.contentDocument,win=frame.contentWindow
-  if(!doc||!win||doc.getElementById('andreia-reform-v4'))return
-  doc.title='Andreia - Especialista em Redes Sociais'
+function HomePage() {
+  const customize = (frame: HTMLIFrameElement) => {
+    const doc = frame.contentDocument
+    if (!doc || doc.getElementById('andreia-campaign-v1')) return
 
-  const rebrand=()=>{
-   const walker=doc.createTreeWalker(doc.body,win.NodeFilter.SHOW_TEXT),nodes:Text[]=[]
-   while(walker.nextNode())nodes.push(walker.currentNode as Text)
-   nodes.forEach(n=>{if(n.nodeValue)n.nodeValue=n.nodeValue.replace(/Ale Marques|Ale Max|Ale\b/g,'Andreia')})
-   doc.querySelectorAll<HTMLElement>('[alt],[title],[aria-label]').forEach(el=>['alt','title','aria-label'].forEach(a=>{const v=el.getAttribute(a);if(v)el.setAttribute(a,v.replace(/Ale Marques|Ale Max|Ale\b/g,'Andreia'))}))
+    doc.title = 'Andreia | Especialista em Redes Sociais'
+
+    const rebrand = () => {
+      const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
+      const nodes: Text[] = []
+      while (walker.nextNode()) nodes.push(walker.currentNode as Text)
+      nodes.forEach((node) => {
+        if (node.nodeValue) node.nodeValue = node.nodeValue.replace(/Ale Marques|Ale Max|Ale\b/g, 'Andreia')
+      })
+      doc.querySelectorAll<HTMLElement>('[alt],[title],[aria-label]').forEach((element) => {
+        ;['alt', 'title', 'aria-label'].forEach((attribute) => {
+          const value = element.getAttribute(attribute)
+          if (value) element.setAttribute(attribute, value.replace(/Ale Marques|Ale Max|Ale\b/g, 'Andreia'))
+        })
+      })
+    }
+
+    rebrand()
+    new MutationObserver(rebrand).observe(doc.body, { childList: true, subtree: true })
+
+    const heroContent = doc.querySelector('#home .hero-content')
+    if (heroContent && !doc.getElementById('andreia-hero-label')) {
+      const label = doc.createElement('span')
+      label.id = 'andreia-hero-label'
+      label.textContent = 'POSICIONAMENTO DIGITAL'
+      heroContent.prepend(label)
+
+      const cta = doc.createElement('a')
+      cta.id = 'andreia-hero-cta'
+      cta.href = '#servicos'
+      cta.textContent = 'CONHEÇA OS SERVIÇOS  →'
+      heroContent.appendChild(cta)
+    }
+
+    const hero = doc.getElementById('home')
+    if (hero && !doc.getElementById('andreia-backword')) {
+      const word = doc.createElement('span')
+      word.id = 'andreia-backword'
+      word.textContent = 'PROTAGONISTA'
+      word.setAttribute('aria-hidden', 'true')
+      hero.appendChild(word)
+    }
+
+    const style = doc.createElement('style')
+    style.id = 'andreia-campaign-v1'
+    style.textContent = `
+      :root{
+        --primary-bg:#151515!important;
+        --secondary-bg:#1b1b1b!important;
+        --tertiary-bg:#111111!important;
+        --accent-green:#ffa600!important;
+        --accent-blue:#ffa600!important;
+        --accent-orange:#ffa600!important;
+        --accent-purple:#ffa600!important;
+        --text-primary:#ffffff!important;
+        --text-secondary:#c8c8c8!important;
+        --text-muted:#a9a9a9!important;
+        --border-color:rgba(255,166,0,.22)!important;
+        --gradient-primary:linear-gradient(135deg,#ffa600,#ff7a00)!important;
+        --gradient-secondary:linear-gradient(135deg,#ffa600,#ff7a00)!important;
+      }
+      html,body{background:#151515!important;color:#fff!important;font-family:'Figtree','Poppins',sans-serif!important}
+      body:before{background:radial-gradient(ellipse 55% 34% at 78% 12%,rgba(255,166,0,.12),transparent 72%),linear-gradient(180deg,#151515 0%,#101010 100%)!important}
+      h1,h2,h3,h4,h5,h6,.navbar-brand{font-family:'Outfit','Poppins',sans-serif!important;letter-spacing:0!important}
+      #andreia-universe,#andreia-experience{display:none!important}
+      #mainNav{background:rgba(21,21,21,.86)!important;border-bottom:1px solid rgba(255,166,0,.16)!important;box-shadow:none!important}
+      #mainNav .navbar-brand strong{font-family:'Outfit','Poppins',sans-serif!important;font-style:normal!important;font-size:24px!important;color:#ffa600!important;background:none!important;text-shadow:none!important;animation:none!important}
+      #mainNav .nav-link{color:rgba(255,255,255,.72)!important;font-size:13px!important;font-weight:600!important}
+      #mainNav .nav-link:hover{color:#ffa600!important}
+      #mainNav .nav-link:after{background:#ffa600!important}
+
+      #home{position:relative!important;isolation:isolate!important;min-height:100vh!important;padding:92px 0 46px!important;background:#151515!important;overflow:hidden!important}
+      #home>.container{position:relative!important;z-index:3!important;width:min(1240px,calc(100% - 64px))!important;max-width:none!important}
+      #home .row{min-height:calc(100vh - 138px)!important;align-items:center!important}
+      #home .col-lg-6:first-child{width:54%!important;position:relative!important;z-index:4!important}
+      #home .col-lg-6:last-child{width:46%!important;position:relative!important;z-index:3!important}
+      #andreia-backword{position:absolute!important;z-index:1!important;left:50%!important;top:54%!important;transform:translate(-50%,-50%)!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:clamp(124px,14vw,236px)!important;font-weight:900!important;line-height:.8!important;color:rgba(255,255,255,.025)!important;white-space:nowrap!important;pointer-events:none!important}
+      #andreia-hero-label{display:inline-flex!important;margin-bottom:20px!important;padding:8px 13px!important;border:1px solid rgba(255,166,0,.36)!important;background:rgba(255,166,0,.06)!important;color:#ffa600!important;font-size:11px!important;font-weight:800!important;letter-spacing:2px!important}
+      #home .hero-title{max-width:720px!important;margin:0 0 26px!important;font-size:clamp(58px,5.8vw,88px)!important;line-height:.93!important;font-weight:800!important;color:#fff!important}
+      #home .hero-title .text-accent-green{display:block!important;color:#ffa600!important;background:none!important}
+      #home .hero-title .text-accent-blue{color:#ffa600!important;background:none!important}
+      #home .hero-subtitle{max-width:610px!important;margin:0 0 28px!important;color:rgba(255,255,255,.68)!important;font-size:18px!important;line-height:1.7!important}
+      #home .hero-subtitle strong{color:#ffa600!important}
+      #andreia-hero-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:54px!important;padding:0 27px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:13px!important;font-weight:800!important;letter-spacing:.7px!important;border-radius:4px!important;box-shadow:0 12px 32px rgba(32,195,75,.18)!important;transition:transform .25s ease,filter .25s ease,box-shadow .25s ease!important;animation:andreiaCtaGlow 3s ease-in-out infinite!important}
+      #andreia-hero-cta:hover{transform:translateY(-3px)!important;filter:brightness(1.08)!important}
+      #home .hero-image{display:flex!important;justify-content:center!important;align-items:center!important;min-height:610px!important}
+      #home .image-container{width:min(500px,38vw)!important;height:min(620px,48vw)!important;max-height:650px!important;transform:none!important;position:relative!important;border-radius:0!important}
+      #home .image-container:before,#home .image-container:after{content:''!important;display:block!important;position:absolute!important;width:120px!important;height:120px!important;z-index:5!important;pointer-events:none!important}
+      #home .image-container:before{top:-15px!important;right:-15px!important;border-top:2px solid #ffa600!important;border-right:2px solid #ffa600!important}
+      #home .image-container:after{bottom:-15px!important;left:-15px!important;border-bottom:2px solid #ffa600!important;border-left:2px solid #ffa600!important}
+      #home .image-glow{inset:8% -8% 2%!important;background:radial-gradient(circle,rgba(255,166,0,.22),transparent 68%)!important;border-radius:0!important;filter:blur(42px)!important;opacity:.68!important;animation:andreiaHalo 5s ease-in-out infinite!important}
+      #home .hero-photo{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important;border:0!important;border-radius:0!important;filter:saturate(.93) contrast(1.04)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
+      #home .social-orbit{inset:0!important;z-index:6!important}
+      #home .social-node{width:44px!important;height:44px!important;border:1px solid rgba(255,166,0,.45)!important;background:#151515!important;color:#ffa600!important;box-shadow:0 10px 28px rgba(0,0,0,.3)!important;animation:socialFloat 6s ease-in-out infinite!important}
+
+      #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
+      #servicos,#sobre,#depoimentos{padding:104px 0!important}
+      #servicos:after,#sobre:after,#depoimentos:after{display:none!important}
+      #servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container{width:min(1240px,calc(100% - 64px))!important;max-width:none!important}
+      .section-title{font-size:clamp(44px,5vw,70px)!important;line-height:1!important;font-weight:800!important;color:#fff!important;text-align:left!important;margin-bottom:16px!important}
+      .section-title span{color:#ffa600!important;background:none!important}
+      .section-subtitle{max-width:680px!important;margin:0!important;text-align:left!important;color:rgba(255,255,255,.62)!important;font-size:18px!important}
+      #servicos .row:first-child,#depoimentos .row:first-child{border-top:1px solid rgba(255,166,0,.25)!important;padding-top:28px!important}
+      #servicos .row.g-4{margin-top:36px!important}
+      #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:none!important}
+      #servicos .service-card:has(#ale-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+      #servicos .service-card:has(#ale-native-rail):after{display:none!important}
+      #ale-native-rail{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;max-width:none!important;position:static!important;transform:none!important}
+      #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item:focus{display:grid!important;grid-template-columns:72px minmax(0,1fr) auto!important;align-items:center!important;width:100%!important;max-width:none!important;min-height:104px!important;padding:20px 10px!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.12)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#fff!important;transform:none!important;transition:padding .25s ease,border-color .25s ease!important}
+      #ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item.active{padding-left:22px!important;border-bottom-color:#ffa600!important}
+      #ale-native-rail .ale-rail-item i{width:46px!important;height:46px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#ffa600!important;color:#151515!important;font-size:18px!important}
+      #ale-native-rail .ale-rail-item span{max-width:none!important}
+      #ale-native-rail .ale-rail-item span b{font-family:'Outfit','Poppins',sans-serif!important;font-size:26px!important;color:#fff!important;white-space:normal!important}
+      #ale-native-rail .ale-rail-item span small{font-size:14px!important;color:rgba(255,255,255,.55)!important;max-width:none!important;white-space:normal!important}
+      #ale-native-rail .ale-rail-item:after{content:'↗'!important;font-size:24px!important;color:#ffa600!important}
+      #ale-native-rail .ale-rail-item small:after{display:none!important}
+
+      .fp-banner-section,.gm-banner-section{padding:72px 0!important;background:#111!important}
+      .fp-banner-section>.container,.gm-banner-section>.container{width:min(1240px,calc(100% - 64px))!important;max-width:none!important;padding:0!important}
+      .fp-banner-wrap,.gm-banner-wrap{max-width:none!important;border-radius:4px!important;border:1px solid rgba(255,166,0,.25)!important;box-shadow:0 30px 80px rgba(0,0,0,.34)!important;animation:none!important}
+      .fp-banner-wrap:after,.gm-banner-wrap:after{border-radius:4px!important;box-shadow:inset 0 0 50px rgba(255,166,0,.08)!important}
+
+      #sobre .row{gap:5%!important}
+      #sobre .col-lg-6{width:47.5%!important}
+      #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important}
+      #sobre .about-image:before{content:'ANDREIA'!important;position:absolute!important;left:-8px!important;bottom:-42px!important;z-index:3!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:78px!important;font-weight:900!important;color:#ffa600!important;line-height:1!important}
+      #sobre .about-image img{border-radius:0!important}
+      #sobre .about-content{padding:20px 0 0!important}
+      #sobre .about-text{font-size:17px!important;color:rgba(255,255,255,.66)!important}
+      #sobre .achievement-item{border-radius:0!important;border:0!important;border-top:1px solid rgba(255,255,255,.12)!important;background:transparent!important}
+      #sobre .achievement-icon{background:#ffa600!important;color:#151515!important}
+      #sobre .btn-primary{background:#20c34b!important;color:#07130a!important;border-radius:4px!important;box-shadow:none!important}
+
+      #depoimentos{background:#111!important}
+      #depoimentos .testimonials-carousel{margin-top:42px!important}
+      #depoimentos .testimonial-card{border-radius:4px!important;background:#191919!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:none!important}
+      #depoimentos .testimonial-card:hover{border-color:rgba(255,166,0,.45)!important;transform:translateY(-5px)!important}
+      #depoimentos .testimonial-rating i{color:#ffa600!important}
+      .footer{padding:68px 0 34px!important;background:#0c0c0c!important;border-top:1px solid rgba(255,166,0,.2)!important}
+      .footer h5,.footer h6{color:#ffa600!important;background:none!important}
+      .footer .social-link{background:#ffa600!important;color:#151515!important}
+
+      @keyframes andreiaHalo{0%,100%{opacity:.46;transform:scale(.96)}50%{opacity:.72;transform:scale(1.02)}}
+      @keyframes andreiaCtaGlow{0%,100%{box-shadow:0 12px 32px rgba(32,195,75,.16)}50%{box-shadow:0 12px 42px rgba(32,195,75,.34)}}
+      @media(max-width:991px){
+        #home>.container,#servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container,.fp-banner-section>.container,.gm-banner-section>.container{width:min(100% - 32px,720px)!important}
+        #home{padding-top:84px!important}
+        #home .row{min-height:auto!important}
+        #home .col-lg-6:first-child,#home .col-lg-6:last-child{width:100%!important}
+        #home .col-lg-6:last-child{order:-1!important}
+        #home .hero-content{text-align:center!important}
+        #andreia-hero-label{margin-left:auto!important;margin-right:auto!important}
+        #home .hero-title{font-size:clamp(45px,10vw,66px)!important;margin-left:auto!important;margin-right:auto!important}
+        #home .hero-subtitle{margin-left:auto!important;margin-right:auto!important}
+        #home .image-container{width:min(430px,78vw)!important;height:min(530px,96vw)!important}
+        #home .hero-image{min-height:auto!important;margin-bottom:50px!important}
+        #andreia-backword{font-size:24vw!important;top:28%!important}
+        #sobre .col-lg-6{width:100%!important}
+        #sobre .about-image:before{font-size:54px!important;bottom:-30px!important}
+      }
+      @media(max-width:600px){
+        #home{padding:80px 0 42px!important}
+        #home .image-container{width:min(330px,82vw)!important;height:min(410px,102vw)!important}
+        #home .hero-image{margin:8px 0 36px!important}
+        #home .hero-title{font-size:42px!important;line-height:.96!important}
+        #home .hero-subtitle{font-size:15px!important;line-height:1.6!important}
+        #andreia-hero-cta{width:100%!important}
+        #servicos,#sobre,#depoimentos{padding:72px 0!important}
+        .section-title{font-size:38px!important}
+        #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 4px!important}
+        #ale-native-rail .ale-rail-item span b{font-size:19px!important}
+        #ale-native-rail .ale-rail-item span small{font-size:12px!important}
+        .fp-banner-section,.gm-banner-section{padding:34px 0!important}
+      }
+      @media(prefers-reduced-motion:reduce){#home .image-glow,#andreia-hero-cta,#home .social-node{animation:none!important}}
+    `
+    doc.head.appendChild(style)
   }
-  rebrand();new win.MutationObserver(rebrand).observe(doc.body,{childList:true,subtree:true})
 
-  const style=doc.createElement('style');style.id='andreia-reform-v4';style.textContent=`
-   #andreia-universe{position:fixed;inset:0;width:100%;height:100%;z-index:-30;pointer-events:none;background:transparent}
-   #mainNav{border-bottom:1px solid rgba(255,255,255,.06)!important}.navbar-brand strong{letter-spacing:-.8px!important}
-   #home .hero-title{font-size:clamp(48px,5.1vw,78px)!important;line-height:1.02!important;letter-spacing:-2.3px!important;font-weight:800!important}
-   #home .hero-subtitle{max-width:680px!important;font-size:19px!important;line-height:1.72!important;color:rgba(238,239,247,.78)!important}
-   .section-title{font-size:clamp(36px,4vw,56px)!important;letter-spacing:-1.7px!important;line-height:1.08!important}
-   .service-card,.testimonial-card,.pricing-card,.contact-card,.ebook-card,.eb-card{border-radius:24px!important;background:linear-gradient(145deg,rgba(25,29,57,.78),rgba(12,15,33,.72))!important;border:1px solid rgba(183,154,255,.17)!important;box-shadow:0 18px 60px rgba(0,0,0,.18)!important;backdrop-filter:blur(16px)!important;transition:.3s ease!important}
-   .service-card:hover,.testimonial-card:hover,.pricing-card:hover{transform:translateY(-7px)!important;border-color:rgba(214,92,225,.32)!important;box-shadow:0 26px 80px rgba(0,0,0,.30)!important}
-   .btn,.service-btn,.cta-button,.whatsapp-btn,a[class*="btn"]{border-radius:999px!important}
-   #andreia-experience{position:relative;padding:95px 20px;color:#fff;background:transparent!important}
-   .ax-wrap{width:min(1080px,100%);margin:auto}.ax-head{text-align:center;max-width:780px;margin:0 auto 36px}.ax-pill{display:inline-flex;padding:8px 14px;border:1px solid rgba(190,148,255,.25);background:rgba(108,67,184,.10);border-radius:999px;color:#d0baff;font-size:12px;font-weight:800;letter-spacing:1.5px}.ax-head h2{font-size:clamp(38px,4.8vw,60px);line-height:1.06;letter-spacing:-2px;margin:17px 0 12px;font-weight:800}.ax-head h2 span{background:linear-gradient(90deg,#b7dcff,#c676ff,#ed5dce);-webkit-background-clip:text;background-clip:text;color:transparent}.ax-head p{color:rgba(238,239,247,.7);font-size:17px;line-height:1.65}.ax-progress{height:10px;max-width:760px;margin:0 auto 34px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}.ax-progress i{display:block;width:89%;height:100%;background:linear-gradient(90deg,#725cff,#c047d2,#e05abf);border-radius:inherit}.ax-media{aspect-ratio:16/9;max-width:900px;margin:0 auto 32px;border-radius:26px;border:1px solid rgba(190,148,255,.18);background:linear-gradient(145deg,rgba(25,29,58,.72),rgba(8,11,27,.84));box-shadow:0 30px 90px rgba(0,0,0,.28);display:grid;place-items:center}.ax-play{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;padding-left:5px;background:linear-gradient(135deg,#755cff,#d247c8);box-shadow:0 0 45px rgba(174,76,221,.35);font-size:27px}.ax-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ax-card{padding:30px;border-radius:24px;border:1px solid rgba(190,148,255,.15);background:linear-gradient(145deg,rgba(25,29,58,.70),rgba(9,12,29,.75));box-shadow:0 18px 60px rgba(0,0,0,.18)}.ax-step{display:inline-flex;padding:7px 12px;border-radius:9px;background:linear-gradient(135deg,#795cff,#c846cb);font-size:12px;font-weight:800;letter-spacing:1px}.ax-card h3{font-size:25px;margin:17px 0 9px}.ax-card p{color:rgba(238,239,247,.68);line-height:1.65;font-size:15px}.ax-button{display:inline-flex;margin-top:9px;padding:14px 21px;border-radius:999px;background:linear-gradient(135deg,#12a84a,#20d878);color:white!important;text-decoration:none!important;font-weight:800}.ax-note{margin-top:17px;padding:14px 15px;border-radius:14px;background:rgba(255,255,255,.045);color:rgba(238,239,247,.72);font-size:14px;line-height:1.55}.ax-bottom{margin-top:20px;padding:26px 30px;border:1px solid rgba(190,148,255,.14);border-radius:22px;background:rgba(15,18,38,.58);display:flex;align-items:center;justify-content:space-between;gap:20px}.ax-bottom h3{margin:0 0 4px;font-size:22px}.ax-bottom p{margin:0;color:rgba(238,239,247,.65)}
-   @media(max-width:760px){#andreia-experience{padding:70px 16px}.ax-grid{grid-template-columns:1fr}.ax-card{padding:24px 20px}.ax-bottom{flex-direction:column;text-align:center}.ax-media{border-radius:18px}#home .hero-title{font-size:clamp(42px,10vw,60px)!important}}
-  `;doc.head.appendChild(style)
-
-  if(!doc.getElementById('andreia-experience')){
-   const s=doc.createElement('section');s.id='andreia-experience';s.innerHTML=`<div class="ax-wrap"><div class="ax-head"><span class="ax-pill">EXPERIÊNCIA ANDREIA</span><h2>Só mais <span>um passo...</span></h2><p>Uma nova área integrada à página para orientar os próximos passos e deixar a experiência mais clara, moderna e própria da Andreia.</p></div><div class="ax-progress"><i></i></div><div class="ax-media"><div class="ax-play">▶</div></div><div class="ax-grid"><article class="ax-card"><span class="ax-step">PASSO 1</span><h3>Entre no grupo do WhatsApp</h3><p>Receba avisos, novidades e materiais importantes diretamente pelo WhatsApp.</p><a class="ax-button" href="#contato">● ENTRAR NO GRUPO</a></article><article class="ax-card"><span class="ax-step">PASSO 2</span><h3>Confirme seu e-mail</h3><p>Procure a mensagem de confirmação na sua caixa de entrada. Se necessário, confira também o spam.</p><div class="ax-note"><b>Importante:</b> confirme o recebimento para não perder nenhum aviso da Andreia.</div></article></div><div class="ax-bottom"><div><h3>Ainda não entrou no grupo?</h3><p>É por lá que os principais avisos e materiais serão enviados.</p></div><a class="ax-button" href="#contato">● ENTRAR NO GRUPO</a></div></div>`
-   const target=doc.querySelector('#contato,.contact-section,.footer');target?.parentNode?.insertBefore(s,target)
-  }
-
-  const canvas=doc.createElement('canvas');canvas.id='andreia-universe';doc.body.prepend(canvas);const ctx=canvas.getContext('2d');if(!ctx)return
-  let w=0,h=0,stars:Array<{x:number;y:number;r:number;s:number;a:number;p:number}>=[]
-  const resize=()=>{const dpr=Math.min(win.devicePixelRatio||1,1.5);w=win.innerWidth;h=win.innerHeight;canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);stars=Array.from({length:Math.min(190,Math.max(80,Math.floor(w*h/6800)))},()=>({x:Math.random()*w,y:Math.random()*h,r:.35+Math.random()*1.25,s:.035+Math.random()*.13,a:.22+Math.random()*.55,p:Math.random()*Math.PI*2}))};resize();win.addEventListener('resize',resize);let t=0
-  const draw=()=>{t+=.011;ctx.clearRect(0,0,w,h);stars.forEach(st=>{st.y+=st.s;if(st.y>h+3){st.y=-3;st.x=Math.random()*w}const p=.68+.32*Math.sin(t*2+st.p);ctx.beginPath();ctx.arc(st.x,st.y,st.r,0,Math.PI*2);ctx.fillStyle=`rgba(220,232,255,${st.a*p})`;ctx.fill()});win.requestAnimationFrame(draw)};if(!win.matchMedia('(prefers-reduced-motion: reduce)').matches)draw()
- }
- return <iframe className="original-frame" src="/original/index.html?v=andreia-reform-v4" title="Andreia - Especialista em Redes Sociais" onLoad={e=>customize(e.currentTarget)}/>
+  return (
+    <iframe
+      className="original-frame"
+      src="/original/index.html?v=andreia-campaign-v1"
+      title="Andreia | Especialista em Redes Sociais"
+      onLoad={(event) => customize(event.currentTarget)}
+    />
+  )
 }

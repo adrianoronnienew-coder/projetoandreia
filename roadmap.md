@@ -1,5 +1,5 @@
 # Ajustes atuais
 
-- [x] Otimizar o uso de espaço em todas as seções no desktop.
-- [x] Preservar integralmente o layout mobile.
-- [x] Validar visualmente desktop e mobile sem sobreposições.
+- [x] Reformular a página para Andreia com a paleta do modelo enviado.
+- [x] Preservar serviços, banners, links e depoimentos existentes.
+- [ ] Validar visualmente desktop e mobile sem sobreposições.

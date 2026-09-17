@@ -77,16 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ale Marques" },
-      { name: "description", content: "Conteúdo, estratégia e crescimento no TikTok com Ale Marques." },
-      { name: "author", content: "Ale Marques" },
+      { title: "Andreia" },
+      { name: "description", content: "Estratégia, conteúdo e crescimento nas redes sociais com Andreia." },
+      { name: "author", content: "Andreia" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" },
+        href: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" },
       {
         rel: "stylesheet",
         href: appCss,
