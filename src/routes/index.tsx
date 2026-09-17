@@ -133,13 +133,14 @@ function HomePage() {
 
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
+      #servicos{padding-left:clamp(24px,4vw,64px)!important;padding-right:clamp(24px,4vw,64px)!important;box-sizing:border-box!important}
       #servicos:after,#sobre:after,#depoimentos:after{display:none!important}
       #servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container{width:min(1240px,calc(100% - 64px))!important;max-width:none!important}
       .section-title{font-size:clamp(44px,5vw,70px)!important;line-height:1!important;font-weight:800!important;color:#fff!important;text-align:left!important;margin-bottom:16px!important}
       .section-title span{color:#ffa600!important;background:none!important}
       .section-subtitle{max-width:680px!important;margin:0!important;text-align:left!important;color:rgba(255,255,255,.62)!important;font-size:18px!important}
       #servicos .row:first-child,#depoimentos .row:first-child{border-top:1px solid rgba(255,166,0,.25)!important;padding-top:28px!important}
-      #servicos .row.g-4{margin-top:36px!important;padding-left:clamp(28px,5vw,84px)!important;padding-right:clamp(12px,2vw,32px)!important}
+      #servicos .row.g-4{margin-top:36px!important;padding-left:clamp(14px,2vw,30px)!important;padding-right:0!important}
       #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:none!important}
       #servicos .service-card:has(#ale-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
       #servicos .service-card:has(#ale-native-rail):after{display:none!important}
@@ -197,7 +198,7 @@ function HomePage() {
         #home .social-orbit{inset:0!important}
         #sobre .col-lg-6{width:100%!important}
         #sobre .about-image:before{font-size:54px!important;bottom:-30px!important}
-        #servicos .row.g-4{padding-left:20px!important;padding-right:8px!important}
+        #servicos .row.g-4{padding-left:8px!important;padding-right:0!important}
       }
       @media(max-width:600px){
         #home{padding:80px 0 42px!important}
@@ -208,8 +209,9 @@ function HomePage() {
         #andreia-hero-cta{width:100%!important}
         #andreia-backword{display:none!important}
         #servicos,#sobre,#depoimentos{padding:72px 0!important}
+        #servicos{padding-left:16px!important;padding-right:16px!important}
         .section-title{font-size:38px!important}
-        #servicos .row.g-4{padding-left:14px!important;padding-right:6px!important}
+        #servicos .row.g-4{padding-left:6px!important;padding-right:0!important}
         #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 12px!important}
         #ale-native-rail .ale-rail-item span b{font-size:19px!important}
         #ale-native-rail .ale-rail-item span small{font-size:12px!important}
@@ -238,7 +240,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-campaign-v1"
+      src="/original/index.html?v=andreia-photos-services-v2"
       title="Andreia | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
