@@ -474,6 +474,68 @@
   #ale-native-rail .ale-rail-item{height:100px!important;min-height:100px!important}
 }
 </style>
+<style id="ale-desktop-hero-fill-v31">
+/* Amplia somente a composição da primeira tela no desktop. */
+@media (min-width: 992px){
+  #home>.container{
+    width:100%!important;
+    max-width:1660px!important;
+    padding-left:64px!important;
+    padding-right:64px!important;
+  }
+  #home .row.min-vh-100{
+    min-height:100vh!important;
+    padding-top:54px!important;
+    align-items:center!important;
+  }
+  #home .row.min-vh-100>.col-lg-6:first-child{
+    flex:0 0 51%!important;
+    width:51%!important;
+  }
+  #home .row.min-vh-100>.col-lg-6:last-child{
+    flex:0 0 49%!important;
+    width:49%!important;
+  }
+  #home .hero-content{
+    width:100%!important;
+    max-width:760px!important;
+    margin-left:auto!important;
+    margin-right:26px!important;
+  }
+  #home .hero-title{
+    font-size:clamp(58px,3.65vw,76px)!important;
+    line-height:1.04!important;
+    margin-bottom:30px!important;
+  }
+  #home .hero-subtitle{
+    max-width:700px!important;
+    font-size:clamp(20px,1.18vw,25px)!important;
+    line-height:1.65!important;
+  }
+  #home .hero-image{
+    width:100%!important;
+    min-height:590px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    padding-left:34px!important;
+  }
+  #home .image-container{
+    width:clamp(500px,29vw,610px)!important;
+    height:clamp(500px,29vw,610px)!important;
+  }
+  #home .hero-photo{
+    width:100%!important;
+    height:100%!important;
+  }
+  #home .social-orbit{inset:-34px!important}
+  #home .social-node{
+    width:52px!important;
+    height:52px!important;
+    font-size:21px!important;
+  }
+}
+</style>
 
 <link rel="stylesheet" href="modern-effects.css?v=2">
 </head>
