@@ -107,14 +107,15 @@ function HomePage() {
       #andreia-hero-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:54px!important;padding:0 27px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:13px!important;font-weight:800!important;letter-spacing:.7px!important;border-radius:4px!important;box-shadow:0 12px 32px rgba(32,195,75,.18)!important;transition:transform .25s ease,filter .25s ease,box-shadow .25s ease!important;animation:andreiaCtaGlow 3s ease-in-out infinite!important}
       #andreia-hero-cta:hover{transform:translateY(-3px)!important;filter:brightness(1.08)!important}
       #home .hero-image{display:flex!important;justify-content:center!important;align-items:center!important;min-height:610px!important}
-      #home .image-container{width:min(500px,38vw)!important;height:min(620px,48vw)!important;max-height:650px!important;transform:none!important;position:relative!important;border-radius:0!important}
+      #home .image-container{width:min(500px,38vw)!important;height:min(620px,48vw)!important;max-height:650px!important;transform:none!important;position:relative!important;border-radius:0!important;overflow:hidden!important;background:#151515!important}
       #home .image-container:before,#home .image-container:after{content:''!important;display:block!important;position:absolute!important;width:120px!important;height:120px!important;z-index:5!important;pointer-events:none!important}
       #home .image-container:before{top:-15px!important;right:-15px!important;border-top:2px solid #ffa600!important;border-right:2px solid #ffa600!important}
       #home .image-container:after{bottom:-15px!important;left:-15px!important;border-bottom:2px solid #ffa600!important;border-left:2px solid #ffa600!important}
       #home .image-glow{inset:8% -8% 2%!important;background:radial-gradient(circle,rgba(255,166,0,.22),transparent 68%)!important;border-radius:0!important;filter:blur(42px)!important;opacity:.68!important;animation:andreiaHalo 5s ease-in-out infinite!important}
-      #home .hero-photo{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important;border:0!important;border-radius:0!important;filter:saturate(.93) contrast(1.04)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
+      #home .hero-photo{width:118%!important;max-width:none!important;height:118%!important;margin:-9%!important;object-fit:cover!important;object-position:center top!important;border:0!important;border-radius:0!important;filter:saturate(.9) contrast(1.04)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
       #home .social-orbit{inset:0!important;z-index:6!important}
       #home .social-node{width:44px!important;height:44px!important;border:1px solid rgba(255,166,0,.45)!important;background:#151515!important;color:#ffa600!important;box-shadow:0 10px 28px rgba(0,0,0,.3)!important;animation:socialFloat 6s ease-in-out infinite!important}
+      #home .social-node-instagram{top:6%!important;right:4%!important}.social-node-youtube{right:1%!important}.social-node-tiktok{left:4%!important}
 
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
@@ -166,6 +167,7 @@ function HomePage() {
       @keyframes andreiaHalo{0%,100%{opacity:.46;transform:scale(.96)}50%{opacity:.72;transform:scale(1.02)}}
       @keyframes andreiaCtaGlow{0%,100%{box-shadow:0 12px 32px rgba(32,195,75,.16)}50%{box-shadow:0 12px 42px rgba(32,195,75,.34)}}
       @media(max-width:991px){
+        html,body{max-width:100%!important;overflow-x:hidden!important}
         #home>.container,#servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container,.fp-banner-section>.container,.gm-banner-section>.container{width:min(100% - 32px,720px)!important}
         #home{padding-top:84px!important}
         #home .row{min-height:auto!important}
@@ -178,6 +180,7 @@ function HomePage() {
         #home .image-container{width:min(430px,78vw)!important;height:min(530px,96vw)!important}
         #home .hero-image{min-height:auto!important;margin-bottom:50px!important}
         #andreia-backword{font-size:24vw!important;top:28%!important}
+        #home .social-orbit{inset:0!important}
         #sobre .col-lg-6{width:100%!important}
         #sobre .about-image:before{font-size:54px!important;bottom:-30px!important}
       }
@@ -188,6 +191,7 @@ function HomePage() {
         #home .hero-title{font-size:42px!important;line-height:.96!important}
         #home .hero-subtitle{font-size:15px!important;line-height:1.6!important}
         #andreia-hero-cta{width:100%!important}
+        #andreia-backword{display:none!important}
         #servicos,#sobre,#depoimentos{padding:72px 0!important}
         .section-title{font-size:38px!important}
         #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 4px!important}
