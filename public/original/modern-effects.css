@@ -95,6 +95,71 @@ a.btn:active,button:active,.btn:active,[role="button"]:active,.ale-action:active
 [aria-expanded]{transition:background-color .22s ease,border-color .22s ease,transform .22s ease}
 [aria-expanded]:hover{border-color:rgba(214,59,199,.24)!important}
 
+/* Seamless cosmic background fusion between page sections.
+   All fusion layers stay behind text, photos, cards and controls. */
+body{
+  background:#050817!important;
+}
+#home,#servicos,#sobre,#depoimentos,.contact-section,#ebooks-area,.footer{
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  overflow:hidden!important;
+}
+#home>*:not(.hero-background):not(.hero-overlay):not(.hero-particles),
+#servicos>.container,#sobre>.container,#depoimentos>.container,
+.contact-section>.container,#ebooks-area>.eb-wrap,.footer>.container{
+  position:relative!important;
+  z-index:2!important;
+}
+#home:before,#servicos:before,#sobre:before,#depoimentos:before,.contact-section:before,#ebooks-area:before,.footer:before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-2px!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+#home:before{
+  background:linear-gradient(180deg,#080b22 0%,#0d1530 56%,#091225 82%,#080d1d 100%)!important;
+}
+#servicos:before{
+  background:linear-gradient(180deg,#080d1d 0%,#080c1c 10%,#09091b 42%,#071322 78%,#07101d 100%)!important;
+}
+#sobre:before{
+  background:linear-gradient(180deg,#07101d 0%,#0c1022 20%,#151027 55%,#0a1224 84%,#07101d 100%)!important;
+}
+#depoimentos:before{
+  background:linear-gradient(180deg,#07101d 0%,#091426 25%,#100c22 58%,#080d1d 100%)!important;
+}
+.contact-section:before,#ebooks-area:before{
+  background:linear-gradient(180deg,#080d1d 0%,#0c1022 34%,#111027 64%,#080b19 100%)!important;
+}
+.footer:before{
+  background:linear-gradient(180deg,#080b19 0%,#060812 45%,#05060d 100%)!important;
+}
+/* Wide transition bands overlap section boundaries to remove hard horizontal seams. */
+#home:after,#servicos:after,#sobre:after,#depoimentos:after,.contact-section:after,#ebooks-area:after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:0!important;right:0!important;bottom:-1px!important;
+  height:240px!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+#home:after{background:linear-gradient(180deg,transparent 0%,rgba(8,13,29,.18) 25%,rgba(8,13,29,.72) 70%,#080d1d 100%)!important}
+#servicos:after{background:linear-gradient(180deg,transparent 0%,rgba(7,16,29,.20) 25%,rgba(7,16,29,.76) 72%,#07101d 100%)!important}
+#sobre:after{background:linear-gradient(180deg,transparent 0%,rgba(7,16,29,.18) 25%,rgba(7,16,29,.75) 72%,#07101d 100%)!important}
+#depoimentos:after{background:linear-gradient(180deg,transparent 0%,rgba(8,13,29,.18) 25%,rgba(8,13,29,.76) 72%,#080d1d 100%)!important}
+.contact-section:after,#ebooks-area:after{background:linear-gradient(180deg,transparent 0%,rgba(8,11,25,.20) 25%,rgba(8,11,25,.78) 72%,#080b19 100%)!important}
+/* Keep decorative cosmic particles behind the actual page content. */
+#home .hero-background,#home .hero-overlay,#home .hero-particles{z-index:0!important}
+#home .hero-content,#home .hero-image{position:relative!important;z-index:3!important}
+@media(max-width:600px){
+  #home:after,#servicos:after,#sobre:after,#depoimentos:after,.contact-section:after,#ebooks-area:after{height:170px!important}
+}
+
 /* Respect accessibility and keep mobile lightweight */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
