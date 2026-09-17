@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
+import andreiaProfile from '@/assets/andreia-profile.png.asset.json'
+import andreiaStudio from '@/assets/andreia-studio.png.asset.json'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -40,6 +42,18 @@ function HomePage() {
 
     rebrand()
     new MutationObserver(rebrand).observe(doc.body, { childList: true, subtree: true })
+
+    const heroPhoto = doc.querySelector<HTMLImageElement>('#home .hero-photo')
+    if (heroPhoto) {
+      heroPhoto.src = andreiaProfile.url
+      heroPhoto.alt = 'Andreia, especialista em redes sociais'
+    }
+
+    const aboutPhoto = doc.querySelector<HTMLImageElement>('#sobre .about-image img')
+    if (aboutPhoto) {
+      aboutPhoto.src = andreiaStudio.url
+      aboutPhoto.alt = 'Andreia em seu estúdio de criação de conteúdo'
+    }
 
     const heroContent = doc.querySelector('#home .hero-content')
     if (heroContent && !doc.getElementById('andreia-hero-label')) {
@@ -112,7 +126,7 @@ function HomePage() {
       #home .image-container:before{top:-15px!important;right:-15px!important;border-top:2px solid #ffa600!important;border-right:2px solid #ffa600!important}
       #home .image-container:after{bottom:-15px!important;left:-15px!important;border-bottom:2px solid #ffa600!important;border-left:2px solid #ffa600!important}
       #home .image-glow{inset:8% -8% 2%!important;background:radial-gradient(circle,rgba(255,166,0,.22),transparent 68%)!important;border-radius:0!important;filter:blur(42px)!important;opacity:.68!important;animation:andreiaHalo 5s ease-in-out infinite!important}
-      #home .hero-photo{width:118%!important;max-width:none!important;height:118%!important;margin:-9%!important;object-fit:cover!important;object-position:center top!important;border:0!important;border-radius:0!important;filter:saturate(.9) contrast(1.04)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
+      #home .hero-photo{width:100%!important;max-width:none!important;height:100%!important;margin:0!important;object-fit:cover!important;object-position:center!important;border:0!important;border-radius:0!important;filter:saturate(.94) contrast(1.03)!important;box-shadow:0 34px 80px rgba(0,0,0,.38)!important}
       #home .social-orbit{inset:0!important;z-index:6!important}
       #home .social-node{width:44px!important;height:44px!important;border:1px solid rgba(255,166,0,.45)!important;background:#151515!important;color:#ffa600!important;box-shadow:0 10px 28px rgba(0,0,0,.3)!important;animation:socialFloat 6s ease-in-out infinite!important}
       #home .social-node-instagram{top:6%!important;right:4%!important}.social-node-youtube{right:1%!important}.social-node-tiktok{left:4%!important}
@@ -125,18 +139,18 @@ function HomePage() {
       .section-title span{color:#ffa600!important;background:none!important}
       .section-subtitle{max-width:680px!important;margin:0!important;text-align:left!important;color:rgba(255,255,255,.62)!important;font-size:18px!important}
       #servicos .row:first-child,#depoimentos .row:first-child{border-top:1px solid rgba(255,166,0,.25)!important;padding-top:28px!important}
-      #servicos .row.g-4{margin-top:36px!important}
+      #servicos .row.g-4{margin-top:36px!important;padding-left:clamp(28px,5vw,84px)!important;padding-right:clamp(12px,2vw,32px)!important}
       #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:none!important}
       #servicos .service-card:has(#ale-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
       #servicos .service-card:has(#ale-native-rail):after{display:none!important}
       #ale-native-rail{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;max-width:none!important;position:static!important;transform:none!important}
-      #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item:focus{display:grid!important;grid-template-columns:72px minmax(0,1fr) auto!important;align-items:center!important;width:100%!important;max-width:none!important;min-height:104px!important;padding:20px 10px!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.12)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#fff!important;transform:none!important;transition:padding .25s ease,border-color .25s ease!important}
-      #ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item.active{padding-left:22px!important;border-bottom-color:#ffa600!important}
-      #ale-native-rail .ale-rail-item i{width:46px!important;height:46px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#ffa600!important;color:#151515!important;font-size:18px!important}
+      #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item:focus{display:grid!important;grid-template-columns:72px minmax(0,1fr) auto!important;align-items:center!important;width:100%!important;max-width:none!important;min-height:104px!important;padding:20px 18px!important;border:1px solid rgba(32,195,75,.2)!important;border-radius:8px!important;background:rgba(18,37,24,.72)!important;box-shadow:0 12px 30px rgba(0,0,0,.18)!important;color:#fff!important;transform:none!important;transition:transform .25s ease,border-color .25s ease,background .25s ease!important}
+      #ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item.active{transform:translateX(6px)!important;border-color:#20c34b!important;background:rgba(20,54,30,.88)!important}
+      #ale-native-rail .ale-rail-item i{width:46px!important;height:46px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#20c34b!important;color:#07130a!important;font-size:18px!important}
       #ale-native-rail .ale-rail-item span{max-width:none!important}
       #ale-native-rail .ale-rail-item span b{font-family:'Outfit','Poppins',sans-serif!important;font-size:26px!important;color:#fff!important;white-space:normal!important}
       #ale-native-rail .ale-rail-item span small{font-size:14px!important;color:rgba(255,255,255,.55)!important;max-width:none!important;white-space:normal!important}
-      #ale-native-rail .ale-rail-item:after{content:'↗'!important;font-size:24px!important;color:#ffa600!important}
+      #ale-native-rail .ale-rail-item:after{content:'↗'!important;font-size:24px!important;color:#20c34b!important}
       #ale-native-rail .ale-rail-item small:after{display:none!important}
 
       .fp-banner-section,.gm-banner-section{padding:72px 0!important;background:#111!important}
@@ -148,7 +162,7 @@ function HomePage() {
       #sobre .col-lg-6{width:47.5%!important}
       #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important}
       #sobre .about-image:before{content:'ANDREIA'!important;position:absolute!important;left:-8px!important;bottom:-42px!important;z-index:3!important;font-family:'Outfit','Poppins',sans-serif!important;font-size:78px!important;font-weight:900!important;color:#ffa600!important;line-height:1!important}
-      #sobre .about-image img{border-radius:0!important}
+      #sobre .about-image img{width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
       #sobre .about-content{padding:20px 0 0!important}
       #sobre .about-text{font-size:17px!important;color:rgba(255,255,255,.66)!important}
       #sobre .achievement-item{border-radius:0!important;border:0!important;border-top:1px solid rgba(255,255,255,.12)!important;background:transparent!important}
@@ -183,6 +197,7 @@ function HomePage() {
         #home .social-orbit{inset:0!important}
         #sobre .col-lg-6{width:100%!important}
         #sobre .about-image:before{font-size:54px!important;bottom:-30px!important}
+        #servicos .row.g-4{padding-left:20px!important;padding-right:8px!important}
       }
       @media(max-width:600px){
         #home{padding:80px 0 42px!important}
@@ -194,7 +209,8 @@ function HomePage() {
         #andreia-backword{display:none!important}
         #servicos,#sobre,#depoimentos{padding:72px 0!important}
         .section-title{font-size:38px!important}
-        #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 4px!important}
+        #servicos .row.g-4{padding-left:14px!important;padding-right:6px!important}
+        #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 12px!important}
         #ale-native-rail .ale-rail-item span b{font-size:19px!important}
         #ale-native-rail .ale-rail-item span small{font-size:12px!important}
         .fp-banner-section,.gm-banner-section{padding:34px 0!important}
