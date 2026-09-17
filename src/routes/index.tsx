@@ -156,14 +156,15 @@ function HomePage() {
       #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:none!important}
       #servicos .service-card:has(#ale-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
       #servicos .service-card:has(#ale-native-rail):after{display:none!important}
-      #ale-native-rail{display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;max-width:none!important;position:static!important;transform:none!important}
-      #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item:focus{display:grid!important;grid-template-columns:72px minmax(0,1fr) auto!important;align-items:center!important;width:100%!important;max-width:none!important;min-height:104px!important;padding:20px 18px!important;border:1px solid rgba(32,195,75,.2)!important;border-radius:8px!important;background:rgba(18,37,24,.72)!important;box-shadow:0 12px 30px rgba(0,0,0,.18)!important;color:#fff!important;transform:none!important;transition:transform .25s ease,border-color .25s ease,background .25s ease!important}
-      #ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item.active{transform:translateX(6px)!important;border-color:#20c34b!important;background:rgba(20,54,30,.88)!important}
-      #ale-native-rail .ale-rail-item i{width:46px!important;height:46px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#20c34b!important;color:#07130a!important;font-size:18px!important}
+      #ale-native-rail{display:grid!important;grid-template-columns:1fr!important;gap:18px!important;width:100%!important;max-width:none!important;position:static!important;transform:none!important}
+      #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item:focus{display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;align-items:center!important;width:100%!important;max-width:none!important;height:auto!important;min-height:112px!important;padding:12px 28px 12px 12px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:999px!important;background:#0d0d12!important;box-shadow:0 12px 30px rgba(0,0,0,.2)!important;color:#fff!important;overflow:hidden!important;transform:none!important;transition:transform .25s ease,border-color .25s ease!important}
+      #ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item.active{transform:translateY(-2px)!important;border-color:rgba(255,166,0,.42)!important;background:#0d0d12!important}
+      #ale-native-rail .ale-rail-item i{width:76px!important;height:76px!important;min-width:76px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:linear-gradient(135deg,#a83bd6,#168dff)!important;color:#fff!important;font-size:26px!important}
+      #ale-native-rail .ale-rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)!important}
       #ale-native-rail .ale-rail-item span{max-width:none!important}
-      #ale-native-rail .ale-rail-item span b{font-family:'Outfit','Poppins',sans-serif!important;font-size:26px!important;color:#fff!important;white-space:normal!important}
-      #ale-native-rail .ale-rail-item span small{font-size:14px!important;color:rgba(255,255,255,.55)!important;max-width:none!important;white-space:normal!important}
-      #ale-native-rail .ale-rail-item:after{content:'↗'!important;font-size:24px!important;color:#20c34b!important}
+      #ale-native-rail .ale-rail-item span b{font-family:'Outfit','Poppins',sans-serif!important;font-size:22px!important;color:#fff!important;white-space:normal!important}
+      #ale-native-rail .ale-rail-item span small{font-size:15px!important;color:rgba(255,255,255,.64)!important;max-width:none!important;white-space:normal!important}
+      #ale-native-rail .ale-rail-item:after{display:none!important;content:none!important}
       #ale-native-rail .ale-rail-item small:after{display:none!important}
 
       .fp-banner-section,.gm-banner-section{padding:72px 0!important;background:#111!important}
@@ -230,9 +231,11 @@ function HomePage() {
         #servicos{padding-left:16px!important;padding-right:16px!important}
         .section-title{font-size:38px!important}
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
-        #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 12px!important}
-        #ale-native-rail .ale-rail-item span b{font-size:19px!important}
-        #ale-native-rail .ale-rail-item span small{font-size:12px!important}
+        #ale-native-rail{gap:16px!important;padding:0!important}
+        #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:76px minmax(0,1fr)!important;width:100%!important;min-height:94px!important;padding:9px 18px 9px 9px!important;border-radius:999px!important;background:#0d0d12!important}
+        #ale-native-rail .ale-rail-item i{width:68px!important;height:68px!important;min-width:68px!important;font-size:25px!important}
+        #ale-native-rail .ale-rail-item span b{font-size:18px!important}
+        #ale-native-rail .ale-rail-item span small{font-size:13px!important}
         .fp-banner-section,.gm-banner-section{padding:34px 0!important}
         #sobre .about-image img{object-position:center 42%!important}
         #sobre .about-badge{bottom:-16px!important;max-width:calc(100% - 24px)!important;min-height:34px!important;padding:8px 11px!important}
@@ -262,7 +265,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-mobile-consistency-v4"
+      src="/original/index.html?v=andreia-services-pill-v5"
       title="Andreia | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
