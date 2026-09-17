@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "82a309e7-a59d-4b9c-9858-56b4fa1a1895",
-  "project_id": "36c2f12c-c588-4596-bd58-5004e1664228",
-  "url": "/__l5e/assets-v1/82a309e7-a59d-4b9c-9858-56b4fa1a1895/ale-marques-studio.png",
-  "r2_key": "a/v1/36c2f12c-c588-4596-bd58-5004e1664228/82a309e7-a59d-4b9c-9858-56b4fa1a1895/ale-marques-studio.png",
-  "original_filename": "ale-marques-studio.png",
-  "size": 2497069,
   "content_type": "image/png",
-  "created_at": "2026-09-15T19:15:43Z"
+  "created_at": "2026-09-15T19:15:43Z",
+  "original_filename": "ale-marques-studio.png",
+  "project_id": "c5802f34-047a-4503-b3d8-2bfc1db04bd2",
+  "r2_key": "a/v1/c5802f34-047a-4503-b3d8-2bfc1db04bd2/82a309e7-a59d-4b9c-9858-56b4fa1a1895/ale-marques-studio.png",
+  "size": 2497069,
+  "url": "/__l5e/assets-v1/82a309e7-a59d-4b9c-9858-56b4fa1a1895/ale-marques-studio.png",
+  "version": 1
 }

@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "3bbfe861-c832-48dd-b1ce-d62aec9dca1a",
-  "project_id": "36c2f12c-c588-4596-bd58-5004e1664228",
-  "url": "/__l5e/assets-v1/3bbfe861-c832-48dd-b1ce-d62aec9dca1a/ale-marques-studio-2026.png",
-  "r2_key": "a/v1/36c2f12c-c588-4596-bd58-5004e1664228/3bbfe861-c832-48dd-b1ce-d62aec9dca1a/ale-marques-studio-2026.png",
-  "original_filename": "ale-marques-studio-2026.png",
-  "size": 2068407,
   "content_type": "image/png",
-  "created_at": "2026-09-15T20:09:53Z"
+  "created_at": "2026-09-15T20:09:53Z",
+  "original_filename": "ale-marques-studio-2026.png",
+  "project_id": "c5802f34-047a-4503-b3d8-2bfc1db04bd2",
+  "r2_key": "a/v1/c5802f34-047a-4503-b3d8-2bfc1db04bd2/3bbfe861-c832-48dd-b1ce-d62aec9dca1a/ale-marques-studio-2026.png",
+  "size": 2068407,
+  "url": "/__l5e/assets-v1/3bbfe861-c832-48dd-b1ce-d62aec9dca1a/ale-marques-studio-2026.png",
+  "version": 1
 }
