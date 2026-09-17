@@ -96,7 +96,7 @@ function HomePage() {
         --gradient-primary:linear-gradient(135deg,#ffa600,#ff7a00)!important;
         --gradient-secondary:linear-gradient(135deg,#ffa600,#ff7a00)!important;
       }
-      html,body{background:#151515!important;color:#fff!important;font-family:'Figtree','Poppins',sans-serif!important}
+      html,body{max-width:100%!important;overflow-x:hidden!important;background:#151515!important;color:#fff!important;font-family:'Figtree','Poppins',sans-serif!important}
       body:before{background:radial-gradient(ellipse 55% 34% at 78% 12%,rgba(255,166,0,.12),transparent 72%),linear-gradient(180deg,#151515 0%,#101010 100%)!important}
       h1,h2,h3,h4,h5,h6,.navbar-brand{font-family:'Outfit','Poppins',sans-serif!important;letter-spacing:0!important}
       #andreia-universe,#andreia-experience{display:none!important}
