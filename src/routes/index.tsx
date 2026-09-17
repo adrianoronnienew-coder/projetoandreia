@@ -133,7 +133,7 @@ function HomePage() {
 
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
-      #servicos{padding-left:0!important;padding-right:0!important;box-sizing:border-box!important}
+      #servicos{padding-left:max(32px,calc((100vw - 1216px)/2))!important;padding-right:max(32px,calc((100vw - 1216px)/2))!important;box-sizing:border-box!important}
       #servicos:after,#sobre:after,#depoimentos:after{display:none!important}
       #servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container{width:min(1240px,calc(100% - 64px))!important;max-width:none!important}
       .section-title{font-size:clamp(44px,5vw,70px)!important;line-height:1!important;font-weight:800!important;color:#fff!important;text-align:left!important;margin-bottom:16px!important}
@@ -210,7 +210,7 @@ function HomePage() {
         #andreia-hero-cta{width:100%!important}
         #andreia-backword{display:none!important}
         #servicos,#sobre,#depoimentos{padding:72px 0!important}
-        #servicos{padding-left:0!important;padding-right:0!important}
+        #servicos{padding-left:16px!important;padding-right:16px!important}
         .section-title{font-size:38px!important}
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
         #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:52px minmax(0,1fr) 24px!important;min-height:92px!important;padding:15px 12px!important}
