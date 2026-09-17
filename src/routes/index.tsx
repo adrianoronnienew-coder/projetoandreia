@@ -166,6 +166,9 @@ function HomePage() {
       #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important}
       #sobre .about-image:before{display:none!important;content:none!important}
       #sobre .about-image img{width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
+      #sobre .about-badge{left:50%!important;right:auto!important;top:auto!important;bottom:-18px!important;width:max-content!important;max-width:calc(100% - 32px)!important;min-height:38px!important;padding:9px 14px!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;border:1px solid rgba(255,166,0,.42)!important;border-radius:4px!important;background:#151515!important;color:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.32)!important}
+      #sobre .about-badge i{font-size:13px!important;color:#ffa600!important}
+      #sobre .about-badge span{font-size:12px!important;line-height:1.2!important;font-weight:700!important;letter-spacing:.3px!important;white-space:nowrap!important}
       #sobre .about-content{padding:20px 0 0!important}
       #sobre .about-text{font-size:17px!important;color:rgba(255,255,255,.66)!important}
       #sobre .achievement-item{border-radius:0!important;border:0!important;border-top:1px solid rgba(255,255,255,.12)!important;background:transparent!important}
@@ -205,8 +208,9 @@ function HomePage() {
       @media(max-width:600px){
         #home{padding:80px 0 42px!important}
         #home .image-container{width:min(330px,82vw)!important;height:min(410px,102vw)!important}
-        #home .hero-image{margin:8px 0 36px!important}
-        #home .hero-title{font-size:42px!important;line-height:.96!important}
+        #home .hero-image{margin:8px 0 44px!important}
+        #home .hero-title{max-width:100%!important;font-size:clamp(32px,9.2vw,38px)!important;line-height:1.04!important}
+        #home .hero-title .text-accent-green{margin-bottom:8px!important}
         #home .hero-subtitle{font-size:15px!important;line-height:1.6!important}
         #andreia-hero-cta{width:100%!important}
         #andreia-backword{display:none!important}
@@ -219,6 +223,9 @@ function HomePage() {
         #ale-native-rail .ale-rail-item span small{font-size:12px!important}
         .fp-banner-section,.gm-banner-section{padding:34px 0!important}
         #sobre .about-image img{object-position:center 42%!important}
+        #sobre .about-badge{bottom:-16px!important;max-width:calc(100% - 24px)!important;min-height:34px!important;padding:8px 11px!important}
+        #sobre .about-badge i{font-size:12px!important}
+        #sobre .about-badge span{font-size:11px!important;white-space:normal!important;text-align:center!important}
       }
       @media(prefers-reduced-motion:reduce){#home .image-glow,#andreia-hero-cta,#home .social-node{animation:none!important}}
     `
