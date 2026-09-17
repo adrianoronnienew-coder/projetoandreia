@@ -174,10 +174,10 @@ function HomePage() {
 
       #sobre .row{gap:5%!important}
       #sobre .col-lg-6{width:47.5%!important}
-      #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important}
+      #sobre .about-image{border-radius:0!important;box-shadow:0 30px 80px rgba(0,0,0,.35)!important;position:relative!important;overflow:visible!important;isolation:isolate!important}
       #sobre .about-image:before{display:none!important;content:none!important}
       #sobre .about-image img{width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
-      #sobre .about-badge{left:50%!important;right:auto!important;top:auto!important;bottom:-18px!important;width:max-content!important;max-width:calc(100% - 32px)!important;min-height:38px!important;padding:9px 14px!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;border:1px solid rgba(255,166,0,.42)!important;border-radius:4px!important;background:#151515!important;color:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.32)!important}
+      #sobre .about-badge{left:50%!important;right:auto!important;top:auto!important;bottom:-18px!important;z-index:8!important;width:max-content!important;max-width:calc(100% - 32px)!important;min-height:38px!important;padding:9px 14px!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;border:1px solid rgba(255,166,0,.42)!important;border-radius:4px!important;background:#151515!important;color:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.32)!important}
       #sobre .about-badge i{font-size:13px!important;color:#ffa600!important}
       #sobre .about-badge span{font-size:12px!important;line-height:1.2!important;font-weight:700!important;letter-spacing:.3px!important;white-space:nowrap!important}
       #sobre .about-content{padding:20px 0 0!important}
@@ -213,7 +213,7 @@ function HomePage() {
         #home .hero-image{min-height:auto!important;margin-bottom:50px!important}
         #home .social-orbit{inset:0!important}
         #sobre .col-lg-6{width:100%!important}
-        #sobre .row{gap:32px!important}
+        #sobre .row{gap:52px!important}
         #sobre .about-content{padding-top:0!important}
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
       }
@@ -265,7 +265,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-services-pill-v5"
+      src="/original/index.html?v=andreia-about-badge-v6"
       title="Andreia | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
