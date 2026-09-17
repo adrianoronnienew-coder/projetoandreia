@@ -1,42 +1,49 @@
-/* Andreia — fundo único e contínuo */
-:root{--fx-accent:#d63bc7;--fx-accent-2:#7a5cff;--fx-shadow:0 18px 50px rgba(0,0,0,.22)}
-html{scroll-behavior:smooth;background:#070b1b!important}
-body{overflow-x:hidden!important;position:relative!important;background:#070b1b!important}
-
-/* O fundo existe UMA vez no body. Ele não reinicia em nenhuma seção. */
+/* Andreia — reformulação visual + fundo único contínuo */
+:root{--fx-accent:#d63bc7;--fx-accent-2:#7a5cff;--fx-blue:#129ff0;--fx-green:#20d878;--fx-bg:#070b1b;--fx-panel:rgba(17,20,42,.72);--fx-border:rgba(183,154,255,.17);--fx-shadow:0 22px 65px rgba(0,0,0,.32)}
+html{scroll-behavior:smooth;background:var(--fx-bg)!important}
+body{overflow-x:hidden!important;position:relative!important;background:var(--fx-bg)!important}
 body::before{content:"";position:fixed;inset:0;z-index:-20;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 8% 18%,rgba(15,105,115,.17),transparent 67%),radial-gradient(ellipse 85% 70% at 92% 35%,rgba(47,70,165,.17),transparent 69%),radial-gradient(ellipse 90% 75% at 20% 72%,rgba(105,43,145,.12),transparent 72%),linear-gradient(145deg,#07131c 0%,#0a1126 38%,#0b0d25 67%,#081221 100%)!important}
-
-/* Remove completamente fundos e pseudo-fundos das áreas grandes. */
-#home,#servicos,#sobre,#depoimentos,#ebooks-area,#gemini-acesso,#contato,.contact-section,.footer,
-.hero-section,.services-section,.about-section,.testimonials-section,section,footer{
- background:transparent!important;background-color:transparent!important;background-image:none!important;
- border-top:0!important;border-bottom:0!important;box-shadow:none!important;outline:0!important;
-}
-#home::before,#home::after,#servicos::before,#servicos::after,#sobre::before,#sobre::after,#depoimentos::before,#depoimentos::after,
-#ebooks-area::before,#ebooks-area::after,#gemini-acesso::before,#gemini-acesso::after,#contato::before,#contato::after,
-.contact-section::before,.contact-section::after,.footer::before,.footer::after,
-.hero-section::before,.hero-section::after,.services-section::before,.services-section::after,.about-section::before,.about-section::after,.testimonials-section::before,.testimonials-section::after{
- content:none!important;display:none!important;background:none!important;
-}
-
-/* O antigo fundo do hero também não pode formar uma faixa própria. */
+#home,#servicos,#sobre,#depoimentos,#ebooks-area,#gemini-acesso,#contato,.contact-section,.footer,.hero-section,.services-section,.about-section,.testimonials-section,section,footer{background:transparent!important;background-color:transparent!important;background-image:none!important;border-top:0!important;border-bottom:0!important;box-shadow:none!important;outline:0!important}
+#home::before,#home::after,#servicos::before,#servicos::after,#sobre::before,#sobre::after,#depoimentos::before,#depoimentos::after,#ebooks-area::before,#ebooks-area::after,#gemini-acesso::before,#gemini-acesso::after,#contato::before,#contato::after,.contact-section::before,.contact-section::after,.footer::before,.footer::after,.hero-section::before,.hero-section::after,.services-section::before,.services-section::after,.about-section::before,.about-section::after,.testimonials-section::before,.testimonials-section::after{content:none!important;display:none!important;background:none!important}
 #home .hero-background,#home .hero-overlay,#home .hero-particles{background:transparent!important;background-image:none!important;box-shadow:none!important;border:0!important}
-#home .hero-background{opacity:1!important}
+body>main,body>.page-wrapper,body>.site-wrapper,main{background:transparent!important;background-image:none!important}section+section{margin-top:0!important;border-top:0!important}
 
-/* Mantém somente os componentes como superfícies; nunca a seção inteira. */
-.service-card,.testimonial-card,.pricing-card,.contact-card,.ebook-card,.eb-card,.about-image,.gemini-card{
- background:rgba(18,20,42,.72)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(255,255,255,.10)!important;
- transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
-}
-.service-card:hover,.testimonial-card:hover,.pricing-card:hover{transform:translateY(-4px);box-shadow:var(--fx-shadow);border-color:rgba(214,59,199,.28)!important}
-
-#mainNav{background:rgba(4,5,14,.78)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
-.footer{background:rgba(4,5,12,.30)!important}
-
-/* Garantia contra qualquer faixa inserida como filho direto entre seções. */
-body>main,body>.page-wrapper,body>.site-wrapper,main{background:transparent!important;background-image:none!important}
-section+section{margin-top:0!important;border-top:0!important}
-
-.ale-brand-animated{background:linear-gradient(90deg,#fff,#b8d7ff 32%,#bd8cff 58%,#fff)!important;background-size:220% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;animation:andreiaGlow 7s ease-in-out infinite!important}
+/* Identidade Andreia: mais autoral, sofisticada e menos parecida com a página-base */
+#mainNav{background:rgba(5,7,20,.68)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;border-bottom:1px solid rgba(255,255,255,.055)!important}
+#mainNav .navbar-brand strong{font-size:27px!important;letter-spacing:-.8px!important}
+.ale-brand-animated{background:linear-gradient(90deg,#fff 0%,#b7d9ff 28%,#c273ff 57%,#ff70d5 76%,#fff 100%)!important;background-size:240% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;animation:andreiaGlow 7s ease-in-out infinite!important}
 @keyframes andreiaGlow{0%,100%{background-position:100% 50%}50%{background-position:0% 50%}}
+
+#home{min-height:100vh!important;padding-top:74px!important}
+#home>.container{max-width:1320px!important}
+#home .hero-title{font-size:clamp(48px,5.1vw,78px)!important;line-height:1.02!important;letter-spacing:-2.4px!important;font-weight:800!important}
+#home .hero-title .text-accent-green{background:linear-gradient(90deg,#fff,#c7b1ff 48%,#e34ecb)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+#home .hero-subtitle{max-width:690px!important;font-size:19px!important;line-height:1.72!important;color:rgba(238,239,247,.78)!important}
+#home .image-container{transform:translateY(-8px)!important}
+#home .hero-photo{filter:saturate(.96) contrast(1.02)!important}
+
+.section-title{font-size:clamp(36px,4vw,56px)!important;letter-spacing:-1.8px!important;line-height:1.08!important}
+.section-subtitle{font-size:17px!important;line-height:1.65!important;color:rgba(235,235,245,.67)!important;max-width:720px!important;margin-left:auto!important;margin-right:auto!important}
+#servicos,#sobre,#depoimentos,#ebooks-area,#gemini-acesso,.contact-section{padding-top:92px!important;padding-bottom:92px!important}
+
+/* Cards com linguagem visual nova: vidro escuro, borda luminosa e cantos mais elegantes */
+.service-card,.testimonial-card,.pricing-card,.contact-card,.ebook-card,.eb-card,.gemini-card{background:linear-gradient(145deg,rgba(25,29,57,.78),rgba(12,15,33,.72))!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;border:1px solid var(--fx-border)!important;border-radius:24px!important;box-shadow:0 18px 60px rgba(0,0,0,.18)!important;transition:transform .34s cubic-bezier(.22,1,.36,1),box-shadow .34s ease,border-color .34s ease!important}
+.service-card:hover,.testimonial-card:hover,.pricing-card:hover,.ebook-card:hover,.eb-card:hover{transform:translateY(-7px)!important;box-shadow:0 26px 80px rgba(0,0,0,.30),0 0 42px rgba(122,92,255,.08)!important;border-color:rgba(214,92,225,.32)!important}
+.service-card{overflow:hidden!important;position:relative!important}
+.service-card::after{content:""!important;display:block!important;position:absolute!important;left:22px!important;right:22px!important;top:0!important;height:1px!important;background:linear-gradient(90deg,transparent,rgba(213,91,232,.62),rgba(80,158,255,.48),transparent)!important;pointer-events:none!important}
+.service-icon{box-shadow:0 12px 32px rgba(0,0,0,.20)!important}
+.service-title{letter-spacing:-.5px!important}
+
+#sobre .about-image{border-radius:30px!important;overflow:hidden!important;box-shadow:0 30px 90px rgba(0,0,0,.28),0 0 55px rgba(103,76,220,.08)!important}
+#sobre .about-content{padding-left:12px!important}
+#sobre .achievement-item{background:rgba(17,21,43,.52)!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:18px!important;padding:14px 16px!important}
+#depoimentos .testimonial-card{min-height:300px!important}
+.footer{background:rgba(4,5,12,.30)!important;border-top:1px solid rgba(255,255,255,.055)!important}
+
+/* Botões mais próprios da nova identidade */
+.btn,.service-btn,.cta-button,.whatsapp-btn,a[class*="btn"]{border-radius:999px!important;transition:transform .22s ease,filter .22s ease,box-shadow .22s ease!important}
+.btn:hover,.service-btn:hover,.cta-button:hover,.whatsapp-btn:hover,a[class*="btn"]:hover{transform:translateY(-2px)!important;filter:brightness(1.07)!important}
+
+@media(max-width:991px){#home .hero-title{font-size:clamp(42px,9vw,64px)!important;letter-spacing:-1.5px!important}#home .hero-subtitle{font-size:17px!important}#servicos,#sobre,#depoimentos,#ebooks-area,#gemini-acesso,.contact-section{padding-top:72px!important;padding-bottom:72px!important}.service-card,.testimonial-card,.pricing-card,.contact-card,.ebook-card,.eb-card,.gemini-card{border-radius:20px!important}}
+@media(max-width:600px){#mainNav .navbar-brand strong{font-size:23px!important}.section-title{font-size:34px!important;letter-spacing:-1px!important}#home{padding-top:64px!important}.service-card{border-radius:18px!important}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
