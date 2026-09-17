@@ -17,5 +17,5 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
-  return <iframe className="original-frame" src="/original/index.html?v=gemini-alinhado-8" title="Ale Marques - Especialista em Redes Sociais" />
+  return <iframe className="original-frame" src="/original/index.html?v=gemini-olhos-alinhados-9" title="Ale Marques - Especialista em Redes Sociais" />
 }
