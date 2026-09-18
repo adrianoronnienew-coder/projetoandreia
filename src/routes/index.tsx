@@ -108,7 +108,7 @@ function HomePage() {
           <li><span>2</span><p>No WhatsApp, toque em <strong>Seguir</strong>.</p></li>
           <li><span>3</span><p>Volte para esta página. O download começará automaticamente, em até 10 segundos.</p></li>
         </ol>
-        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR E SEGUIR O CANAL</a>
+        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">INSCREVA-SE AGORA NO CANAL E BAIXE</a>
         <button class="andreia-dialog-later" type="button" data-dialog-close>Agora não</button>
       </div>
     `
@@ -140,17 +140,10 @@ function HomePage() {
       download.click()
       download.remove()
     }
-    const markChannelVisited = () => {
-      if (downloadPending) channelVisited = true
-    }
-    const downloadOnReturn = () => {
-      if (downloadPending && channelVisited) startDownload()
-    }
-    window.addEventListener('blur', markChannelVisited)
-    window.addEventListener('focus', downloadOnReturn)
     doc.addEventListener('visibilitychange', () => {
-      if (doc.hidden) markChannelVisited()
-      else downloadOnReturn()
+      if (!downloadPending) return
+      if (doc.hidden) channelVisited = true
+      else if (channelVisited) startDownload()
     })
     channelLink?.addEventListener('click', () => {
       downloadPending = true
@@ -335,7 +328,9 @@ function HomePage() {
       .andreia-dialog-steps li>span{display:grid!important;place-items:center!important;width:28px!important;height:28px!important;border-radius:50%!important;background:#ffa600!important;color:#151515!important;font-size:12px!important;font-weight:900!important}
       .andreia-dialog-steps p{margin:3px 0 0!important;color:rgba(255,255,255,.72)!important;font-size:14px!important;line-height:1.45!important}
       .andreia-dialog-steps strong{color:#fff!important;font-weight:800!important}
-      .andreia-dialog-panel>a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:52px!important;border-radius:4px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-size:13px!important;font-weight:900!important}
+      .andreia-dialog-panel>a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:52px!important;padding:10px 18px!important;border-radius:4px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-size:13px!important;font-weight:900!important;animation:andreia-channel-pulse 1.4s ease-in-out infinite!important}
+      @keyframes andreia-channel-pulse{0%,100%{transform:scale(1);filter:brightness(1);box-shadow:0 0 0 0 rgba(32,195,75,.38)}50%{transform:scale(1.025);filter:brightness(1.1);box-shadow:0 0 0 8px rgba(32,195,75,0)}}
+      @media (prefers-reduced-motion:reduce){.andreia-dialog-panel>a{animation:none!important}}
       .andreia-dialog-later{margin-top:13px!important;padding:7px 12px!important;border:0!important;background:transparent!important;color:rgba(255,255,255,.58)!important;font-size:12px!important;cursor:pointer!important}
 
       @keyframes andreiaHalo{0%,100%{opacity:.46;transform:scale(.96)}50%{opacity:.72;transform:scale(1.02)}}
