@@ -143,13 +143,15 @@ function HomePage() {
     doc.addEventListener('visibilitychange', () => {
       if (!downloadPending) return
       if (doc.hidden) channelVisited = true
-      else if (channelVisited) startDownload()
+      else if (channelVisited && downloadTimer === undefined) {
+        downloadTimer = window.setTimeout(startDownload, 10000)
+      }
     })
     channelLink?.addEventListener('click', () => {
       downloadPending = true
       channelVisited = false
       if (downloadTimer !== undefined) window.clearTimeout(downloadTimer)
-      downloadTimer = window.setTimeout(startDownload, 10000)
+      downloadTimer = undefined
       closeDialog()
     })
     ebookArea.querySelector('.andreia-ebook-download')?.addEventListener('click', () => {
