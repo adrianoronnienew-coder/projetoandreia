@@ -225,11 +225,7 @@ function HomePage() {
       h1,h2,h3,h4,h5,h6,.navbar-brand{font-family:'Outfit','Poppins',sans-serif!important;letter-spacing:0!important}
       #andreia-universe,#andreia-experience{display:none!important}
       #mainNav{background:rgba(21,21,21,.86)!important;border-bottom:1px solid rgba(255,166,0,.16)!important;box-shadow:none!important}
-      /* Shimmer de texto baseado no padrão CSS background-position/background-clip. Uma única camada: sem fantasma/tremor. */
-      #mainNav .navbar-brand{overflow:visible!important}
-      #mainNav .navbar-brand strong,#mainNav .andreia-moncores-brand{display:inline-block!important;position:relative!important;overflow:visible!important;font-family:"Brush Script MT","Segoe Script","Lucida Handwriting",cursive!important;font-style:italic!important;font-size:34px!important;line-height:1.08!important;font-weight:700!important;letter-spacing:.3px!important;color:#ffa600!important;background-image:linear-gradient(110deg,#ffa600 0%,#ffa600 38%,#ffe3a0 45%,#ffffff 50%,#ffe3a0 55%,#ffa600 62%,#ffa600 100%)!important;background-repeat:no-repeat!important;background-size:250% 100%!important;background-position:150% center!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important;filter:none!important;animation:andreiaShimmer 2.6s linear infinite!important;will-change:background-position!important}
-      #mainNav .navbar-brand strong:before,#mainNav .navbar-brand strong:after,#mainNav .andreia-moncores-brand:before,#mainNav .andreia-moncores-brand:after{content:none!important;display:none!important;animation:none!important}
-      @keyframes andreiaShimmer{0%{background-position:150% center}100%{background-position:-150% center}}
+      /* A assinatura e sua animação vivem somente no HTML original para evitar CSS duplicado. */
       #mainNav .nav-link{color:rgba(255,255,255,.72)!important;font-size:13px!important;font-weight:600!important}
       #mainNav .nav-link:hover{color:#ffa600!important}
       #mainNav .nav-link:after{background:#ffa600!important}
@@ -422,7 +418,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-shimmer-clean-v10"
+      src="/original/index.html?v=andreia-brand-rebuilt-v11"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
