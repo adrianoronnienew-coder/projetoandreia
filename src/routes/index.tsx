@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import andreiaProfile from '@/assets/andreia-profile-new.png.asset.json'
 import andreiaStudio from '@/assets/andreia-studio.png.asset.json'
+import tiktokGuide from '@/assets/guia-tiktok-do-zero.pdf.asset.json'
+import tiktokGuideCover from '@/assets/tiktok-do-zero-capa.jpg.asset.json'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -54,6 +56,79 @@ function HomePage() {
       aboutPhoto.src = andreiaStudio.url
       aboutPhoto.alt = 'Andreia em seu estúdio de criação de conteúdo'
     }
+
+    const oldEbookArea = doc.getElementById('ebooks-area')
+    if (oldEbookArea) oldEbookArea.remove()
+
+    const ebookArea = doc.createElement('section')
+    ebookArea.id = 'ebooks-area'
+    ebookArea.setAttribute('aria-labelledby', 'ebook-title')
+    ebookArea.innerHTML = `
+      <div class="andreia-ebook-inner">
+        <div class="andreia-ebook-copy">
+          <span class="andreia-ebook-kicker">E-BOOK GRATUITO</span>
+          <h2 id="ebook-title">TikTok do Zero</h2>
+          <p class="andreia-ebook-lead">Um guia prático para criar sua conta, configurar seu perfil e publicar conteúdos que engajam.</p>
+          <ul class="andreia-ebook-list">
+            <li>Estratégias simples para começar</li>
+            <li>Modelos de conteúdo e ganchos</li>
+            <li>Desafio prático de 7 dias</li>
+          </ul>
+          <button class="andreia-ebook-download" type="button">RECEBER MEU E-BOOK <span aria-hidden="true">↓</span></button>
+          <small>Download gratuito em PDF.</small>
+        </div>
+        <div class="andreia-ebook-cover">
+          <img src="${tiktokGuideCover.url}" alt="Capa do e-book TikTok do Zero — Guia Prático para Iniciantes">
+        </div>
+      </div>
+    `
+
+    const ebookAnchor = doc.getElementById('gemini-acesso')
+    const aboutSection = doc.getElementById('sobre')
+    if (ebookAnchor) ebookAnchor.insertAdjacentElement('afterend', ebookArea)
+    else if (aboutSection) aboutSection.insertAdjacentElement('beforebegin', ebookArea)
+    else doc.querySelector('main')?.appendChild(ebookArea)
+
+    const channelDialog = doc.createElement('div')
+    channelDialog.id = 'andreia-channel-dialog'
+    channelDialog.setAttribute('role', 'dialog')
+    channelDialog.setAttribute('aria-modal', 'true')
+    channelDialog.setAttribute('aria-labelledby', 'channel-dialog-title')
+    channelDialog.setAttribute('aria-hidden', 'true')
+    channelDialog.innerHTML = `
+      <div class="andreia-dialog-backdrop" data-dialog-close></div>
+      <div class="andreia-dialog-panel">
+        <button class="andreia-dialog-close" type="button" aria-label="Fechar" data-dialog-close>×</button>
+        <span class="andreia-dialog-icon" aria-hidden="true"><i class="fab fa-whatsapp"></i></span>
+        <span class="andreia-dialog-kicker">DOWNLOAD INICIADO</span>
+        <h3 id="channel-dialog-title">Receba mais dicas gratuitas</h3>
+        <p>Entre no canal da Andreia no WhatsApp para acompanhar novos conteúdos e oportunidades.</p>
+        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR NO CANAL</a>
+        <button class="andreia-dialog-later" type="button" data-dialog-close>Agora não</button>
+      </div>
+    `
+    doc.body.appendChild(channelDialog)
+
+    const closeDialog = () => {
+      channelDialog.classList.remove('is-open')
+      channelDialog.setAttribute('aria-hidden', 'true')
+    }
+    channelDialog.querySelectorAll<HTMLElement>('[data-dialog-close]').forEach((control) => {
+      control.addEventListener('click', closeDialog)
+    })
+    ebookArea.querySelector('.andreia-ebook-download')?.addEventListener('click', () => {
+      const download = doc.createElement('a')
+      download.href = tiktokGuide.url
+      download.download = 'TikTok-do-Zero-Guia-Pratico.pdf'
+      download.target = '_blank'
+      download.rel = 'noopener'
+      doc.body.appendChild(download)
+      download.click()
+      download.remove()
+      channelDialog.classList.add('is-open')
+      channelDialog.setAttribute('aria-hidden', 'false')
+      window.setTimeout(() => channelDialog.querySelector<HTMLAnchorElement>('a')?.focus(), 100)
+    })
 
     const heroContent = doc.querySelector('#home .hero-content')
     if (heroContent && !doc.getElementById('andreia-hero-label')) {
@@ -195,6 +270,34 @@ function HomePage() {
       .footer h5,.footer h6{color:#ffa600!important;background:none!important}
       .footer .social-link{background:#ffa600!important;color:#151515!important}
 
+      #ebooks-area{position:relative!important;padding:96px 0!important;background:#111!important;overflow:hidden!important}
+      #ebooks-area .andreia-ebook-inner{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(300px,430px)!important;align-items:center!important;gap:clamp(54px,7vw,110px)!important;width:min(1160px,calc(100% - 64px))!important;margin:0 auto!important}
+      .andreia-ebook-copy{position:relative!important;z-index:2!important}
+      .andreia-ebook-kicker{display:inline-block!important;margin-bottom:16px!important;color:#ffa600!important;font-size:12px!important;font-weight:900!important;letter-spacing:2px!important}
+      .andreia-ebook-copy h2{margin:0 0 20px!important;color:#fff!important;font-size:clamp(46px,5.4vw,76px)!important;line-height:.95!important;font-weight:800!important}
+      .andreia-ebook-lead{max-width:620px!important;margin:0 0 25px!important;color:rgba(255,255,255,.7)!important;font-size:18px!important;line-height:1.65!important}
+      .andreia-ebook-list{display:grid!important;gap:10px!important;margin:0 0 30px!important;padding:0!important;list-style:none!important;color:#fff!important}
+      .andreia-ebook-list li{position:relative!important;padding-left:28px!important;font-size:15px!important}
+      .andreia-ebook-list li:before{content:'✓'!important;position:absolute!important;left:0!important;top:0!important;color:#20c34b!important;font-weight:900!important}
+      .andreia-ebook-download{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:14px!important;min-height:56px!important;padding:0 28px!important;border:0!important;border-radius:4px!important;background:#20c34b!important;color:#07130a!important;font:800 13px 'Outfit','Poppins',sans-serif!important;letter-spacing:.6px!important;cursor:pointer!important;box-shadow:0 14px 34px rgba(32,195,75,.2)!important;transition:transform .25s ease,filter .25s ease!important}
+      .andreia-ebook-download:hover{transform:translateY(-3px)!important;filter:brightness(1.08)!important}
+      .andreia-ebook-download span{font-size:20px!important}
+      .andreia-ebook-copy>small{display:block!important;margin-top:12px!important;color:rgba(255,255,255,.48)!important;font-size:12px!important}
+      .andreia-ebook-cover{position:relative!important;padding:16px!important;border:1px solid rgba(255,166,0,.3)!important;background:#191919!important;box-shadow:0 32px 80px rgba(0,0,0,.4)!important;transform:rotate(2deg)!important;transition:transform .35s ease!important}
+      .andreia-ebook-cover:hover{transform:rotate(0deg) translateY(-5px)!important}
+      .andreia-ebook-cover img{display:block!important;width:100%!important;height:auto!important}
+      #andreia-channel-dialog{position:fixed!important;inset:0!important;z-index:10050!important;display:none!important;place-items:center!important;padding:20px!important}
+      #andreia-channel-dialog.is-open{display:grid!important}
+      .andreia-dialog-backdrop{position:absolute!important;inset:0!important;background:rgba(0,0,0,.78)!important;backdrop-filter:blur(6px)!important}
+      .andreia-dialog-panel{position:relative!important;z-index:1!important;width:min(440px,100%)!important;padding:42px 34px 30px!important;border:1px solid rgba(255,166,0,.32)!important;border-radius:6px!important;background:#151515!important;color:#fff!important;text-align:center!important;box-shadow:0 30px 90px rgba(0,0,0,.58)!important}
+      .andreia-dialog-close{position:absolute!important;top:10px!important;right:12px!important;width:36px!important;height:36px!important;padding:0!important;border:0!important;background:transparent!important;color:rgba(255,255,255,.65)!important;font-size:28px!important;line-height:1!important;cursor:pointer!important}
+      .andreia-dialog-icon{display:grid!important;place-items:center!important;width:58px!important;height:58px!important;margin:0 auto 18px!important;border-radius:50%!important;background:#20c34b!important;color:#07130a!important;font-size:29px!important}
+      .andreia-dialog-kicker{color:#ffa600!important;font-size:10px!important;font-weight:900!important;letter-spacing:1.8px!important}
+      .andreia-dialog-panel h3{margin:9px 0 12px!important;color:#fff!important;font-size:30px!important;line-height:1.08!important}
+      .andreia-dialog-panel p{margin:0 0 24px!important;color:rgba(255,255,255,.68)!important;font-size:15px!important;line-height:1.55!important}
+      .andreia-dialog-panel>a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:52px!important;border-radius:4px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-size:13px!important;font-weight:900!important}
+      .andreia-dialog-later{margin-top:13px!important;padding:7px 12px!important;border:0!important;background:transparent!important;color:rgba(255,255,255,.58)!important;font-size:12px!important;cursor:pointer!important}
+
       @keyframes andreiaHalo{0%,100%{opacity:.46;transform:scale(.96)}50%{opacity:.72;transform:scale(1.02)}}
       @keyframes andreiaCtaGlow{0%,100%{box-shadow:0 12px 32px rgba(32,195,75,.16)}50%{box-shadow:0 12px 42px rgba(32,195,75,.34)}}
       @media(max-width:991px){
@@ -216,6 +319,7 @@ function HomePage() {
         #sobre .row{gap:52px!important}
         #sobre .about-content{padding-top:0!important}
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
+        #ebooks-area .andreia-ebook-inner{grid-template-columns:minmax(0,1fr) minmax(260px,340px)!important;gap:42px!important}
       }
       @media(max-width:600px){
         #home{padding:80px 0 42px!important}
@@ -241,6 +345,16 @@ function HomePage() {
         #sobre .about-badge{bottom:-16px!important;max-width:calc(100% - 24px)!important;min-height:34px!important;padding:8px 11px!important}
         #sobre .about-badge i{font-size:12px!important}
         #sobre .about-badge span{font-size:11px!important;white-space:normal!important;text-align:center!important}
+        #ebooks-area{padding:70px 0!important}
+        #ebooks-area .andreia-ebook-inner{grid-template-columns:1fr!important;width:min(100% - 32px,520px)!important;gap:42px!important}
+        .andreia-ebook-copy{text-align:center!important}
+        .andreia-ebook-copy h2{font-size:42px!important}
+        .andreia-ebook-lead{font-size:15px!important}
+        .andreia-ebook-list{width:max-content!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;text-align:left!important}
+        .andreia-ebook-download{width:100%!important}
+        .andreia-ebook-cover{width:min(82%,340px)!important;margin:0 auto!important;transform:rotate(1deg)!important}
+        .andreia-dialog-panel{padding:40px 22px 25px!important}
+        .andreia-dialog-panel h3{font-size:26px!important}
       }
       @media(prefers-reduced-motion:reduce){#home .image-glow,#andreia-hero-cta,#home .social-node{animation:none!important}}
     `
