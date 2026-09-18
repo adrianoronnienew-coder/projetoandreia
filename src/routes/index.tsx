@@ -100,10 +100,10 @@ function HomePage() {
       <div class="andreia-dialog-panel">
         <button class="andreia-dialog-close" type="button" aria-label="Fechar" data-dialog-close>×</button>
         <span class="andreia-dialog-icon" aria-hidden="true"><i class="fab fa-whatsapp"></i></span>
-        <span class="andreia-dialog-kicker">DOWNLOAD INICIADO</span>
+        <span class="andreia-dialog-kicker">E-BOOK GRATUITO</span>
         <h3 id="channel-dialog-title">Receba mais dicas gratuitas</h3>
-        <p>Entre no canal da Andreia no WhatsApp para acompanhar novos conteúdos e oportunidades.</p>
-        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR NO CANAL</a>
+        <p>Entre no canal da Andreia no WhatsApp para acompanhar novos conteúdos e iniciar o download.</p>
+        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR NO CANAL E INICIAR BAIXAR</a>
         <button class="andreia-dialog-later" type="button" data-dialog-close>Agora não</button>
       </div>
     `
@@ -116,7 +116,8 @@ function HomePage() {
     channelDialog.querySelectorAll<HTMLElement>('[data-dialog-close]').forEach((control) => {
       control.addEventListener('click', closeDialog)
     })
-    ebookArea.querySelector('.andreia-ebook-download')?.addEventListener('click', () => {
+    const channelLink = channelDialog.querySelector<HTMLAnchorElement>('a')
+    channelLink?.addEventListener('click', () => {
       const download = doc.createElement('a')
       download.href = tiktokGuide.url
       download.download = 'TikTok-do-Zero-Guia-Pratico.pdf'
@@ -125,9 +126,12 @@ function HomePage() {
       doc.body.appendChild(download)
       download.click()
       download.remove()
+      closeDialog()
+    })
+    ebookArea.querySelector('.andreia-ebook-download')?.addEventListener('click', () => {
       channelDialog.classList.add('is-open')
       channelDialog.setAttribute('aria-hidden', 'false')
-      window.setTimeout(() => channelDialog.querySelector<HTMLAnchorElement>('a')?.focus(), 100)
+      window.setTimeout(() => channelLink?.focus(), 100)
     })
 
     const heroContent = doc.querySelector('#home .hero-content')
