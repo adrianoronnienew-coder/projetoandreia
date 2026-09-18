@@ -44,16 +44,6 @@ function HomePage() {
     }
 
     rebrand()
-    const brandName = doc.querySelector<HTMLElement>('#mainNav .navbar-brand strong')
-    if (brandName) {
-      brandName.textContent = 'Andreia Moncores'
-      brandName.classList.add('andreia-moncores-brand')
-    }
-    new MutationObserver(() => {
-      rebrand()
-      const currentBrand = doc.querySelector<HTMLElement>('#mainNav .navbar-brand strong')
-      if (currentBrand && currentBrand.textContent?.trim() !== 'Andreia Moncores') currentBrand.textContent = 'Andreia Moncores'
-    }).observe(doc.body, { childList: true, subtree: true })
 
     const heroPhoto = doc.querySelector<HTMLImageElement>('#home .hero-photo')
     if (heroPhoto) {
@@ -418,7 +408,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-brand-rebuilt-v11"
+      src="/original/index.html?v=andreia-signature-from-zero-v12"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
