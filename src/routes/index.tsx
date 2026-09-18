@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import { useRef, useState } from 'react'
 import andreiaProfile from '@/assets/andreia-profile-new.png.asset.json'
 import andreiaStudio from '@/assets/andreia-studio.png.asset.json'
 import tiktokGuide from '@/assets/guia-tiktok-do-zero.pdf.asset.json'
@@ -21,6 +21,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   const frameRef = useRef<HTMLIFrameElement>(null)
+  const [ready, setReady] = useState(false)
   const customize = (frame: HTMLIFrameElement) => {
     const doc = frame.contentDocument
     if (!doc || doc.getElementById('andreia-campaign-v2')) return
@@ -410,15 +411,7 @@ function HomePage() {
     doc.head.appendChild(style)
   }
 
-  useEffect(() => {
-    const applyCustomization = () => {
-      const frame = frameRef.current
-      if (frame?.contentDocument?.body) customize(frame)
-    }
-    applyCustomization()
-    const timer = window.setInterval(applyCustomization, 250)
-    const stopTimer = window.setTimeout(() => window.clearInterval(timer), 5000)
-    return () => {
+  return () => {
       window.clearInterval(timer)
       window.clearTimeout(stopTimer)
     }
@@ -430,7 +423,11 @@ function HomePage() {
       className="original-frame"
       src="/original/index.html?v=andreia-moncores-mirror-v9"
       title="Andreia Moncores | Especialista em Redes Sociais"
-      onLoad={(event) => customize(event.currentTarget)}
+      style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
+      onLoad={(event) => {
+        customize(event.currentTarget)
+        requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)))
+      }}
     />
   )
 }
