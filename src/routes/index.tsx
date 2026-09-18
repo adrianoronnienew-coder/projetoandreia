@@ -8,9 +8,9 @@ import tiktokGuideCover from '@/assets/tiktok-do-zero-capa.jpg.asset.json'
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Andreia | Especialista em Redes Sociais' },
+      { title: 'Andreia Moncores | Especialista em Redes Sociais' },
       { name: 'description', content: 'Estratégia, conteúdo e crescimento nas redes sociais com Andreia.' },
-      { property: 'og:title', content: 'Andreia | Especialista em Redes Sociais' },
+      { property: 'og:title', content: 'Andreia Moncores | Especialista em Redes Sociais' },
       { property: 'og:description', content: 'Fortaleça sua presença digital com estratégia, conteúdo e posicionamento.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary_large_image' },
@@ -25,7 +25,7 @@ function HomePage() {
     const doc = frame.contentDocument
     if (!doc || doc.getElementById('andreia-campaign-v1')) return
 
-    doc.title = 'Andreia | Especialista em Redes Sociais'
+    doc.title = 'Andreia Moncores | Especialista em Redes Sociais'
 
     const rebrand = () => {
       const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
@@ -215,7 +215,10 @@ function HomePage() {
       h1,h2,h3,h4,h5,h6,.navbar-brand{font-family:'Outfit','Poppins',sans-serif!important;letter-spacing:0!important}
       #andreia-universe,#andreia-experience{display:none!important}
       #mainNav{background:rgba(21,21,21,.86)!important;border-bottom:1px solid rgba(255,166,0,.16)!important;box-shadow:none!important}
-      #mainNav .navbar-brand strong{font-family:'Outfit','Poppins',sans-serif!important;font-style:normal!important;font-size:24px!important;color:#ffa600!important;background:none!important;text-shadow:none!important;animation:none!important}
+      #mainNav .navbar-brand strong{position:relative!important;display:inline-block!important;overflow:hidden!important;font-family:'Playfair Display','Cormorant Garamond','Georgia',serif!important;font-style:italic!important;font-size:32px!important;line-height:1!important;font-weight:700!important;letter-spacing:.15px!important;color:#fff!important;background:linear-gradient(90deg,#fff 0%,#fff1fb 38%,#ffc6ec 52%,#fff 66%,#fff 100%)!important;background-size:230% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;text-shadow:0 0 18px rgba(255,166,214,.12)!important;animation:andreiaNameMirror 4.2s linear infinite!important}
+      #mainNav .navbar-brand strong:after{content:''!important;position:absolute!important;top:-30%!important;bottom:-30%!important;width:32px!important;left:-45px!important;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),rgba(255,255,255,.95),rgba(255,255,255,.16),transparent)!important;transform:skewX(-18deg)!important;animation:andreiaNameSweep 4.2s ease-in-out infinite!important;pointer-events:none!important}
+      @keyframes andreiaNameMirror{0%,100%{background-position:115% 50%}50%{background-position:-15% 50%}}
+      @keyframes andreiaNameSweep{0%,14%{left:-45px;opacity:0}22%{opacity:1}56%{left:calc(100% + 20px);opacity:1}64%,100%{left:calc(100% + 20px);opacity:0}}
       #mainNav .nav-link{color:rgba(255,255,255,.72)!important;font-size:13px!important;font-weight:600!important}
       #mainNav .nav-link:hover{color:#ffa600!important}
       #mainNav .nav-link:after{background:#ffa600!important}
@@ -358,7 +361,7 @@ function HomePage() {
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
         #ebooks-area .andreia-ebook-inner{grid-template-columns:minmax(0,1fr) minmax(260px,340px)!important;gap:42px!important}
       }
-      @media(max-width:600px){
+      @media(max-width:600px){#mainNav .navbar-brand strong{font-size:27px!important}
         #home{padding:80px 0 42px!important}
         #home .image-container{width:min(330px,82vw)!important;height:min(410px,102vw)!important}
         #home .hero-image{margin:8px 0 44px!important}
@@ -417,7 +420,7 @@ function HomePage() {
       ref={frameRef}
       className="original-frame"
       src="/original/index.html?v=andreia-about-badge-v6"
-      title="Andreia | Especialista em Redes Sociais"
+      title="Andreia Moncores | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
   )
