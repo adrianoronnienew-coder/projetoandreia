@@ -4,7 +4,7 @@
 
 // Configuration
 const CONFIG = {
-    whatsappNumber: '5531989167511', // Substitua pelo número real
+    whatsappNumber: '554788371212', // Substitua pelo número real
     apiUrl: 'api/contact.php',
     whatsappMessages: {
         curso: 'Olá Ale! Tenho interesse na Formação Digital. Pode me enviar mais informações?',
