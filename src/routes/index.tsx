@@ -23,7 +23,7 @@ function HomePage() {
   const frameRef = useRef<HTMLIFrameElement>(null)
   const customize = (frame: HTMLIFrameElement) => {
     const doc = frame.contentDocument
-    if (!doc || doc.getElementById('andreia-campaign-v1')) return
+    if (!doc || doc.getElementById('andreia-campaign-v2')) return
 
     doc.title = 'Andreia Moncores | Especialista em Redes Sociais'
 
@@ -43,7 +43,16 @@ function HomePage() {
     }
 
     rebrand()
-    new MutationObserver(rebrand).observe(doc.body, { childList: true, subtree: true })
+    const brandName = doc.querySelector<HTMLElement>('#mainNav .navbar-brand strong')
+    if (brandName) {
+      brandName.textContent = 'Andreia Moncores'
+      brandName.classList.add('andreia-moncores-brand')
+    }
+    new MutationObserver(() => {
+      rebrand()
+      const currentBrand = doc.querySelector<HTMLElement>('#mainNav .navbar-brand strong')
+      if (currentBrand && currentBrand.textContent?.trim() !== 'Andreia Moncores') currentBrand.textContent = 'Andreia Moncores'
+    }).observe(doc.body, { childList: true, subtree: true })
 
     const heroPhoto = doc.querySelector<HTMLImageElement>('#home .hero-photo')
     if (heroPhoto) {
@@ -193,7 +202,7 @@ function HomePage() {
     }
 
     const style = doc.createElement('style')
-    style.id = 'andreia-campaign-v1'
+    style.id = 'andreia-campaign-v2'
     style.textContent = `
       :root{
         --primary-bg:#151515!important;
@@ -215,7 +224,7 @@ function HomePage() {
       h1,h2,h3,h4,h5,h6,.navbar-brand{font-family:'Outfit','Poppins',sans-serif!important;letter-spacing:0!important}
       #andreia-universe,#andreia-experience{display:none!important}
       #mainNav{background:rgba(21,21,21,.86)!important;border-bottom:1px solid rgba(255,166,0,.16)!important;box-shadow:none!important}
-      #mainNav .navbar-brand strong{position:relative!important;display:inline-block!important;overflow:hidden!important;font-family:'Playfair Display','Cormorant Garamond','Georgia',serif!important;font-style:italic!important;font-size:32px!important;line-height:1!important;font-weight:700!important;letter-spacing:.15px!important;color:#fff!important;background:linear-gradient(90deg,#fff 0%,#fff1fb 38%,#ffc6ec 52%,#fff 66%,#fff 100%)!important;background-size:230% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;text-shadow:0 0 18px rgba(255,166,214,.12)!important;animation:andreiaNameMirror 4.2s linear infinite!important}
+      #mainNav .navbar-brand strong{position:relative!important;display:inline-block!important;overflow:hidden!important;font-family:'Playfair Display','Cormorant Garamond','Georgia',serif!important;font-style:italic!important;font-size:34px!important;line-height:1.05!important;font-weight:700!important;letter-spacing:.15px!important;color:#ffa600!important;background:linear-gradient(90deg,#ffa600 0%,#ffbd3d 35%,#fff4c2 50%,#ffbd3d 64%,#ffa600 100%)!important;background-size:230% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;text-shadow:0 0 18px rgba(255,166,0,.18)!important;animation:andreiaNameMirror 4.2s linear infinite!important}
       #mainNav .navbar-brand strong:after{content:''!important;position:absolute!important;top:-30%!important;bottom:-30%!important;width:32px!important;left:-45px!important;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),rgba(255,255,255,.95),rgba(255,255,255,.16),transparent)!important;transform:skewX(-18deg)!important;animation:andreiaNameSweep 4.2s ease-in-out infinite!important;pointer-events:none!important}
       @keyframes andreiaNameMirror{0%,100%{background-position:115% 50%}50%{background-position:-15% 50%}}
       @keyframes andreiaNameSweep{0%,14%{left:-45px;opacity:0}22%{opacity:1}56%{left:calc(100% + 20px);opacity:1}64%,100%{left:calc(100% + 20px);opacity:0}}
@@ -419,7 +428,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-about-badge-v6"
+      src="/original/index.html?v=andreia-moncores-v7"
       title="Andreia Moncores | Especialista em Redes Sociais"
       onLoad={(event) => customize(event.currentTarget)}
     />
