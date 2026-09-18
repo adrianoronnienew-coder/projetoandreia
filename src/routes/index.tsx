@@ -102,8 +102,8 @@ function HomePage() {
         <span class="andreia-dialog-icon" aria-hidden="true"><i class="fab fa-whatsapp"></i></span>
         <span class="andreia-dialog-kicker">E-BOOK GRATUITO</span>
         <h3 id="channel-dialog-title">Receba mais dicas gratuitas</h3>
-        <p>Entre no canal da Andreia no WhatsApp para acompanhar novos conteúdos e iniciar o download.</p>
-        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR NO CANAL E INICIAR BAIXAR</a>
+        <p>Entre e siga o canal da Andreia no WhatsApp. O e-book será baixado ao voltar ou após 10 segundos.</p>
+        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR, SEGUIR O CANAL E BAIXAR</a>
         <button class="andreia-dialog-later" type="button" data-dialog-close>Agora não</button>
       </div>
     `
@@ -117,7 +117,15 @@ function HomePage() {
       control.addEventListener('click', closeDialog)
     })
     const channelLink = channelDialog.querySelector<HTMLAnchorElement>('a')
-    channelLink?.addEventListener('click', () => {
+    let downloadPending = false
+    let channelVisited = false
+    let downloadTimer: number | undefined
+    const startDownload = () => {
+      if (!downloadPending) return
+      downloadPending = false
+      if (downloadTimer !== undefined) window.clearTimeout(downloadTimer)
+      downloadTimer = undefined
+      channelVisited = false
       const download = doc.createElement('a')
       download.href = tiktokGuide.url
       download.download = 'TikTok-do-Zero-Guia-Pratico.pdf'
@@ -126,6 +134,24 @@ function HomePage() {
       doc.body.appendChild(download)
       download.click()
       download.remove()
+    }
+    const markChannelVisited = () => {
+      if (downloadPending) channelVisited = true
+    }
+    const downloadOnReturn = () => {
+      if (downloadPending && channelVisited) startDownload()
+    }
+    window.addEventListener('blur', markChannelVisited)
+    window.addEventListener('focus', downloadOnReturn)
+    doc.addEventListener('visibilitychange', () => {
+      if (doc.hidden) markChannelVisited()
+      else downloadOnReturn()
+    })
+    channelLink?.addEventListener('click', () => {
+      downloadPending = true
+      channelVisited = false
+      if (downloadTimer !== undefined) window.clearTimeout(downloadTimer)
+      downloadTimer = window.setTimeout(startDownload, 10000)
       closeDialog()
     })
     ebookArea.querySelector('.andreia-ebook-download')?.addEventListener('click', () => {
