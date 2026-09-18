@@ -102,8 +102,13 @@ function HomePage() {
         <span class="andreia-dialog-icon" aria-hidden="true"><i class="fab fa-whatsapp"></i></span>
         <span class="andreia-dialog-kicker">E-BOOK GRATUITO</span>
         <h3 id="channel-dialog-title">Receba mais dicas gratuitas</h3>
-        <p>Entre e siga o canal da Andreia no WhatsApp. O e-book será baixado ao voltar ou após 10 segundos.</p>
-        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR, SEGUIR O CANAL E BAIXAR</a>
+        <p class="andreia-dialog-intro">Siga estas etapas para receber o seu e-book:</p>
+        <ol class="andreia-dialog-steps">
+          <li><span>1</span><p>Clique no botão abaixo para entrar no canal.</p></li>
+          <li><span>2</span><p>No WhatsApp, toque em <strong>Seguir</strong>.</p></li>
+          <li><span>3</span><p>Volte para esta página. O download começará automaticamente, em até 10 segundos.</p></li>
+        </ol>
+        <a href="https://whatsapp.com/channel/0029VbDHbAj545usvXVmYC0q" target="_blank" rel="noopener noreferrer">ENTRAR E SEGUIR O CANAL</a>
         <button class="andreia-dialog-later" type="button" data-dialog-close>Agora não</button>
       </div>
     `
@@ -324,7 +329,12 @@ function HomePage() {
       .andreia-dialog-icon{display:grid!important;place-items:center!important;width:58px!important;height:58px!important;margin:0 auto 18px!important;border-radius:50%!important;background:#20c34b!important;color:#07130a!important;font-size:29px!important}
       .andreia-dialog-kicker{color:#ffa600!important;font-size:10px!important;font-weight:900!important;letter-spacing:1.8px!important}
       .andreia-dialog-panel h3{margin:9px 0 12px!important;color:#fff!important;font-size:30px!important;line-height:1.08!important}
-      .andreia-dialog-panel p{margin:0 0 24px!important;color:rgba(255,255,255,.68)!important;font-size:15px!important;line-height:1.55!important}
+      .andreia-dialog-panel .andreia-dialog-intro{margin:0 0 18px!important;color:rgba(255,255,255,.68)!important;font-size:15px!important;line-height:1.55!important}
+      .andreia-dialog-steps{display:grid!important;gap:12px!important;margin:0 0 24px!important;padding:0!important;list-style:none!important;text-align:left!important}
+      .andreia-dialog-steps li{display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;align-items:start!important;gap:10px!important}
+      .andreia-dialog-steps li>span{display:grid!important;place-items:center!important;width:28px!important;height:28px!important;border-radius:50%!important;background:#ffa600!important;color:#151515!important;font-size:12px!important;font-weight:900!important}
+      .andreia-dialog-steps p{margin:3px 0 0!important;color:rgba(255,255,255,.72)!important;font-size:14px!important;line-height:1.45!important}
+      .andreia-dialog-steps strong{color:#fff!important;font-weight:800!important}
       .andreia-dialog-panel>a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:52px!important;border-radius:4px!important;background:#20c34b!important;color:#07130a!important;text-decoration:none!important;font-size:13px!important;font-weight:900!important}
       .andreia-dialog-later{margin-top:13px!important;padding:7px 12px!important;border:0!important;background:transparent!important;color:rgba(255,255,255,.58)!important;font-size:12px!important;cursor:pointer!important}
 
