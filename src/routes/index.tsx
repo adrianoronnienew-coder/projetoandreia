@@ -46,6 +46,18 @@ function HomePage() {
 
     rebrand()
 
+    // Conteúdo crítico da seção Sobre é corrigido também em runtime.
+    // Assim a versão publicada não depende de uma cópia antiga do HTML estático.
+    const aboutSectionRuntime = doc.getElementById('sobre')
+    if (aboutSectionRuntime) {
+      aboutSectionRuntime.querySelectorAll<HTMLElement>('.about-text').forEach((paragraph) => {
+        paragraph.innerHTML = paragraph.innerHTML.replace(
+          /Olá! Eu sou a Andreia(?: Moncores)?,/g,
+          'Olá! Eu sou a Andreia Moncores,'
+        )
+      })
+    }
+
     const heroPhoto = doc.querySelector<HTMLImageElement>('#home .hero-photo')
     if (heroPhoto) {
       heroPhoto.src = andreiaProfile.url
@@ -447,7 +459,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-stable-load-v21"
+      src="/original/index.html?v=andreia-stable-load-v22"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
