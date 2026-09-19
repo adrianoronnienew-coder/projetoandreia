@@ -248,6 +248,29 @@ function HomePage() {
 
 
 
+      /* Desktop: mesma composição estável, porém com escala e largura maiores. */
+      @media(min-width:1100px){
+        #home>.container{width:calc(100% - 96px)!important;max-width:1500px!important;margin:0 auto!important}
+        #home .row{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;margin-left:0!important;margin-right:0!important}
+        #home .col-lg-6:first-child{width:52%!important;flex:0 0 52%!important;padding-left:0!important;padding-right:28px!important}
+        #home .col-lg-6:last-child{width:48%!important;flex:0 0 48%!important;padding-left:28px!important;padding-right:0!important}
+        #home .hero-title{max-width:820px!important;font-size:clamp(70px,5.2vw,96px)!important}
+        #home .hero-title .andreia-role{font-size:clamp(45px,3.55vw,66px)!important}
+        #home .hero-subtitle{max-width:700px!important;font-size:19px!important}
+        #home .hero-image{min-height:680px!important}
+        #home .image-container{width:min(590px,41vw)!important;height:min(710px,49vw)!important;max-height:730px!important}
+        #servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container,.fp-banner-section>.container,.gm-banner-section>.container{width:calc(100% - 96px)!important;max-width:1500px!important;margin-left:auto!important;margin-right:auto!important}
+        #servicos{padding-left:48px!important;padding-right:48px!important}
+        #ebooks-area .andreia-ebook-inner{width:calc(100% - 96px)!important;max-width:1420px!important}
+      }
+      @media(min-width:1600px){
+        #home>.container,#servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container,.fp-banner-section>.container,.gm-banner-section>.container{width:calc(100% - 140px)!important;max-width:1640px!important}
+        #home .hero-title{font-size:102px!important}
+        #home .hero-title .andreia-role{font-size:70px!important}
+        #home .image-container{width:630px!important;height:750px!important}
+        #ebooks-area .andreia-ebook-inner{width:calc(100% - 140px)!important;max-width:1540px!important}
+      }
+
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
       #servicos{padding-left:max(32px,calc((100vw - 1216px)/2))!important;padding-right:max(32px,calc((100vw - 1216px)/2))!important;box-sizing:border-box!important}
@@ -417,7 +440,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-stable-recovery-v19"
+      src="/original/index.html?v=andreia-desktop-balanced-v20"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
