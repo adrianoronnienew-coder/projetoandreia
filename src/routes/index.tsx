@@ -22,6 +22,7 @@ export const Route = createFileRoute('/')({
 function HomePage() {
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [ready, setReady] = useState(false)
+  const customizedRef = useRef(false)
   const customize = (frame: HTMLIFrameElement) => {
     const doc = frame.contentDocument
     if (!doc || doc.getElementById('andreia-campaign-v2')) return
@@ -424,27 +425,36 @@ function HomePage() {
   }
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      const frame = frameRef.current
-      if (frame) customize(frame)
-    }, 250)
-    const stopTimer = window.setTimeout(() => window.clearInterval(timer), 5000)
+    const frame = frameRef.current
+    if (!frame) return
 
-    return () => {
-      window.clearInterval(timer)
-      window.clearTimeout(stopTimer)
+    const applyOnce = () => {
+      if (customizedRef.current) return
+      const doc = frame.contentDocument
+      if (!doc?.body) return
+      customize(frame)
+      customizedRef.current = true
+      requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)))
     }
+
+    if (frame.contentDocument?.readyState === 'complete') applyOnce()
+    else frame.addEventListener('load', applyOnce, { once: true })
+
+    return () => frame.removeEventListener('load', applyOnce)
   }, [])
 
   return (
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-desktop-balanced-v20"
+      src="/original/index.html?v=andreia-stable-load-v21"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
-        customize(event.currentTarget)
+        if (!customizedRef.current) {
+          customize(event.currentTarget)
+          customizedRef.current = true
+        }
         requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)))
       }}
     />
