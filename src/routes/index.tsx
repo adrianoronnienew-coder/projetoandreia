@@ -4,6 +4,10 @@ import andreiaProfile from '@/assets/andreia-profile-new.png.asset.json'
 import andreiaStudio from '@/assets/andreia-studio.png.asset.json'
 import tiktokGuide from '@/assets/guia-tiktok-do-zero.pdf.asset.json'
 import tiktokGuideCover from '@/assets/tiktok-do-zero-capa.jpg.asset.json'
+import testimonialMarina from '@/assets/depoimento-marina.jpg'
+import testimonialFernanda from '@/assets/depoimento-fernanda.jpg'
+import testimonialJuliana from '@/assets/depoimento-juliana.jpg'
+import testimonialRenata from '@/assets/depoimento-renata.jpg'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -68,6 +72,56 @@ function HomePage() {
     if (aboutPhoto) {
       aboutPhoto.src = andreiaStudio.url
       aboutPhoto.alt = 'Andreia em seu estúdio de criação de conteúdo'
+    }
+
+    const testimonialsSection = doc.getElementById('depoimentos')
+    const testimonialsTrack = testimonialsSection?.querySelector<HTMLElement>('.testimonials-track')
+    const testimonialsSubtitle = testimonialsSection?.querySelector<HTMLElement>('.section-subtitle')
+    if (testimonialsSubtitle) {
+      testimonialsSubtitle.textContent = 'Experiências de quem aprendeu e evoluiu com a Andreia'
+    }
+    if (testimonialsTrack) {
+      const testimonials = [
+        {
+          name: 'Marina Costa',
+          service: 'Conteúdo para Redes',
+          photo: testimonialMarina,
+          text: 'Com a Andreia, consegui organizar minhas ideias e criar uma rotina de conteúdo muito mais clara e leve.',
+        },
+        {
+          name: 'Fernanda Silva',
+          service: 'Posicionamento Digital',
+          photo: testimonialFernanda,
+          text: 'As orientações da Andreia me ajudaram a apresentar meu trabalho com mais clareza, confiança e profissionalismo.',
+        },
+        {
+          name: 'Juliana Martins',
+          service: 'Estratégia de Conteúdo',
+          photo: testimonialJuliana,
+          text: 'A Andreia explica tudo de forma prática. Hoje sei o que comunicar e consigo produzir conteúdo com mais segurança.',
+        },
+        {
+          name: 'Renata Borges',
+          service: 'Presença Digital',
+          photo: testimonialRenata,
+          text: 'Depois do acompanhamento com a Andreia, meu perfil ficou mais coerente e minha comunicação muito mais objetiva.',
+        },
+      ]
+      const testimonialCards = [...testimonials, ...testimonials]
+        .map(
+          ({ name, service, photo, text }) => `
+            <article class="testimonial-card">
+              <div class="testimonial-header">
+                <div class="testimonial-avatar"><img src="${photo}" alt="Foto de ${name}" loading="lazy" width="72" height="72"></div>
+                <div class="testimonial-info"><h4>${name}</h4><p>${service}</p></div>
+              </div>
+              <div class="testimonial-text">“${text}”</div>
+              <div class="testimonial-rating" aria-label="5 estrelas"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+            </article>
+          `,
+        )
+        .join('')
+      testimonialsTrack.innerHTML = testimonialCards
     }
 
     const oldEbookArea = doc.getElementById('ebooks-area')
@@ -333,6 +387,8 @@ function HomePage() {
       #depoimentos .testimonials-carousel{margin-top:42px!important}
       #depoimentos .testimonial-card{border-radius:4px!important;background:#191919!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:none!important}
       #depoimentos .testimonial-card:hover{border-color:rgba(255,166,0,.45)!important;transform:translateY(-5px)!important}
+      #depoimentos .testimonial-avatar{width:62px!important;height:62px!important;flex:0 0 62px!important;padding:0!important;overflow:hidden!important;border:2px solid #ffa600!important;background:#111!important}
+      #depoimentos .testimonial-avatar img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
       #depoimentos .testimonial-rating i{color:#ffa600!important}
       .footer{padding:68px 0 34px!important;background:#0c0c0c!important;border-top:1px solid rgba(255,166,0,.2)!important}
       .footer h5,.footer h6{color:#ffa600!important;background:none!important}
@@ -459,7 +515,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-comments-v31"
+      src="/original/index.html?v=andreia-comments-v32"
       title="Andreia Monçores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
