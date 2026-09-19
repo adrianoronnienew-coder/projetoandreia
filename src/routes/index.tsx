@@ -8,9 +8,9 @@ import tiktokGuideCover from '@/assets/tiktok-do-zero-capa.jpg.asset.json'
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Andreia Monçorres | Especialista em Redes Sociais' },
+      { title: 'Andreia Monçores | Especialista em Redes Sociais' },
       { name: 'description', content: 'Estratégia, conteúdo e crescimento nas redes sociais com Andreia.' },
-      { property: 'og:title', content: 'Andreia Monçorres | Especialista em Redes Sociais' },
+      { property: 'og:title', content: 'Andreia Monçores | Especialista em Redes Sociais' },
       { property: 'og:description', content: 'Fortaleça sua presença digital com estratégia, conteúdo e posicionamento.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary_large_image' },
@@ -27,7 +27,7 @@ function HomePage() {
     const doc = frame.contentDocument
     if (!doc || doc.getElementById('andreia-campaign-v2')) return
 
-    doc.title = 'Andreia Monçorres | Especialista em Redes Sociais'
+    doc.title = 'Andreia Monçores | Especialista em Redes Sociais'
 
     const rebrand = () => {
       const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
@@ -52,8 +52,8 @@ function HomePage() {
     if (aboutSectionRuntime) {
       aboutSectionRuntime.querySelectorAll<HTMLElement>('.about-text').forEach((paragraph) => {
         paragraph.innerHTML = paragraph.innerHTML.replace(
-          /Olá! Eu sou a Andreia(?: Monçorres)?,/g,
-          'Olá! Eu sou a Andreia Monçorres,'
+          /Olá! Eu sou a Andreia(?: Monçores)?,/g,
+          'Olá! Eu sou a Andreia Monçores,'
         )
       })
     }
@@ -460,7 +460,7 @@ function HomePage() {
       ref={frameRef}
       className="original-frame"
       src="/original/index.html?v=andreia-stable-load-v22"
-      title="Andreia Monçorres | Especialista em Redes Sociais"
+      title="Andreia Monçores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
         if (!customizedRef.current) {
