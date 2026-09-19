@@ -122,6 +122,14 @@ function HomePage() {
         )
         .join('')
       testimonialsTrack.innerHTML = testimonialCards
+      const carousel = testimonialsTrack.parentElement
+      if (carousel) {
+        const cleanCarousel = carousel.cloneNode(true) as HTMLElement
+        cleanCarousel.removeAttribute('style')
+        cleanCarousel.removeAttribute('data-drag-ready')
+        cleanCarousel.querySelector<HTMLElement>('.testimonials-track')?.removeAttribute('style')
+        carousel.replaceWith(cleanCarousel)
+      }
     }
 
     const oldEbookArea = doc.getElementById('ebooks-area')
