@@ -358,7 +358,7 @@ function HomePage() {
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
         #ebooks-area .andreia-ebook-inner{grid-template-columns:minmax(0,1fr) minmax(260px,340px)!important;gap:42px!important}
       }
-      @media(max-width:600px){#mainNav .navbar-brand strong{font-size:27px!important}
+      @media(max-width:600px){
         #home{padding:80px 0 42px!important}
         #home .image-container{width:min(330px,82vw)!important;height:min(410px,102vw)!important}
         #home .hero-image{margin:8px 0 44px!important}
@@ -408,7 +408,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-signature-from-zero-v12"
+      src="/original/index.html?v=andreia-svg-logo-v13"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
