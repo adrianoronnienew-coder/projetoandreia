@@ -405,7 +405,7 @@ function HomePage() {
     }, 250)
     const stopTimer = window.setTimeout(() => window.clearInterval(timer), 5000)
 
-  return () => {
+    return () => {
       window.clearInterval(timer)
       window.clearTimeout(stopTimer)
     }
