@@ -246,34 +246,6 @@ function HomePage() {
       #home .social-node{width:44px!important;height:44px!important;border:1px solid rgba(255,166,0,.45)!important;background:#151515!important;color:#ffa600!important;box-shadow:0 10px 28px rgba(0,0,0,.3)!important;animation:socialFloat 6s ease-in-out infinite!important}
       #home .social-node-instagram{top:6%!important;right:4%!important}.social-node-youtube{right:1%!important}.social-node-tiktok{left:4%!important}
 
-      /* Desktop amplo: usa a largura real da tela. Mobile continua com regras próprias. */
-      @media(min-width:992px){
-        #home{min-height:100vh!important;padding:58px 0 26px!important}
-        #home>.container{width:calc(100% - 64px)!important;max-width:1720px!important;margin:0 auto!important;padding:0!important}
-        #home .row{min-height:calc(100vh - 84px)!important;column-gap:22px!important;margin:0!important;align-items:center!important}
-        #home .col-lg-6:first-child{width:51%!important;flex:0 0 51%!important;padding:0 8px 0 0!important}
-        #home .col-lg-6:last-child{width:calc(49% - 22px)!important;flex:0 0 calc(49% - 22px)!important;padding:0!important}
-        #andreia-hero-label{font-size:12px!important;padding:9px 15px!important;margin-bottom:18px!important}
-        #home .hero-title{max-width:900px!important;font-size:clamp(76px,5.7vw,112px)!important;line-height:.91!important;margin-bottom:26px!important}
-        #home .hero-title .andreia-role{font-size:clamp(49px,3.8vw,74px)!important;line-height:1!important;margin-top:25px!important}
-        #home .hero-subtitle{max-width:780px!important;font-size:20px!important;line-height:1.6!important;margin-bottom:28px!important}
-        #andreia-hero-cta{min-height:58px!important;padding:0 31px!important;font-size:14px!important}
-        #home .hero-image{min-height:720px!important;justify-content:flex-start!important}
-        #home .image-container{width:min(650px,43vw)!important;height:min(780px,52vw)!important;max-height:790px!important}
-        #home .social-node{width:48px!important;height:48px!important}
-      }
-      @media(min-width:1440px){
-        #home>.container{width:calc(100% - 96px)!important;max-width:1800px!important}
-        #home .row{column-gap:16px!important}
-        #home .col-lg-6:first-child{width:50.5%!important;flex-basis:50.5%!important}
-        #home .col-lg-6:last-child{width:calc(49.5% - 16px)!important;flex-basis:calc(49.5% - 16px)!important}
-        #home .hero-title{font-size:clamp(82px,5.8vw,118px)!important}
-        #home .hero-title .andreia-role{font-size:clamp(52px,3.9vw,78px)!important}
-        #home .image-container{width:min(690px,42vw)!important;height:min(820px,50vw)!important;max-height:820px!important}
-      }
-      @media(min-width:1800px){
-        #home>.container{width:calc(100% - 120px)!important;max-width:1900px!important}
-      }
 
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
@@ -444,7 +416,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-purge-legacy-v16"
+      src="/original/index.html?v=andreia-layout-restored-v17"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
