@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import andreiaProfile from '@/assets/andreia-profile-new.png.asset.json'
 import andreiaStudio from '@/assets/andreia-studio.png.asset.json'
 import tiktokGuide from '@/assets/guia-tiktok-do-zero.pdf.asset.json'
@@ -397,6 +397,13 @@ function HomePage() {
     `
     doc.head.appendChild(style)
   }
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      const frame = frameRef.current
+      if (frame) customize(frame)
+    }, 250)
+    const stopTimer = window.setTimeout(() => window.clearInterval(timer), 5000)
 
   return () => {
       window.clearInterval(timer)
