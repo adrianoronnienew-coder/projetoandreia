@@ -247,6 +247,44 @@ function HomePage() {
       #home .social-node-instagram{top:6%!important;right:4%!important}.social-node-youtube{right:1%!important}.social-node-tiktok{left:4%!important}
 
 
+      /* Escala desktop global inspirada na referência ampliada: ocupa mais viewport sem afetar mobile. */
+      @media(min-width:992px){
+        #home>.container,#servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container,.fp-banner-section>.container,.gm-banner-section>.container{width:calc(100% - 72px)!important;max-width:1540px!important;margin-left:auto!important;margin-right:auto!important}
+        #home{padding-top:72px!important;padding-bottom:34px!important}
+        #home .row{min-height:calc(100vh - 106px)!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:clamp(30px,4vw,76px)!important}
+        #home .col-lg-6:first-child{width:auto!important;flex:1 1 53%!important;padding:0!important}
+        #home .col-lg-6:last-child{width:auto!important;flex:0 1 43%!important;padding:0!important}
+        #home .hero-title{font-size:clamp(66px,5vw,96px)!important;max-width:850px!important}
+        #home .hero-title .andreia-role{font-size:clamp(44px,3.45vw,66px)!important}
+        #home .hero-subtitle{max-width:720px!important;font-size:19px!important}
+        #home .hero-image{min-height:650px!important}
+        #home .image-container{width:min(590px,41vw)!important;height:min(720px,50vw)!important;max-height:740px!important}
+        #servicos,#sobre,#depoimentos{padding-top:118px!important;padding-bottom:118px!important}
+        #servicos{padding-left:36px!important;padding-right:36px!important}
+        .section-title{font-size:clamp(52px,4.5vw,82px)!important}
+        .section-subtitle{max-width:780px!important;font-size:19px!important}
+        #ale-native-rail .ale-rail-item{min-height:126px!important;padding:14px 32px 14px 14px!important}
+        #ale-native-rail .ale-rail-item i{width:86px!important;height:86px!important;min-width:86px!important;font-size:29px!important}
+        #ale-native-rail .ale-rail-item span b{font-size:25px!important}
+        #ale-native-rail .ale-rail-item span small{font-size:16px!important}
+        #sobre .row{gap:4%!important;align-items:center!important}
+        #sobre .col-lg-6{width:48%!important}
+        #sobre .about-text{font-size:19px!important;line-height:1.65!important}
+        #depoimentos .testimonial-card{font-size:17px!important}
+        #ebooks-area{padding:118px 0!important}
+        #ebooks-area .andreia-ebook-inner{width:calc(100% - 72px)!important;max-width:1460px!important;grid-template-columns:minmax(0,1fr) minmax(360px,500px)!important;gap:clamp(60px,7vw,120px)!important}
+        .andreia-ebook-copy h2{font-size:clamp(58px,4.8vw,88px)!important}
+        .andreia-ebook-lead{max-width:760px!important;font-size:20px!important}
+        .andreia-ebook-list li{font-size:17px!important}
+        .footer{padding-top:78px!important}
+      }
+      @media(min-width:1500px){
+        #home>.container,#servicos>.container,#sobre>.container,#depoimentos>.container,.footer>.container,.fp-banner-section>.container,.gm-banner-section>.container{width:calc(100% - 110px)!important;max-width:1660px!important}
+        #home .row{gap:54px!important}
+        #home .image-container{width:min(630px,40vw)!important;height:min(760px,48vw)!important}
+        #ebooks-area .andreia-ebook-inner{width:calc(100% - 110px)!important;max-width:1560px!important}
+      }
+
       #servicos,#foto-profissional,#gemini-acesso,#sobre,#depoimentos,.footer{position:relative!important;background:#151515!important;border:0!important}
       #servicos,#sobre,#depoimentos{padding:104px 0!important}
       #servicos{padding-left:max(32px,calc((100vw - 1216px)/2))!important;padding-right:max(32px,calc((100vw - 1216px)/2))!important;box-sizing:border-box!important}
@@ -416,7 +454,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-layout-restored-v17"
+      src="/original/index.html?v=andreia-desktop-global-scale-v18"
       title="Andreia Moncores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {
