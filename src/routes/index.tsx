@@ -8,6 +8,7 @@ import testimonialMarina from '@/assets/depoimento-marina.jpg'
 import testimonialFernanda from '@/assets/depoimento-fernanda.jpg'
 import testimonialJuliana from '@/assets/depoimento-juliana.jpg'
 import testimonialRenata from '@/assets/depoimento-renata.jpg'
+import shareImage from '@/assets/andreia-moncores-compartilhamento.jpg.asset.json'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -18,11 +19,11 @@ export const Route = createFileRoute('/')({
       { property: 'og:description', content: 'Fortaleça sua presença digital com estratégia, conteúdo e posicionamento.' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://andreiamoncores.site/' },
-      { property: 'og:image', content: 'https://andreiamoncores.site/__l5e/assets-v1/426b0dff-e8d3-4384-a989-6f2f231a44d8/andreia-profile-new.png' },
+      { property: 'og:image', content: `https://andreiamoncores.site${shareImage.url}` },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Andreia Monçores | Especialista em Redes Sociais' },
       { name: 'twitter:description', content: 'Fortaleça sua presença digital com estratégia, conteúdo e posicionamento.' },
-      { name: 'twitter:image', content: 'https://andreiamoncores.site/__l5e/assets-v1/426b0dff-e8d3-4384-a989-6f2f231a44d8/andreia-profile-new.png' },
+      { name: 'twitter:image', content: `https://andreiamoncores.site${shareImage.url}` },
     ],
     links: [{ rel: 'canonical', href: 'https://andreiamoncores.site/' }],
   }),
