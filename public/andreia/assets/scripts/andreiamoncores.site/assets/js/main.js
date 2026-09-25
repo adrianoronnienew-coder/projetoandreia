@@ -1,5 +1,5 @@
 /**
- * Ale Marques Website - Main JavaScript
+ * Andreia Monçores Website - Main JavaScript
  * Versão estabilizada: depoimentos + botões sociais corrigidos.
  */
 
@@ -7,9 +7,9 @@ const CONFIG = {
   whatsappNumber: '5531989167511',
   apiUrl: 'api/contact.php',
   whatsappMessages: {
-    curso: 'Olá Ale! Tenho interesse na Formação Digital. Pode me enviar mais informações?',
-    mentoria: 'Olá Ale! Gostaria de saber mais sobre a gestão de perfil nas redes sociais.',
-    analise: 'Olá Ale! Quero fazer uma análise da minha presença nas redes sociais.'
+    curso: 'Olá Andreia! Tenho interesse na Formação Digital. Pode me enviar mais informações?',
+    mentoria: 'Olá Andreia! Gostaria de saber mais sobre a gestão de perfil nas redes sociais.',
+    analise: 'Olá Andreia! Quero fazer uma análise da minha presença nas redes sociais.'
   }
 };
 
@@ -44,18 +44,18 @@ function initializeApp() {
   setupTestimonialsStyle();
   renderTestimonials(TESTIMONIALS);
   setupTestimonialsDrag();
-  setupAleRailButtons();
-  setupAleRailTyping();
+  setupAndreiaRailButtons();
+  setupAndreiaRailTyping();
   animateCounters();
   setupNavbarEffects();
-  console.log('Ale Marques Website initialized successfully!');
+  console.log('Andreia Monçores Website initialized successfully!');
 }
 
-function setupAleRailButtons() {
-  const rail = document.getElementById('ale-native-rail');
+function setupAndreiaRailButtons() {
+  const rail = document.getElementById('andreia-native-rail');
   if (!rail) return;
 
-  const items = Array.from(rail.querySelectorAll('.ale-rail-item'));
+  const items = Array.from(rail.querySelectorAll('.andreia-rail-item'));
   const info = [
     {
       match: 'Hndy5zUtIi6LyFJdrmcCk1',
@@ -65,27 +65,27 @@ function setupAleRailButtons() {
     },
     {
       match: 'FjQNMkhQcO13fQYq9TExiZ',
-      title: 'Comunidade Ale',
+      title: 'Comunidade Andreia',
       description: 'Conversas, lives, produtos e avisos',
-      label: 'Entrar na comunidade da Ale'
+      label: 'Entrar na comunidade da Andreia'
     },
     {
       match: 'instagram.com/ale.marques.social',
       title: 'Instagram',
       description: 'Conteúdos, bastidores e novidades',
-      label: 'Acessar Instagram da Ale'
+      label: 'Acessar Instagram da Andreia'
     },
     {
       match: 'tiktok.com/@alemarques.com.br',
       title: 'Novo TikTok',
-      description: 'Siga o novo perfil oficial da Ale',
-      label: 'Acessar novo TikTok da Ale'
+      description: 'Siga o novo perfil oficial da Andreia',
+      label: 'Acessar novo TikTok da Andreia'
     },
     {
       match: 'tiktok.com/@alesocialmedia.com.br',
       title: 'Lives no TikTok',
       description: 'Perfil atual das lives e transmissões',
-      label: 'Acessar perfil de lives da Ale'
+      label: 'Acessar perfil de lives da Andreia'
     }
   ];
 
@@ -107,28 +107,28 @@ function setupAleRailButtons() {
   });
 
   const style = document.createElement('style');
-  style.id = 'ale-rail-text-fix-v28';
+  style.id = 'andreia-rail-text-fix-v28';
   style.textContent = `
-    #ale-native-rail .ale-rail-item {
+    #andreia-native-rail .andreia-rail-item {
       min-height: 86px !important;
     }
-    #ale-native-rail .ale-rail-item.active,
-    #ale-native-rail .ale-rail-item:hover,
-    #ale-native-rail .ale-rail-item:focus {
+    #andreia-native-rail .andreia-rail-item.active,
+    #andreia-native-rail .andreia-rail-item:hover,
+    #andreia-native-rail .andreia-rail-item:focus {
       width: min(390px, calc(100vw - 34px)) !important;
       min-height: 92px !important;
     }
-    #ale-native-rail .ale-rail-item span {
+    #andreia-native-rail .andreia-rail-item span {
       min-width: 0 !important;
       max-width: 260px !important;
       line-height: 1.12 !important;
     }
-    #ale-native-rail .ale-rail-item span b {
+    #andreia-native-rail .andreia-rail-item span b {
       font-size: 18px !important;
       line-height: 1.05 !important;
       white-space: normal !important;
     }
-    #ale-native-rail .ale-rail-item span small {
+    #andreia-native-rail .andreia-rail-item span small {
       font-size: 13px !important;
       line-height: 1.18 !important;
       white-space: normal !important;
@@ -139,25 +139,25 @@ function setupAleRailButtons() {
       opacity: .86 !important;
     }
     @media(max-width:600px) {
-      #ale-native-rail .ale-rail-item,
-      #ale-native-rail .ale-rail-item.active {
+      #andreia-native-rail .andreia-rail-item,
+      #andreia-native-rail .andreia-rail-item.active {
         width: min(100%, 330px) !important;
         min-height: 88px !important;
       }
-      #ale-native-rail .ale-rail-item span { max-width: 210px !important; }
-      #ale-native-rail .ale-rail-item span b { font-size: 16px !important; }
-      #ale-native-rail .ale-rail-item span small { font-size: 12px !important; max-width: 210px !important; }
+      #andreia-native-rail .andreia-rail-item span { max-width: 210px !important; }
+      #andreia-native-rail .andreia-rail-item span b { font-size: 16px !important; }
+      #andreia-native-rail .andreia-rail-item span small { font-size: 12px !important; max-width: 210px !important; }
     }
   `;
   document.head.appendChild(style);
 }
 
 
-function setupAleRailTyping() {
-  const rail = document.getElementById('ale-native-rail');
+function setupAndreiaRailTyping() {
+  const rail = document.getElementById('andreia-native-rail');
   if (!rail) return;
 
-  const descriptions = Array.from(rail.querySelectorAll('.ale-rail-item small'));
+  const descriptions = Array.from(rail.querySelectorAll('.andreia-rail-item small'));
   descriptions.forEach((desc, index) => {
     const fullText = desc.textContent.trim();
     if (!fullText) return;
@@ -194,23 +194,23 @@ function setupAleRailTyping() {
     setTimeout(tick, 350 + (index * 500));
   });
 
-  if (!document.getElementById('ale-rail-typing-style')) {
+  if (!document.getElementById('andreia-rail-typing-style')) {
     const style = document.createElement('style');
-    style.id = 'ale-rail-typing-style';
+    style.id = 'andreia-rail-typing-style';
     style.textContent = `
-      #ale-native-rail .ale-rail-item small::after {
+      #andreia-native-rail .andreia-rail-item small::after {
         content: '|';
         display: inline-block;
         margin-left: 2px;
         opacity: .9;
-        animation: aleTypingCursor .8s steps(1) infinite;
+        animation: andreiaTypingCursor .8s steps(1) infinite;
       }
-      @keyframes aleTypingCursor {
+      @keyframes andreiaTypingCursor {
         0%, 48% { opacity: .9; }
         49%, 100% { opacity: 0; }
       }
       @media (prefers-reduced-motion: reduce) {
-        #ale-native-rail .ale-rail-item small::after { animation: none; opacity: 0; }
+        #andreia-native-rail .andreia-rail-item small::after { animation: none; opacity: 0; }
       }
     `;
     document.head.appendChild(style);
@@ -218,9 +218,9 @@ function setupAleRailTyping() {
 }
 
 function setupTestimonialsStyle() {
-  if (document.getElementById('ale-testimonials-photo-slow-style')) return;
+  if (document.getElementById('andreia-testimonials-photo-slow-style')) return;
   const style = document.createElement('style');
-  style.id = 'ale-testimonials-photo-slow-style';
+  style.id = 'andreia-testimonials-photo-slow-style';
   style.textContent = `
     #depoimentos .testimonials-marquee { overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; cursor: grab !important; touch-action: pan-x !important; }
     #depoimentos .testimonials-marquee::-webkit-scrollbar { display: none !important; }

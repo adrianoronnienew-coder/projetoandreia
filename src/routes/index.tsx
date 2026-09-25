@@ -359,18 +359,18 @@ function HomePage() {
       #servicos .row>[class*='col-']{padding-left:0!important;padding-right:0!important}
       #servicos .row.g-4{margin-top:36px!important;padding-left:0!important;padding-right:0!important}
       #servicos .row.g-4>.col-lg-6:first-child{width:100%!important;max-width:none!important}
-      #servicos .service-card:has(#ale-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
-      #servicos .service-card:has(#ale-native-rail):after{display:none!important}
-      #ale-native-rail{display:grid!important;grid-template-columns:1fr!important;gap:18px!important;width:100%!important;max-width:none!important;position:static!important;transform:none!important}
-      #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item:focus{display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;align-items:center!important;width:100%!important;max-width:none!important;height:auto!important;min-height:112px!important;padding:12px 28px 12px 12px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:999px!important;background:#0d0d12!important;box-shadow:0 12px 30px rgba(0,0,0,.2)!important;color:#fff!important;overflow:hidden!important;transform:none!important;transition:transform .25s ease,border-color .25s ease!important}
-      #ale-native-rail .ale-rail-item:hover,#ale-native-rail .ale-rail-item.active{transform:translateY(-2px)!important;border-color:rgba(255,166,0,.42)!important;background:#0d0d12!important}
-      #ale-native-rail .ale-rail-item i{width:76px!important;height:76px!important;min-width:76px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:linear-gradient(135deg,#a83bd6,#168dff)!important;color:#fff!important;font-size:26px!important}
-      #ale-native-rail .ale-rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)!important}
-      #ale-native-rail .ale-rail-item span{max-width:none!important}
-      #ale-native-rail .ale-rail-item span b{font-family:'Outfit','Poppins',sans-serif!important;font-size:22px!important;color:#fff!important;white-space:normal!important}
-      #ale-native-rail .ale-rail-item span small{font-size:15px!important;color:rgba(255,255,255,.64)!important;max-width:none!important;white-space:normal!important}
-      #ale-native-rail .ale-rail-item:after{display:none!important;content:none!important}
-      #ale-native-rail .ale-rail-item small:after{display:none!important}
+      #servicos .service-card:has(#andreia-native-rail){max-width:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+      #servicos .service-card:has(#andreia-native-rail):after{display:none!important}
+      #andreia-native-rail{display:grid!important;grid-template-columns:1fr!important;gap:18px!important;width:100%!important;max-width:none!important;position:static!important;transform:none!important}
+      #andreia-native-rail .andreia-rail-item,#andreia-native-rail .andreia-rail-item.active,#andreia-native-rail .andreia-rail-item:hover,#andreia-native-rail .andreia-rail-item:focus{display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;align-items:center!important;width:100%!important;max-width:none!important;height:auto!important;min-height:112px!important;padding:12px 28px 12px 12px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:999px!important;background:#0d0d12!important;box-shadow:0 12px 30px rgba(0,0,0,.2)!important;color:#fff!important;overflow:hidden!important;transform:none!important;transition:transform .25s ease,border-color .25s ease!important}
+      #andreia-native-rail .andreia-rail-item:hover,#andreia-native-rail .andreia-rail-item.active{transform:translateY(-2px)!important;border-color:rgba(255,166,0,.42)!important;background:#0d0d12!important}
+      #andreia-native-rail .andreia-rail-item i{width:76px!important;height:76px!important;min-width:76px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:linear-gradient(135deg,#a83bd6,#168dff)!important;color:#fff!important;font-size:26px!important}
+      #andreia-native-rail .andreia-rail-item:nth-child(-n+2) i{background:linear-gradient(135deg,#61e96d,#19b87a)!important}
+      #andreia-native-rail .andreia-rail-item span{max-width:none!important}
+      #andreia-native-rail .andreia-rail-item span b{font-family:'Outfit','Poppins',sans-serif!important;font-size:22px!important;color:#fff!important;white-space:normal!important}
+      #andreia-native-rail .andreia-rail-item span small{font-size:15px!important;color:rgba(255,255,255,.64)!important;max-width:none!important;white-space:normal!important}
+      #andreia-native-rail .andreia-rail-item:after{display:none!important;content:none!important}
+      #andreia-native-rail .andreia-rail-item small:after{display:none!important}
 
       .fp-banner-section,.gm-banner-section{padding:72px 0!important;background:#111!important}
       .fp-banner-section>.container,.gm-banner-section>.container{width:min(1240px,calc(100% - 64px))!important;max-width:none!important;padding:0!important}
@@ -474,11 +474,11 @@ function HomePage() {
         #servicos{padding-left:16px!important;padding-right:16px!important}
         .section-title{font-size:38px!important}
         #servicos .row.g-4{padding-left:0!important;padding-right:0!important}
-        #ale-native-rail{gap:16px!important;padding:0!important}
-        #ale-native-rail .ale-rail-item,#ale-native-rail .ale-rail-item.active,#ale-native-rail .ale-rail-item:hover{grid-template-columns:76px minmax(0,1fr)!important;width:100%!important;min-height:94px!important;padding:9px 18px 9px 9px!important;border-radius:999px!important;background:#0d0d12!important}
-        #ale-native-rail .ale-rail-item i{width:68px!important;height:68px!important;min-width:68px!important;font-size:25px!important}
-        #ale-native-rail .ale-rail-item span b{font-size:18px!important}
-        #ale-native-rail .ale-rail-item span small{font-size:13px!important}
+        #andreia-native-rail{gap:16px!important;padding:0!important}
+        #andreia-native-rail .andreia-rail-item,#andreia-native-rail .andreia-rail-item.active,#andreia-native-rail .andreia-rail-item:hover{grid-template-columns:76px minmax(0,1fr)!important;width:100%!important;min-height:94px!important;padding:9px 18px 9px 9px!important;border-radius:999px!important;background:#0d0d12!important}
+        #andreia-native-rail .andreia-rail-item i{width:68px!important;height:68px!important;min-width:68px!important;font-size:25px!important}
+        #andreia-native-rail .andreia-rail-item span b{font-size:18px!important}
+        #andreia-native-rail .andreia-rail-item span small{font-size:13px!important}
         .fp-banner-section,.gm-banner-section{padding:34px 0!important}
         #sobre .about-image img{object-position:center 42%!important}
         #sobre .about-badge{bottom:-16px!important;max-width:calc(100% - 24px)!important;min-height:34px!important;padding:8px 11px!important}
@@ -523,7 +523,7 @@ function HomePage() {
     <iframe
       ref={frameRef}
       className="original-frame"
-      src="/original/index.html?v=andreia-current-v33"
+      src="/andreia/index.html?v=andreia-clean-v34"
       title="Andreia Monçores | Especialista em Redes Sociais"
       style={{ visibility: ready ? 'visible' : 'hidden', opacity: ready ? 1 : 0 }}
       onLoad={(event) => {

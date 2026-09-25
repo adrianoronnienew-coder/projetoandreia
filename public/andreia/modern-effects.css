@@ -11,7 +11,7 @@ body>main,body>.page-wrapper,body>.site-wrapper,main{background:transparent!impo
 /* Identidade Andreia: mais autoral, sofisticada e menos parecida com a página-base */
 #mainNav{background:rgba(5,7,20,.68)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;border-bottom:1px solid rgba(255,255,255,.055)!important}
 #mainNav .navbar-brand strong{font-size:27px!important;letter-spacing:-.8px!important}
-.ale-brand-animated{background:linear-gradient(90deg,#fff 0%,#b7d9ff 28%,#c273ff 57%,#ff70d5 76%,#fff 100%)!important;background-size:240% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;animation:andreiaGlow 7s ease-in-out infinite!important}
+.andreia-brand-animated{background:linear-gradient(90deg,#fff 0%,#b7d9ff 28%,#c273ff 57%,#ff70d5 76%,#fff 100%)!important;background-size:240% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;animation:andreiaGlow 7s ease-in-out infinite!important}
 @keyframes andreiaGlow{0%,100%{background-position:100% 50%}50%{background-position:0% 50%}}
 
 #home{min-height:100vh!important;padding-top:74px!important}
