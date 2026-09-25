@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- A página pública usa exclusivamente a base estática `public/andreia`; não recriar nem referenciar a antiga base `public/original`, pois ela permitia conteúdo legado reaparecer.

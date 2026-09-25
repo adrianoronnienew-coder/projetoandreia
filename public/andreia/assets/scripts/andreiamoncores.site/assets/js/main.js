@@ -1,5 +1,5 @@
 /**
- * Ale Marques Website - Main JavaScript
+ * Andreia Monçores Website - Main JavaScript
  * Versão estabilizada: depoimentos + botões sociais corrigidos.
  */
 
@@ -7,23 +7,11 @@ const CONFIG = {
   whatsappNumber: '5531989167511',
   apiUrl: 'api/contact.php',
   whatsappMessages: {
-    curso: 'Olá Ale! Tenho interesse na Formação Digital. Pode me enviar mais informações?',
-    mentoria: 'Olá Ale! Gostaria de saber mais sobre a gestão de perfil nas redes sociais.',
-    analise: 'Olá Ale! Quero fazer uma análise da minha presença nas redes sociais.'
+    curso: 'Olá Andreia! Tenho interesse na Formação Digital. Pode me enviar mais informações?',
+    mentoria: 'Olá Andreia! Gostaria de saber mais sobre a gestão de perfil nas redes sociais.',
+    analise: 'Olá Andreia! Quero fazer uma análise da minha presença nas redes sociais.'
   }
 };
-
-const TESTIMONIALS = [
-  { nome_cliente: 'Desireé', foto: 'https://i.pravatar.cc/120?img=47', depoimento: 'Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria.' },
-  { nome_cliente: 'Alda Mendes', foto: 'https://i.pravatar.cc/120?img=45', depoimento: 'Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV!' },
-  { nome_cliente: 'Anne Danielle', foto: 'https://i.pravatar.cc/120?img=32', depoimento: 'Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui!' },
-  { nome_cliente: 'Camila Martins', foto: 'https://i.pravatar.cc/120?img=49', depoimento: 'Depois que organizei meu conteúdo com a estratégia, comecei a entender o que realmente fazia as pessoas pararem e interagirem.' },
-  { nome_cliente: 'Juliana Souza', foto: 'https://i.pravatar.cc/120?img=44', depoimento: 'Meu perfil ficou muito mais profissional e organizado. Hoje consigo comunicar com clareza o que faço e para quem faço.' },
-  { nome_cliente: 'Renata Ferreira', foto: 'https://i.pravatar.cc/120?img=26', depoimento: 'A mentoria me deu direção. Parei de postar sem estratégia e comecei a produzir conteúdo com um objetivo claro.' },
-  { nome_cliente: 'Patrícia Barbosa', foto: 'https://i.pravatar.cc/120?img=56', depoimento: 'A análise mostrou detalhes que eu nunca tinha percebido. Fiz os ajustes e meu posicionamento ficou muito mais claro.' },
-  { nome_cliente: 'Larissa Santos', foto: 'https://i.pravatar.cc/120?img=29', depoimento: 'Passei a ter muito mais segurança para criar. Agora tenho uma linha de conteúdo e sei exatamente o que comunicar.' },
-  { nome_cliente: 'Mariana Freitas', foto: 'https://i.pravatar.cc/120?img=16', depoimento: 'O trabalho mudou completamente a apresentação do meu perfil. Ficou mais profissional, coerente e fácil de entender.' }
-];
 
 const elements = {
   serviceButtons: document.querySelectorAll('.btn-service'),
@@ -42,122 +30,18 @@ function initializeApp() {
   setupScrollEffects();
   setupSmoothScrolling();
   setupTestimonialsStyle();
-  renderTestimonials(TESTIMONIALS);
   setupTestimonialsDrag();
-  setupAleRailButtons();
-  setupAleRailTyping();
+  setupAndreiaRailTyping();
   animateCounters();
   setupNavbarEffects();
-  console.log('Ale Marques Website initialized successfully!');
+  console.log('Andreia Monçores Website initialized successfully!');
 }
 
-function setupAleRailButtons() {
-  const rail = document.getElementById('ale-native-rail');
+function setupAndreiaRailTyping() {
+  const rail = document.getElementById('andreia-native-rail');
   if (!rail) return;
 
-  const items = Array.from(rail.querySelectorAll('.ale-rail-item'));
-  const info = [
-    {
-      match: 'Hndy5zUtIi6LyFJdrmcCk1',
-      title: 'Mentoria Profissional',
-      description: 'Grupo para interessados na Mentoria Gold',
-      label: 'Entrar no grupo da Mentoria Gold'
-    },
-    {
-      match: 'FjQNMkhQcO13fQYq9TExiZ',
-      title: 'Comunidade Ale',
-      description: 'Conversas, lives, produtos e avisos',
-      label: 'Entrar na comunidade da Ale'
-    },
-    {
-      match: 'instagram.com/ale.marques.social',
-      title: 'Instagram',
-      description: 'Conteúdos, bastidores e novidades',
-      label: 'Acessar Instagram da Ale'
-    },
-    {
-      match: 'tiktok.com/@alemarques.com.br',
-      title: 'Novo TikTok',
-      description: 'Siga o novo perfil oficial da Ale',
-      label: 'Acessar novo TikTok da Ale'
-    },
-    {
-      match: 'tiktok.com/@alesocialmedia.com.br',
-      title: 'Lives no TikTok',
-      description: 'Perfil atual das lives e transmissões',
-      label: 'Acessar perfil de lives da Ale'
-    }
-  ];
-
-  items.forEach(item => {
-    const href = item.getAttribute('href') || '';
-    const data = info.find(entry => href.includes(entry.match));
-    if (!data) return;
-    const title = item.querySelector('b');
-    const desc = item.querySelector('small');
-    if (title) title.textContent = data.title;
-    if (desc) desc.textContent = data.description;
-    item.setAttribute('aria-label', data.label);
-  });
-
-  // Mantém a ordem correta: Mentoria Gold primeiro, Comunidade depois, Instagram, Novo TikTok, Lives.
-  info.forEach(entry => {
-    const found = items.find(item => (item.getAttribute('href') || '').includes(entry.match));
-    if (found) rail.appendChild(found);
-  });
-
-  const style = document.createElement('style');
-  style.id = 'ale-rail-text-fix-v28';
-  style.textContent = `
-    #ale-native-rail .ale-rail-item {
-      min-height: 86px !important;
-    }
-    #ale-native-rail .ale-rail-item.active,
-    #ale-native-rail .ale-rail-item:hover,
-    #ale-native-rail .ale-rail-item:focus {
-      width: min(390px, calc(100vw - 34px)) !important;
-      min-height: 92px !important;
-    }
-    #ale-native-rail .ale-rail-item span {
-      min-width: 0 !important;
-      max-width: 260px !important;
-      line-height: 1.12 !important;
-    }
-    #ale-native-rail .ale-rail-item span b {
-      font-size: 18px !important;
-      line-height: 1.05 !important;
-      white-space: normal !important;
-    }
-    #ale-native-rail .ale-rail-item span small {
-      font-size: 13px !important;
-      line-height: 1.18 !important;
-      white-space: normal !important;
-      max-width: 260px !important;
-      overflow: visible !important;
-      text-overflow: unset !important;
-      display: block !important;
-      opacity: .86 !important;
-    }
-    @media(max-width:600px) {
-      #ale-native-rail .ale-rail-item,
-      #ale-native-rail .ale-rail-item.active {
-        width: min(100%, 330px) !important;
-        min-height: 88px !important;
-      }
-      #ale-native-rail .ale-rail-item span { max-width: 210px !important; }
-      #ale-native-rail .ale-rail-item span b { font-size: 16px !important; }
-      #ale-native-rail .ale-rail-item span small { font-size: 12px !important; max-width: 210px !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-
-function setupAleRailTyping() {
-  const rail = document.getElementById('ale-native-rail');
-  if (!rail) return;
-
-  const descriptions = Array.from(rail.querySelectorAll('.ale-rail-item small'));
+  const descriptions = Array.from(rail.querySelectorAll('.andreia-rail-item small'));
   descriptions.forEach((desc, index) => {
     const fullText = desc.textContent.trim();
     if (!fullText) return;
@@ -194,23 +78,23 @@ function setupAleRailTyping() {
     setTimeout(tick, 350 + (index * 500));
   });
 
-  if (!document.getElementById('ale-rail-typing-style')) {
+  if (!document.getElementById('andreia-rail-typing-style')) {
     const style = document.createElement('style');
-    style.id = 'ale-rail-typing-style';
+    style.id = 'andreia-rail-typing-style';
     style.textContent = `
-      #ale-native-rail .ale-rail-item small::after {
+      #andreia-native-rail .andreia-rail-item small::after {
         content: '|';
         display: inline-block;
         margin-left: 2px;
         opacity: .9;
-        animation: aleTypingCursor .8s steps(1) infinite;
+        animation: andreiaTypingCursor .8s steps(1) infinite;
       }
-      @keyframes aleTypingCursor {
+      @keyframes andreiaTypingCursor {
         0%, 48% { opacity: .9; }
         49%, 100% { opacity: 0; }
       }
       @media (prefers-reduced-motion: reduce) {
-        #ale-native-rail .ale-rail-item small::after { animation: none; opacity: 0; }
+        #andreia-native-rail .andreia-rail-item small::after { animation: none; opacity: 0; }
       }
     `;
     document.head.appendChild(style);
@@ -218,9 +102,9 @@ function setupAleRailTyping() {
 }
 
 function setupTestimonialsStyle() {
-  if (document.getElementById('ale-testimonials-photo-slow-style')) return;
+  if (document.getElementById('andreia-testimonials-photo-slow-style')) return;
   const style = document.createElement('style');
-  style.id = 'ale-testimonials-photo-slow-style';
+  style.id = 'andreia-testimonials-photo-slow-style';
   style.textContent = `
     #depoimentos .testimonials-marquee { overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; cursor: grab !important; touch-action: pan-x !important; }
     #depoimentos .testimonials-marquee::-webkit-scrollbar { display: none !important; }
