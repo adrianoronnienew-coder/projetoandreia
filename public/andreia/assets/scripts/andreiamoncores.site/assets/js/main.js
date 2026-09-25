@@ -31,114 +31,11 @@ function initializeApp() {
   setupSmoothScrolling();
   setupTestimonialsStyle();
   setupTestimonialsDrag();
-  setupAndreiaRailButtons();
   setupAndreiaRailTyping();
   animateCounters();
   setupNavbarEffects();
   console.log('Andreia Monçores Website initialized successfully!');
 }
-
-function setupAndreiaRailButtons() {
-  const rail = document.getElementById('andreia-native-rail');
-  if (!rail) return;
-
-  const items = Array.from(rail.querySelectorAll('.andreia-rail-item'));
-  const info = [
-    {
-      match: 'Hndy5zUtIi6LyFJdrmcCk1',
-      title: 'Mentoria Profissional',
-      description: 'Grupo para interessados na Mentoria Gold',
-      label: 'Entrar no grupo da Mentoria Gold'
-    },
-    {
-      match: 'FjQNMkhQcO13fQYq9TExiZ',
-      title: 'Comunidade Andreia',
-      description: 'Conversas, lives, produtos e avisos',
-      label: 'Entrar na comunidade da Andreia'
-    },
-    {
-      match: 'instagram.com/eusouandreiamoncores',
-      title: 'Instagram',
-      description: 'Conteúdos, bastidores e novidades',
-      label: 'Acessar Instagram da Andreia'
-    },
-    {
-      match: 'tiktok.com/@andreiamoncores',
-      title: 'Novo TikTok',
-      description: 'Siga o novo perfil oficial da Andreia',
-      label: 'Acessar novo TikTok da Andreia'
-    },
-    {
-      match: 'tiktok.com/@andreiamoncores',
-      title: 'Lives no TikTok',
-      description: 'Perfil atual das lives e transmissões',
-      label: 'Acessar perfil de lives da Andreia'
-    }
-  ];
-
-  items.forEach(item => {
-    const href = item.getAttribute('href') || '';
-    const data = info.find(entry => href.includes(entry.match));
-    if (!data) return;
-    const title = item.querySelector('b');
-    const desc = item.querySelector('small');
-    if (title) title.textContent = data.title;
-    if (desc) desc.textContent = data.description;
-    item.setAttribute('aria-label', data.label);
-  });
-
-  // Mantém a ordem correta: Mentoria Gold primeiro, Comunidade depois, Instagram, Novo TikTok, Lives.
-  info.forEach(entry => {
-    const found = items.find(item => (item.getAttribute('href') || '').includes(entry.match));
-    if (found) rail.appendChild(found);
-  });
-
-  const style = document.createElement('style');
-  style.id = 'andreia-rail-text-fix-v28';
-  style.textContent = `
-    #andreia-native-rail .andreia-rail-item {
-      min-height: 86px !important;
-    }
-    #andreia-native-rail .andreia-rail-item.active,
-    #andreia-native-rail .andreia-rail-item:hover,
-    #andreia-native-rail .andreia-rail-item:focus {
-      width: min(390px, calc(100vw - 34px)) !important;
-      min-height: 92px !important;
-    }
-    #andreia-native-rail .andreia-rail-item span {
-      min-width: 0 !important;
-      max-width: 260px !important;
-      line-height: 1.12 !important;
-    }
-    #andreia-native-rail .andreia-rail-item span b {
-      font-size: 18px !important;
-      line-height: 1.05 !important;
-      white-space: normal !important;
-    }
-    #andreia-native-rail .andreia-rail-item span small {
-      font-size: 13px !important;
-      line-height: 1.18 !important;
-      white-space: normal !important;
-      max-width: 260px !important;
-      overflow: visible !important;
-      text-overflow: unset !important;
-      display: block !important;
-      opacity: .86 !important;
-    }
-    @media(max-width:600px) {
-      #andreia-native-rail .andreia-rail-item,
-      #andreia-native-rail .andreia-rail-item.active {
-        width: min(100%, 330px) !important;
-        min-height: 88px !important;
-      }
-      #andreia-native-rail .andreia-rail-item span { max-width: 210px !important; }
-      #andreia-native-rail .andreia-rail-item span b { font-size: 16px !important; }
-      #andreia-native-rail .andreia-rail-item span small { font-size: 12px !important; max-width: 210px !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
 
 function setupAndreiaRailTyping() {
   const rail = document.getElementById('andreia-native-rail');
