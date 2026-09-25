@@ -13,18 +13,6 @@ const CONFIG = {
   }
 };
 
-const TESTIMONIALS = [
-  { nome_cliente: 'Desireé', foto: 'https://i.pravatar.cc/120?img=47', depoimento: 'Estou em choque com a qualidade da análise. Você realmente vai profundamente na pesquisa, todo material é valioso, sozinha jamais conseguiria.' },
-  { nome_cliente: 'Alda Mendes', foto: 'https://i.pravatar.cc/120?img=45', depoimento: 'Mulher, amanhã vou dar uma entrevista para uma filial da Globo. Foi você que me ajudou. Não tinha nenhum seguidor e agora vou aparecer na TV!' },
-  { nome_cliente: 'Anne Danielle', foto: 'https://i.pravatar.cc/120?img=32', depoimento: 'Ontem bati meus 10k. Tenho 3 semanas de conta e 2 de mentoria. Não imaginava conseguir tão rápido, mas consegui!' },
-  { nome_cliente: 'Camila Martins', foto: 'https://i.pravatar.cc/120?img=49', depoimento: 'Depois que organizei meu conteúdo com a estratégia, comecei a entender o que realmente fazia as pessoas pararem e interagirem.' },
-  { nome_cliente: 'Juliana Souza', foto: 'https://i.pravatar.cc/120?img=44', depoimento: 'Meu perfil ficou muito mais profissional e organizado. Hoje consigo comunicar com clareza o que faço e para quem faço.' },
-  { nome_cliente: 'Renata Ferreira', foto: 'https://i.pravatar.cc/120?img=26', depoimento: 'A mentoria me deu direção. Parei de postar sem estratégia e comecei a produzir conteúdo com um objetivo claro.' },
-  { nome_cliente: 'Patrícia Barbosa', foto: 'https://i.pravatar.cc/120?img=56', depoimento: 'A análise mostrou detalhes que eu nunca tinha percebido. Fiz os ajustes e meu posicionamento ficou muito mais claro.' },
-  { nome_cliente: 'Larissa Santos', foto: 'https://i.pravatar.cc/120?img=29', depoimento: 'Passei a ter muito mais segurança para criar. Agora tenho uma linha de conteúdo e sei exatamente o que comunicar.' },
-  { nome_cliente: 'Mariana Freitas', foto: 'https://i.pravatar.cc/120?img=16', depoimento: 'O trabalho mudou completamente a apresentação do meu perfil. Ficou mais profissional, coerente e fácil de entender.' }
-];
-
 const elements = {
   serviceButtons: document.querySelectorAll('.btn-service'),
   contactForm: document.getElementById('contactForm'),
@@ -42,7 +30,6 @@ function initializeApp() {
   setupScrollEffects();
   setupSmoothScrolling();
   setupTestimonialsStyle();
-  renderTestimonials(TESTIMONIALS);
   setupTestimonialsDrag();
   setupAndreiaRailButtons();
   setupAndreiaRailTyping();
@@ -70,19 +57,19 @@ function setupAndreiaRailButtons() {
       label: 'Entrar na comunidade da Andreia'
     },
     {
-      match: 'instagram.com/ale.marques.social',
+      match: 'instagram.com/eusouandreiamoncores',
       title: 'Instagram',
       description: 'Conteúdos, bastidores e novidades',
       label: 'Acessar Instagram da Andreia'
     },
     {
-      match: 'tiktok.com/@alemarques.com.br',
+      match: 'tiktok.com/@andreiamoncores',
       title: 'Novo TikTok',
       description: 'Siga o novo perfil oficial da Andreia',
       label: 'Acessar novo TikTok da Andreia'
     },
     {
-      match: 'tiktok.com/@alesocialmedia.com.br',
+      match: 'tiktok.com/@andreiamoncores',
       title: 'Lives no TikTok',
       description: 'Perfil atual das lives e transmissões',
       label: 'Acessar perfil de lives da Andreia'

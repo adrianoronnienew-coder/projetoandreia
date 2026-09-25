@@ -33,35 +33,6 @@ function HomePage() {
 
     doc.title = 'Andreia Monçores | Especialista em Redes Sociais'
 
-    const rebrand = () => {
-      const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT)
-      const nodes: Text[] = []
-      while (walker.nextNode()) nodes.push(walker.currentNode as Text)
-      nodes.forEach((node) => {
-        if (node.nodeValue) node.nodeValue = node.nodeValue.replace(/Ale Marques|Ale Max|Ale\b/g, 'Andreia')
-      })
-      doc.querySelectorAll<HTMLElement>('[alt],[title],[aria-label]').forEach((element) => {
-        ;['alt', 'title', 'aria-label'].forEach((attribute) => {
-          const value = element.getAttribute(attribute)
-          if (value) element.setAttribute(attribute, value.replace(/Ale Marques|Ale Max|Ale\b/g, 'Andreia'))
-        })
-      })
-    }
-
-    rebrand()
-
-    // Conteúdo crítico da seção Sobre é corrigido também em runtime.
-    // Assim a versão publicada não depende de uma cópia antiga do HTML estático.
-    const aboutSectionRuntime = doc.getElementById('sobre')
-    if (aboutSectionRuntime) {
-      aboutSectionRuntime.querySelectorAll<HTMLElement>('.about-text').forEach((paragraph) => {
-        paragraph.innerHTML = paragraph.innerHTML.replace(
-          /Olá! Eu sou a Andreia(?: Monçores)?,/g,
-          'Olá! Eu sou a Andreia Monçores,'
-        )
-      })
-    }
-
     const heroPhoto = doc.querySelector<HTMLImageElement>('#home .hero-photo')
     if (heroPhoto) {
       heroPhoto.src = andreiaProfile.url
